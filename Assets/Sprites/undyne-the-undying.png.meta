@@ -1,0 +1,2420 @@
+fileFormatVersion: 2
+guid: efb46e8bcd4f7904084898d6a2703888
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7660895413596128386
+    second: undyne-the-undying_0
+  - first:
+      213: -3156688559794307779
+    second: undyne-the-undying_1
+  - first:
+      213: 1254431454094490938
+    second: undyne-the-undying_2
+  - first:
+      213: 6948647493747741537
+    second: undyne-the-undying_3
+  - first:
+      213: 8965688065247775854
+    second: undyne-the-undying_4
+  - first:
+      213: 7062143536699128802
+    second: undyne-the-undying_5
+  - first:
+      213: -5481016022886222104
+    second: undyne-the-undying_6
+  - first:
+      213: 1758165572955422184
+    second: undyne-the-undying_7
+  - first:
+      213: -546310678170112972
+    second: undyne-the-undying_8
+  - first:
+      213: -8355859326345101738
+    second: undyne-the-undying_9
+  - first:
+      213: -8243692313836712968
+    second: undyne-the-undying_10
+  - first:
+      213: -1975975371491814779
+    second: undyne-the-undying_11
+  - first:
+      213: 3572538516452676511
+    second: undyne-the-undying_12
+  - first:
+      213: 5770217159064785858
+    second: undyne-the-undying_13
+  - first:
+      213: -4181773558771574298
+    second: undyne-the-undying_14
+  - first:
+      213: 8582641979462034377
+    second: undyne-the-undying_15
+  - first:
+      213: -2288746088723100928
+    second: undyne-the-undying_16
+  - first:
+      213: -4770540458117972609
+    second: undyne-the-undying_17
+  - first:
+      213: -4274183730883265726
+    second: undyne-the-undying_18
+  - first:
+      213: -4208103792671502698
+    second: undyne-the-undying_19
+  - first:
+      213: 7528811438658116370
+    second: undyne-the-undying_20
+  - first:
+      213: -8871908567482975957
+    second: undyne-the-undying_21
+  - first:
+      213: -4211375159444365766
+    second: undyne-the-undying_22
+  - first:
+      213: 2538884823830026841
+    second: undyne-the-undying_23
+  - first:
+      213: 5101608056313677907
+    second: undyne-the-undying_24
+  - first:
+      213: -3485918735563524105
+    second: undyne-the-undying_25
+  - first:
+      213: 5959486971936328810
+    second: undyne-the-undying_26
+  - first:
+      213: 1748626636075133430
+    second: undyne-the-undying_27
+  - first:
+      213: 2638977358311457163
+    second: undyne-the-undying_28
+  - first:
+      213: 7040623714614950861
+    second: undyne-the-undying_29
+  - first:
+      213: -8099158605082460742
+    second: undyne-the-undying_30
+  - first:
+      213: 6543139379663487366
+    second: undyne-the-undying_31
+  - first:
+      213: 624789195705437679
+    second: undyne-the-undying_32
+  - first:
+      213: -8351594483173618577
+    second: undyne-the-undying_33
+  - first:
+      213: 699654906990215816
+    second: undyne-the-undying_34
+  - first:
+      213: -2718790809549482656
+    second: undyne-the-undying_35
+  - first:
+      213: 1555847807756216445
+    second: undyne-the-undying_36
+  - first:
+      213: -7038094130077003974
+    second: undyne-the-undying_37
+  - first:
+      213: -3528589761510993529
+    second: undyne-the-undying_38
+  - first:
+      213: 1717852660491516682
+    second: undyne-the-undying_39
+  - first:
+      213: 3216450970075920139
+    second: undyne-the-undying_40
+  - first:
+      213: 7853547999353891929
+    second: undyne-the-undying_41
+  - first:
+      213: -5691113312851009243
+    second: undyne-the-undying_42
+  - first:
+      213: 1554075795428151866
+    second: undyne-the-undying_43
+  - first:
+      213: 8144196888085231409
+    second: undyne-the-undying_44
+  - first:
+      213: -1585241951422607587
+    second: undyne-the-undying_45
+  - first:
+      213: 5342996452566152621
+    second: undyne-the-undying_46
+  - first:
+      213: -2056506413238076713
+    second: undyne-the-undying_47
+  - first:
+      213: -952065953932785767
+    second: undyne-the-undying_48
+  - first:
+      213: 3213943296457942015
+    second: undyne-the-undying_49
+  - first:
+      213: -4508343989203352364
+    second: undyne-the-undying_50
+  - first:
+      213: 8691198480970522698
+    second: undyne-the-undying_51
+  - first:
+      213: -2119584431141928908
+    second: undyne-the-undying_52
+  - first:
+      213: -7998520637341924763
+    second: undyne-the-undying_53
+  - first:
+      213: -5480247695365551784
+    second: undyne-the-undying_54
+  - first:
+      213: 2677954987867604704
+    second: undyne-the-undying_55
+  - first:
+      213: -141336150081201345
+    second: undyne-the-undying_56
+  - first:
+      213: 866841235571741110
+    second: undyne-the-undying_57
+  - first:
+      213: -1964316005708862947
+    second: undyne-the-undying_58
+  - first:
+      213: 4401755298089041658
+    second: undyne-the-undying_59
+  - first:
+      213: -5424789435627093730
+    second: undyne-the-undying_60
+  - first:
+      213: -260678423782178872
+    second: undyne-the-undying_61
+  - first:
+      213: 2097534836340811737
+    second: undyne-the-undying_62
+  - first:
+      213: 7795274019526617602
+    second: undyne-the-undying_63
+  - first:
+      213: -8134635376077967928
+    second: undyne-the-undying_64
+  - first:
+      213: -373282253526628324
+    second: undyne-the-undying_65
+  - first:
+      213: -2553308057518340864
+    second: undyne-the-undying_66
+  - first:
+      213: -2761705798513289822
+    second: undyne-the-undying_67
+  - first:
+      213: 6096278485067512775
+    second: undyne-the-undying_68
+  - first:
+      213: -4402566449482298448
+    second: undyne-the-undying_69
+  - first:
+      213: -2482215997482410107
+    second: undyne-the-undying_70
+  - first:
+      213: 3448291046603192
+    second: undyne-the-undying_71
+  - first:
+      213: 8014937093666220057
+    second: undyne-the-undying_72
+  - first:
+      213: -1119225950719752433
+    second: undyne-the-undying_73
+  - first:
+      213: -1475415856359507203
+    second: undyne-the-undying_74
+  - first:
+      213: 5457259443818158310
+    second: undyne-the-undying_75
+  - first:
+      213: 3159620867337589844
+    second: undyne-the-undying_76
+  - first:
+      213: 1821984948271042482
+    second: undyne-the-undying_77
+  - first:
+      213: 755949768686665744
+    second: undyne-the-undying_78
+  - first:
+      213: 8849844164590616402
+    second: undyne-the-undying_79
+  - first:
+      213: 457818046816504587
+    second: undyne-the-undying_80
+  - first:
+      213: 7570195168891623144
+    second: undyne-the-undying_81
+  - first:
+      213: -3686241891679096366
+    second: undyne-the-undying_82
+  - first:
+      213: -6135049682642297734
+    second: undyne-the-undying_83
+  - first:
+      213: 6424879919685148926
+    second: undyne-the-undying_84
+  - first:
+      213: -4352795903738631496
+    second: undyne-the-undying_85
+  - first:
+      213: 64461403416432145
+    second: undyne-the-undying_86
+  - first:
+      213: -3924205640056839677
+    second: undyne-the-undying_87
+  - first:
+      213: 1848051477439222506
+    second: undyne-the-undying_88
+  - first:
+      213: -5712855239804952521
+    second: undyne-the-undying_89
+  - first:
+      213: 2707530612771371385
+    second: undyne-the-undying_90
+  - first:
+      213: -6063698455711056044
+    second: undyne-the-undying_91
+  - first:
+      213: 3390022125030511766
+    second: undyne-the-undying_92
+  - first:
+      213: -5892421846385067763
+    second: undyne-the-undying_93
+  - first:
+      213: 2098304952744698247
+    second: undyne-the-undying_94
+  - first:
+      213: -3829603784599410886
+    second: undyne-the-undying_95
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: undyne-the-undying_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2706
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7bfe23e5380fa590800000000000000
+      internalID: -7660895413596128386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_1
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 2706
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3dbbeeca703134d0800000000000000
+      internalID: -3156688559794307779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_2
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 2706
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3df060e2c2a86110800000000000000
+      internalID: 1254431454094490938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_3
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 2706
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1631e3e741e8e6060800000000000000
+      internalID: 6948647493747741537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_4
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 2706
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6c8d080bc58c6c70800000000000000
+      internalID: 8965688065247775854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_5
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 2706
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ebb5c93126c10260800000000000000
+      internalID: 7062143536699128802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_6
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 2706
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e674a387f48fe3b0800000000000000
+      internalID: -5481016022886222104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_7
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 2706
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ed34500642466810800000000000000
+      internalID: 1758165572955422184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2460
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ceaaa255d1b68f0800000000000000
+      internalID: -546310678170112972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_9
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 2460
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65eb014c6360a0c80800000000000000
+      internalID: -8355859326345101738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_10
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 2460
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fb052c7485889d80800000000000000
+      internalID: -8243692313836712968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_11
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 2460
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5825f496edce394e0800000000000000
+      internalID: -1975975371491814779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_12
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 2460
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9310934ad4349130800000000000000
+      internalID: 3572538516452676511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_13
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 2460
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c39bea2fede31050800000000000000
+      internalID: 5770217159064785858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_14
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 2460
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e99c42ba1b57f5c0800000000000000
+      internalID: -4181773558771574298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_15
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 2460
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c3a034586bab1770800000000000000
+      internalID: 8582641979462034377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2214
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00b48900f8dbc30e0800000000000000
+      internalID: -2288746088723100928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_17
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 2214
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7dbf3f8ab2abcdb0800000000000000
+      internalID: -4770540458117972609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_18
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 2214
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24bf2f7da8c0fa4c0800000000000000
+      internalID: -4274183730883265726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_19
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 2214
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69e47d365efc995c0800000000000000
+      internalID: -4208103792671502698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_20
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 2214
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21b5d163d16bb7860800000000000000
+      internalID: 7528811438658116370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_21
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 2214
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b29be6bc926a0e480800000000000000
+      internalID: -8871908567482975957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_22
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 2214
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3e1a65fa903e85c0800000000000000
+      internalID: -4211375159444365766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_23
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 2214
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95ad402bb4eeb3320800000000000000
+      internalID: 2538884823830026841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1968
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35809db6f7d8cc640800000000000000
+      internalID: 5101608056313677907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_25
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 1968
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f77bd211678f9fc0800000000000000
+      internalID: -3485918735563524105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_26
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 1968
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c45d583d954b250800000000000000
+      internalID: 5959486971936328810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_27
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 1968
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f96b0039ae544810800000000000000
+      internalID: 1748626636075133430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_28
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 1968
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b81047cece78f9420800000000000000
+      internalID: 2638977358311457163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_29
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 1968
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcbb0d237f155b160800000000000000
+      internalID: 7040623714614950861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_30
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 1968
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abdf28ce8220a9f80800000000000000
+      internalID: -8099158605082460742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_31
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 1968
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68146b84996edca50800000000000000
+      internalID: 6543139379663487366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1722
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fed46859672bba800800000000000000
+      internalID: 624789195705437679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_33
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 1722
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6c0352f01d291c80800000000000000
+      internalID: -8351594483173618577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_34
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 1722
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882c2845e6ca5b900800000000000000
+      internalID: 699654906990215816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_35
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 1722
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 065d43ad92ae44ad0800000000000000
+      internalID: -2718790809549482656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_36
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 1722
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7821e1865b779510800000000000000
+      internalID: 1555847807756216445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_37
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 1722
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3f8ff89daaa35e90800000000000000
+      internalID: -7038094130077003974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_38
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 1722
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7819e03ae4ee70fc0800000000000000
+      internalID: -3528589761510993529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_39
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 1722
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0b7e05a4e907d710800000000000000
+      internalID: 1717852660491516682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1476
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b07f5d4ad1123ac20800000000000000
+      internalID: 3216450970075920139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_41
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 1476
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95ce7f7ab486dfc60800000000000000
+      internalID: 7853547999353891929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_42
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 1476
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 521e403489a1501b0800000000000000
+      internalID: -5691113312851009243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_43
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 1476
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a32178cb3bf219510800000000000000
+      internalID: 1554075795428151866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_44
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 1476
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 137792f7beff50170800000000000000
+      internalID: 8144196888085231409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_45
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 1476
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1f886a18d6100ae0800000000000000
+      internalID: -1585241951422607587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_46
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 1476
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da5b06717f2262a40800000000000000
+      internalID: 5342996452566152621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_47
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 1476
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dab1a02052d573e0800000000000000
+      internalID: -2056506413238076713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1230
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 997c7152f0599c2f0800000000000000
+      internalID: -952065953932785767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_49
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 1230
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff3af9166683a9c20800000000000000
+      internalID: 3213943296457942015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_50
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 1230
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d4444e27052f61c0800000000000000
+      internalID: -4508343989203352364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_51
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 1230
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a40a9a278f65d9870800000000000000
+      internalID: 8691198480970522698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_52
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 1230
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 430465e9039b592e0800000000000000
+      internalID: -2119584431141928908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_53
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 1230
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5628a9abbdb8ff090800000000000000
+      internalID: -7998520637341924763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_54
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 1230
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8594594b1cf32f3b0800000000000000
+      internalID: -5480247695365551784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_55
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 1230
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e685508fd10a2520800000000000000
+      internalID: 2677954987867604704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 984
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3b1d74358fd90ef0800000000000000
+      internalID: -141336150081201345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_57
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 984
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b11ae2d283a70c00800000000000000
+      internalID: 866841235571741110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_58
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 984
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1aeb1d00095db4e0800000000000000
+      internalID: -1964316005708862947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_59
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 984
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afe7ac24f1d261d30800000000000000
+      internalID: 4401755298089041658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_60
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 984
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e11c72400c647b4b0800000000000000
+      internalID: -5424789435627093730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_61
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 984
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cfbaddca52e16cf0800000000000000
+      internalID: -260678423782178872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_62
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 984
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d7e91802d0fb1d10800000000000000
+      internalID: 2097534836340811737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_63
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 984
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20a27bc6b606e2c60800000000000000
+      internalID: 7795274019526617602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_64
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 738
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cdeb8f7938fb1f80800000000000000
+      internalID: -8134635376077967928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_65
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 738
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c188695a4c5d1daf0800000000000000
+      internalID: -373282253526628324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_66
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 738
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0050a7589d3d09cd0800000000000000
+      internalID: -2553308057518340864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_67
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 738
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a59a7955337ca9d0800000000000000
+      internalID: -2761705798513289822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_68
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 738
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cb3e429bf45a9450800000000000000
+      internalID: 6096278485067512775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_69
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 738
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bb0e86d321f6e2c0800000000000000
+      internalID: -4402566449482298448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_70
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 738
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58fd44e93b56d8dd0800000000000000
+      internalID: -2482215997482410107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_71
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 738
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b93ae2d3304c0000800000000000000
+      internalID: 3448291046603192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 492
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918a31d52d6ca3f60800000000000000
+      internalID: 8014937093666220057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_73
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 492
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0743ff7de5b770f0800000000000000
+      internalID: -1119225950719752433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_74
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 492
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfa76b18815468be0800000000000000
+      internalID: -1475415856359507203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_75
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 492
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e85de3ec841cbb40800000000000000
+      internalID: 5457259443818158310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_76
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 492
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 454919e307a39db20800000000000000
+      internalID: 3159620867337589844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_77
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 492
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bfcdcb38adf84910800000000000000
+      internalID: 1821984948271042482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_78
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 492
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0108b963f4cad7a00800000000000000
+      internalID: 755949768686665744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_79
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 492
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25fbcf31166f0da70800000000000000
+      internalID: 8849844164590616402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 246
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0bc244861f7a5600800000000000000
+      internalID: 457818046816504587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_81
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 246
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e6d922c56cbe0960800000000000000
+      internalID: 7570195168891623144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_82
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 246
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d1bd42b786d7dcc0800000000000000
+      internalID: -3686241891679096366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_83
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 246
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7c9bba81dcebdaa0800000000000000
+      internalID: -6135049682642297734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_84
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 246
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef0af591f32c92950800000000000000
+      internalID: 6424879919685148926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_85
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 246
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ba22e90033c793c0800000000000000
+      internalID: -4352795903738631496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_86
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 246
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11e0c5c0e4305e000800000000000000
+      internalID: 64461403416432145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_87
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 246
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302e3def2cb6a89c0800000000000000
+      internalID: -3924205640056839677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_88
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae2966ff60995a910800000000000000
+      internalID: 1848051477439222506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_89
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 0
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 730623a6d6cd7b0b0800000000000000
+      internalID: -5712855239804952521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_90
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 0
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 979bbb84fb4139520800000000000000
+      internalID: 2707530612771371385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_91
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 0
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45ff142a16a69dba0800000000000000
+      internalID: -6063698455711056044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_92
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 0
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 694982f5927cb0f20800000000000000
+      internalID: 3390022125030511766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_93
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 0
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d097773dc89e93ea0800000000000000
+      internalID: -5892421846385067763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_94
+      rect:
+        serializedVersion: 2
+        x: 1884
+        y: 0
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7816acabc3dae1d10800000000000000
+      internalID: 2098304952744698247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: undyne-the-undying_95
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 0
+        width: 314
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a37e574e5a38adac0800000000000000
+      internalID: -3829603784599410886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
