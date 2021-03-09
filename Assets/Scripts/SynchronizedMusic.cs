@@ -36,10 +36,19 @@ public class SynchronizedMusic : MonoBehaviour
 
     // Audio source to play the music from
     private AudioSource source;
+    private float songStart;
 
     // CONVERTERS: take the current point in the audio source and convert it
     // to musically meaningful data, such as the current beat and current measure in the music
 
+    // Current amount of time that the song has been playing
+    public float songTime
+    {
+        get
+        {
+            return (float)AudioSettings.dspTime - songStart;
+        }
+    }
     // Number of beats in one second
     public float beatsPerSecond
     {
@@ -61,7 +70,7 @@ public class SynchronizedMusic : MonoBehaviour
     {
         get
         {
-            return Mathf.FloorToInt((source.time / secondsPerBeat) + 1f);
+            return Mathf.FloorToInt(songTime / secondsPerBeat) + 1;
         }
     }
     // Current measure in the music
@@ -98,11 +107,14 @@ public class SynchronizedMusic : MonoBehaviour
 
     private IEnumerator MusicSyncLoop()
     {
+        yield return new WaitForSeconds(2f);
+
         // Play that funky music, white boy!
         source.clip = music;
         source.Play();
 
         // Invoke music start event
+        songStart = (float)AudioSettings.dspTime;
         onMusicStart.Invoke();
 
         while (source.isPlaying)
@@ -116,13 +128,13 @@ public class SynchronizedMusic : MonoBehaviour
                 measureHit.Invoke(beatInMeasure, currentMeasure);
             }
 
-            // Recore the time on the audio source when this beat started
-            float beatStartTime = source.time;
+            // Store the time when the next beat will drop
+            float timeOfNextBeat = currentBeat * secondsPerBeat;
 
             // Wait for the next beat in the music
             yield return new WaitUntil(() =>
             {
-                return (source.time - beatStartTime) >= secondsPerBeat;
+                return songTime >= timeOfNextBeat;
             });
         }
 
