@@ -1,27 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealthEffects : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Sound effect that plays when the player takes damage")]
     private AudioClip damageClip;
+    [SerializeField]
+    [Tooltip("Time it takes for the player to fade in and out while invincible")]
+    private float fadeTime;
 
     // Reference to the audio source that plays effects for the player
     private AudioSource source;
+    private new SpriteRenderer renderer;
 
     private void Start()
     {
         source = GetComponent<AudioSource>();
+        renderer = GetComponent<SpriteRenderer>();
     }
 
-    public void TakeDamageEffect()
+    public void TakeDamageEffect(float invincibleTime)
     {
         source.clip = damageClip;
         source.Play();
 
-        // Heart fades in and out while invincible
+        // Start the fading in and out coroutine
+        StartCoroutine(Flash(invincibleTime));
+    }
+
+    private IEnumerator Flash(float invincibleTime)
+    {
+        float timeStart = Time.time;
+        yield return ColorModule.FadeInAndOut(Color.white, Color.clear, invincibleTime, fadeTime, SetRendererColor);
+        float timeEnd = Time.time;
+        float timeDiff = timeEnd - timeStart;
+        SetRendererColor(Color.white);
+    }
+
+    private void SetRendererColor(Color color)
+    {
+        renderer.color = color;
     }
 }

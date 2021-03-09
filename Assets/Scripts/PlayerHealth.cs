@@ -58,7 +58,7 @@ public class PlayerHealth : MonoBehaviour
         // If the player isn't dead yet, play the effect for the player taking damage
         else
         {
-            effects.TakeDamageEffect();
+            effects.TakeDamageEffect(invincibilityTime);
         }
     }
 }

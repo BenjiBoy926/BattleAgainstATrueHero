@@ -40,7 +40,7 @@ public static class MovementModule
         };
 
         // Run fixed update for time, where the action updates the rigidbody position
-        yield return FixedUpdateForTime(time, updatePosition);
+        yield return CoroutineModule.FixedUpdateForTime(time, updatePosition);
     }
 
     public static IEnumerator RotateOverTime(this Rigidbody2D rb2D, float amount, float time, RotationDirection direction)
@@ -69,22 +69,6 @@ public static class MovementModule
         };
 
         // Run the fixed update for some time, updating the rigidbody rotation
-        yield return FixedUpdateForTime(time, updateRotation);
-    }
-
-    public static IEnumerator FixedUpdateForTime(float time, UnityAction<float> update)
-    {
-        // Current amount of time that the rigidbody has been moving
-        float currentTime = 0f;
-
-        // Wait used in the coroutine. Waits for each physics update
-        WaitForFixedUpdate wait = new WaitForFixedUpdate();
-
-        while (currentTime < time)
-        {
-            update.Invoke(currentTime);
-            yield return wait;
-            currentTime += Time.fixedDeltaTime;
-        }
+        yield return CoroutineModule.FixedUpdateForTime(time, updateRotation);
     }
 }
