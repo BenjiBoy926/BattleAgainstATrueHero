@@ -5,12 +5,12 @@ using UnityEngine.Events;
 
 public static class MovementModule
 {
-    public static void Move(this Rigidbody2D rb2D, Vector2 dir, float speed)
+    public static void Shift(this Rigidbody2D rb2D, Vector2 dir, float speed)
     {
         dir = dir.normalized * speed * Time.fixedDeltaTime;
-        rb2D.Move(dir);
+        rb2D.Shift(dir);
     }
-    public static void Move(this Rigidbody2D rb2D, Vector2 delta)
+    public static void Shift(this Rigidbody2D rb2D, Vector2 delta)
     {
         rb2D.MovePosition(rb2D.position + delta);
     }
@@ -23,6 +23,12 @@ public static class MovementModule
     public static void Send(this Rigidbody2D rb2D, Vector2 velocity)
     {
         rb2D.velocity = velocity;
+    }
+
+    // Shift the rigidbody by designated amount over given amount of time
+    public static IEnumerator ShiftOverTime(this Rigidbody2D rb2D, Vector2 shift, float time)
+    {
+        yield return rb2D.MoveOverTime(rb2D.position + shift, time);
     }
 
     public static IEnumerator MoveOverTime(this Rigidbody2D rb2D, Vector2 endingPos, float time)

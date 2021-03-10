@@ -35,10 +35,7 @@ public class PlayerHealthEffects : MonoBehaviour
 
     private IEnumerator Flash(float invincibleTime)
     {
-        float timeStart = Time.time;
-        yield return ColorModule.FadeInAndOut(Color.white, Color.clear, invincibleTime, fadeTime, SetRendererColor);
-        float timeEnd = Time.time;
-        float timeDiff = timeEnd - timeStart;
+        yield return ColorModule.Flicker(Color.white, Color.clear, invincibleTime, fadeTime, SetRendererColor);
         SetRendererColor(Color.white);
     }
 

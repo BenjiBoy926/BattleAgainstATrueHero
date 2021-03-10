@@ -33,6 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb2D.Move(move, speed);
+        rb2D.Shift(move, speed);
     }
 }

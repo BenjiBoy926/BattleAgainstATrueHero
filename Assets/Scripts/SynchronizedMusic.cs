@@ -4,9 +4,6 @@ using UnityEngine.Events;
 
 public class SynchronizedMusic : MonoBehaviour
 {
-    [System.Serializable]
-    private class IntIntEvent : UnityEvent<int, int> { }
-
     [SerializeField]
     [Tooltip("The audio clip with the music")]
     private AudioClip music;
@@ -15,17 +12,17 @@ public class SynchronizedMusic : MonoBehaviour
     private bool playOnAwake;
     [SerializeField]
     [Tooltip("Beats per minute in the music")]
-    private int beatsPerMinute;
+    private int _beatsPerMinute;
     [SerializeField]
     [Tooltip("Beats in each measure of the given music")]
-    private int beatsPerMeasure;
+    private int _beatsPerMeasure;
+    [SerializeField]
+    [Tooltip("Number of measures in a single phrase. This can be useful for consistent music pieces that play in 4-measure phrases")]
+    private int _measuresPerPhrase;
 
     [SerializeField]
     [Tooltip("Event invoked on each beat in the music")]
-    private IntIntEvent beatHit;
-    [SerializeField]
-    [Tooltip("Event invoked at the start of each new measure in the music")]
-    private IntIntEvent measureHit;
+    private SynchronizedMusicEvent beatHit;
 
     [SerializeField]
     [Tooltip("Event invoked when the music begins")]
@@ -36,35 +33,35 @@ public class SynchronizedMusic : MonoBehaviour
 
     // Audio source to play the music from
     private AudioSource source;
+    // Time in the audio system when the song started
     private float songStart;
 
-    // CONVERTERS: take the current point in the audio source and convert it
-    // to musically meaningful data, such as the current beat and current measure in the music
+    // MUSIC DATA: musically meaningful data, such as the current beat and current measure in the music
 
-    // Current amount of time that the song has been playing
-    public float songTime
+    // GETTERS
+    public int beatsPerMinute
     {
         get
         {
-            return (float)AudioSettings.dspTime - songStart;
+            return _beatsPerMeasure;
         }
     }
-    // Number of beats in one second
-    public float beatsPerSecond
+    public int beatsPerMeasure
     {
         get
         {
-            return beatsPerMinute / 60f;
+            return _beatsPerMeasure;
         }
     }
-    // Number of seconds between each beat
-    public float secondsPerBeat
+    public int measuresPerPhrase
     {
         get
         {
-            return 1f / beatsPerSecond;
+            return _measuresPerPhrase;
         }
     }
+
+    // CURRENT
     // Current beat in the music
     public int currentBeat
     {
@@ -78,19 +75,63 @@ public class SynchronizedMusic : MonoBehaviour
     {
         get
         {
-            return ((currentBeat - 1) / beatsPerMeasure) + 1;
+            return ((currentBeat - 1) / _beatsPerMeasure) + 1;
         }
     }
+    // Current phrase of the music
+    public int currentPhrase
+    {
+        get
+        {
+            return ((currentMeasure - 1) / _measuresPerPhrase) + 1;
+        }
+    }
+
+    // INSIDE OF
     // The current beat in the current measure
     public int beatInMeasure
     {
         get
         {
-            return ((currentBeat - 1) % beatsPerMeasure) + 1;
+            return ((currentBeat - 1) % _beatsPerMeasure) + 1;
+        }
+    }
+    // The current measure in the current phrase
+    public int measureInPhrase
+    {
+        get
+        {
+            return ((currentMeasure - 1) % _measuresPerPhrase) + 1;
         }
     }
 
-    private void Start()
+    // TIME
+    // Current amount of time that the song has been playing
+    public float songTime
+    {
+        get
+        {
+            return (float)AudioSettings.dspTime - songStart;
+        }
+    }
+    // Number of beats in one second
+    public float beatsPerSecond
+    {
+        get
+        {
+            return _beatsPerMinute / 60f;
+        }
+    }
+    // Number of seconds between each beat
+    public float secondsPerBeat
+    {
+        get
+        {
+            return 1f / beatsPerSecond;
+        }
+    }
+
+    private void Awake()
     {
         source = GetComponent<AudioSource>();
 
@@ -107,7 +148,7 @@ public class SynchronizedMusic : MonoBehaviour
 
     private IEnumerator MusicSyncLoop()
     {
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
 
         // Play that funky music, white boy!
         source.clip = music;
@@ -120,13 +161,7 @@ public class SynchronizedMusic : MonoBehaviour
         while (source.isPlaying)
         {
             // Invoke the beat hit event
-            beatHit.Invoke(beatInMeasure, currentMeasure);
-
-            // If this is the first beat in the measure, invoke the measure hit
-            if(beatInMeasure == 1)
-            {
-                measureHit.Invoke(beatInMeasure, currentMeasure);
-            }
+            beatHit.Invoke(this);
 
             // Store the time when the next beat will drop
             float timeOfNextBeat = currentBeat * secondsPerBeat;
@@ -141,4 +176,15 @@ public class SynchronizedMusic : MonoBehaviour
         // Invoke music end event
         onMusicEnd.Invoke();
     }
+
+    // Convert the number of beats to number of seconds
+    public float BeatsToSeconds(float beats)
+    {
+        return secondsPerBeat * beats;
+    }
+
+    // TYPEDEFS
+    // This is so that the unity event shows up in the editor
+    [System.Serializable]
+    private class SynchronizedMusicEvent : UnityEvent<SynchronizedMusic> { }
 }

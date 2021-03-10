@@ -4,10 +4,11 @@ using UnityEngine.Events;
 
 public class ColorModule
 {
-    public static IEnumerator FadeInAndOut(Color startColor, Color endColor, float totalTime, float fadeTime, UnityAction<Color> callback)
+    // Flicker the color between the two colors given
+    public static IEnumerator Flicker(Color startColor, Color endColor, float totalTime, float flickerTime, UnityAction<Color> callback)
     {
         Color currentColor = startColor;
-        float inverseFadeTime = 1f / fadeTime;
+        float inverseFadeTime = 1f / flickerTime;
 
         UnityAction<float> update = currentTime =>
         {
@@ -20,7 +21,12 @@ public class ColorModule
         };
 
         yield return CoroutineModule.UpdateForTime(totalTime, update);
-    }    
+    }
+
+    public static IEnumerator Flicker(Color startColor, Color endColor, float totalTime, int numFlickers, UnityAction<Color> callback)
+    {
+        yield return Flicker(startColor, endColor, totalTime, totalTime / numFlickers, callback);
+    }
 
     public static IEnumerator Fade(Color startColor, Color endColor, float time, UnityAction<Color> callback)
     {

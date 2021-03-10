@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerHealthEffects))]
 public class PlayerHealth : MonoBehaviour
@@ -18,6 +19,19 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     [Tooltip("Time for which the player remains invincible after taking damage")]
     private float invincibilityTime;
+
+    [SerializeField]
+    [Tooltip("Event invoked when the player is defeated")]
+    private UnityEvent _deathEvent;
+    // Property for public access to the death event, 
+    // but we need the field to be serialized
+    public UnityEvent deathEvent
+    {
+        get
+        {
+            return _deathEvent;
+        }
+    }
 
     private PlayerHealthEffects effects;
     private float timeSinceLastHit;
@@ -54,6 +68,7 @@ public class PlayerHealth : MonoBehaviour
         if(health <= 0)
         {
             // Die!
+            _deathEvent.Invoke();
         }
         // If the player isn't dead yet, play the effect for the player taking damage
         else

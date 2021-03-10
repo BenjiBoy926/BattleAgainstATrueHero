@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6800762935738089546}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,6 +163,9 @@ MonoBehaviour:
   health: 56
   damagePerHit: 8
   invincibilityTime: 2
+  _deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3188220078637654758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageClip: {fileID: 8300000, guid: 60de07bbdea4d7940896fc0c93bdba04, type: 3}
+  fadeTime: 0
 --- !u!82 &6800762935738089546
 AudioSource:
   m_ObjectHideFlags: 0
