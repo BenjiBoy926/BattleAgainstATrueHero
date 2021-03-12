@@ -22,7 +22,7 @@ public class SynchronizedMusic : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Event invoked on each beat in the music")]
-    private SynchronizedMusicEvent beatHit;
+    private SynchronizedMusicEvent onMusicBeat;
 
     [SerializeField]
     [Tooltip("Event invoked when the music begins")]
@@ -32,7 +32,7 @@ public class SynchronizedMusic : MonoBehaviour
     private UnityEvent onMusicEnd;
 
     // Audio source to play the music from
-    private AudioSource source;
+    private CachedComponent<AudioSource> source = new CachedComponent<AudioSource>();
     // Time in the audio system when the song started
     private float songStart;
 
@@ -131,10 +131,15 @@ public class SynchronizedMusic : MonoBehaviour
         }
     }
 
+    // Convert the number of beats to number of seconds
+    public float BeatsToSeconds(float beats)
+    {
+        return secondsPerBeat * beats;
+    }
+
     private void Awake()
     {
-        source = GetComponent<AudioSource>();
-
+        SetupMusicListeners();
         if(playOnAwake)
         {
             BeginMusic();
@@ -151,17 +156,17 @@ public class SynchronizedMusic : MonoBehaviour
         //yield return new WaitForSeconds(2f);
 
         // Play that funky music, white boy!
-        source.clip = music;
-        source.Play();
+        source.Get(this).clip = music;
+        source.Get(this).Play();
 
         // Invoke music start event
         songStart = (float)AudioSettings.dspTime;
         onMusicStart.Invoke();
 
-        while (source.isPlaying)
+        while (source.Get(this).isPlaying)
         {
             // Invoke the beat hit event
-            beatHit.Invoke(this);
+            onMusicBeat.Invoke(this);
 
             // Store the time when the next beat will drop
             float timeOfNextBeat = currentBeat * secondsPerBeat;
@@ -177,10 +182,14 @@ public class SynchronizedMusic : MonoBehaviour
         onMusicEnd.Invoke();
     }
 
-    // Convert the number of beats to number of seconds
-    public float BeatsToSeconds(float beats)
+    private void SetupMusicListeners()
     {
-        return secondsPerBeat * beats;
+        IMusicBeatListener[] musicBeatListeners = GetComponentsInChildren<IMusicBeatListener>();
+
+        foreach(IMusicBeatListener listener in musicBeatListeners)
+        {
+            onMusicBeat.AddListener(listener.OnMusicBeat);
+        }
     }
 
     // TYPEDEFS

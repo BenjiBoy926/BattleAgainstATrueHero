@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         effects = GetComponent<PlayerHealthEffects>();
-        timeSinceLastHit = invincibilityTime;
+        timeSinceLastHit = -invincibilityTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
