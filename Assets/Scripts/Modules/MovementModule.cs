@@ -1,10 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public static class MovementModule
 {
+    // SHIFT
+    // Change the position of the rigidbody by the given direction
     public static void Shift(this Rigidbody2D rb2D, Vector2 dir, float speed)
     {
         dir = dir.normalized * speed * Time.fixedDeltaTime;
@@ -14,7 +15,8 @@ public static class MovementModule
     {
         rb2D.MovePosition(rb2D.position + delta);
     }
-
+    // SEND
+    // Send the rigidbody away with the given velocity
     public static void Send(this Rigidbody2D rb2D, Vector2 dir, float speed)
     {
         dir = dir.normalized * speed;

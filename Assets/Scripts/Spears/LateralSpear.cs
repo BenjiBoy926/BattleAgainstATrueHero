@@ -14,7 +14,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     [Tooltip("Will the cross spear move into position at the first phrase or second phrase?")]
     private LateralSpearType type;
     
-    // Current side of the arena that the spear is on
+    // Current direction that the spear will move when it slashes
     private Vector2 slashDirection
     {
         get
@@ -141,6 +141,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         if(active)
         {
             line.Get(this).RenderRay(rb2D.Get(this).position, slashDirection, 50f);
+            StartCoroutine(line.Get(this).FadeGradient(Color.clear, new Color(1f, 1f, 1f, 0.3f), 0.1f));
         }
     }
 }
