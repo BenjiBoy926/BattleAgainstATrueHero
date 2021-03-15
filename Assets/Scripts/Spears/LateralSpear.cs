@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class LateralSpear : MonoBehaviour, IMusicBeatListener
 {
-    public enum LateralSpearType
+    // Y position at bottom of field
+    public const float MARGIN = 0.5f;
+
+    public enum PhraseType
     {
         FirstPhrase,
         SecondPhrase
     }
 
+    public enum VerticalPositionType
+    {
+        Upper, Lower, Middle
+    }
+
     [SerializeField]
     [Tooltip("Will the cross spear move into position at the first phrase or second phrase?")]
-    private LateralSpearType type;
-    
+    private PhraseType type;
+
+    private CachedComponent<Rigidbody2D> rb2D = new CachedComponent<Rigidbody2D>();
+    private CachedComponent<LineRenderer> line = new CachedComponent<LineRenderer>();
+
     // Current direction that the spear will move when it slashes
     private Vector2 slashDirection
     {
@@ -27,9 +38,6 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         }
     }
 
-    private CachedComponent<Rigidbody2D> rb2D = new CachedComponent<Rigidbody2D>();
-    private CachedComponent<LineRenderer> line = new CachedComponent<LineRenderer>();
-
     private void Awake()
     { 
         if(slashDirection == Vector2.left)
@@ -42,96 +50,90 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         }
     }
 
-    public void OnMusicBeat(SynchronizedMusic music)
+    public void OnMusicBeat(MusicCursor cursor)
     {
         // For non-final phrases
-        if(music.measureInPhrase != 4)
+        if(cursor.measureInPhrase != 4)
         {
-            if (type == LateralSpearType.FirstPhrase && music.beatInMeasure == 1)
+            if (type == PhraseType.FirstPhrase && cursor.beatInMeasure == 1)
             {
                 // For the first phrase spear type, take position, wait, then turn around
-                StartCoroutine(TakePositionThenTurnAround(music, 0f, 0.5f));
+                StartCoroutine(TakePosition(cursor, 0f).Then(TurnAround(cursor, 0.5f)));
             }
-            else if (type == LateralSpearType.SecondPhrase && music.beatInMeasure == 2)
+            else if (type == PhraseType.SecondPhrase && cursor.beatInMeasure == 2)
             {
                 // For the second phrase, we need to wait for the right notes in the beat
                 // Then take position and turn around
-                StartCoroutine(TakePositionThenTurnAround(music, 0.5f, 0.5f));
+                StartCoroutine(TakePosition(cursor, 0.5f).Then(TurnAround(cursor, 0.5f)));
             }
             // Slash on the fourth beat
-            else if (music.beatInMeasure == 4)
+            else if (cursor.beatInMeasure == 4)
             {
-                StartCoroutine(Slash(music, 0.5f));
+                StartCoroutine(Throw(cursor, 0.5f));
             }
         }
         // For the final phrase, do something else
         else
         {
             // On the first beat, take position at different time for first and second spear types
-            if(music.beatInMeasure == 1)
+            if(cursor.beatInMeasure == 1)
             {
-                float preWait = type == LateralSpearType.FirstPhrase ? 0f : 0.75f;
-                StartCoroutine(TakePosition(music, preWait));
+                float preWait = type == PhraseType.FirstPhrase ? 0f : 0.75f;
+                StartCoroutine(TakePosition(cursor, preWait));
             }
             // After the second beat, turn around
-            else if(music.beatInMeasure == 2)
+            else if(cursor.beatInMeasure == 2)
             {
-                StartCoroutine(TurnAround(music, 0.5f));
+                StartCoroutine(TurnAround(cursor, 0.5f));
             }
             // Just after the third beat, do a double slash!
-            else if(music.beatInMeasure == 3)
+            else if(cursor.beatInMeasure == 3)
             {
-                StartCoroutine(DoubleSlash(music, 0.25f));
+                StartCoroutine(DoubleThrow(cursor, 0.25f));
             }
         }
         
     }
 
-    private IEnumerator TakePositionThenTurnAround(SynchronizedMusic music, float initialDelayInBeats, float midDelayInBeats)
+    private IEnumerator TurnAround(MusicCursor cursor, float preWaitInBeats)
     {
-        yield return TakePosition(music, initialDelayInBeats);
-        yield return TurnAround(music, midDelayInBeats);
-    }
-
-    private IEnumerator TurnAround(SynchronizedMusic music, float preWaitInBeats)
-    {
-        yield return new WaitForSeconds(music.BeatsToSeconds(preWaitInBeats));
+        yield return new WaitForSeconds(cursor.BeatsToSeconds(preWaitInBeats));
 
         // Wait for the spear to rotate around
-        yield return rb2D.Get(this).RotateOverTime(180, music.BeatsToSeconds(0.25f), RotationDirection.Clockwise);
+        yield return rb2D.Get(this).RotateOverTime(180, cursor.BeatsToSeconds(0.25f), RotationDirection.Clockwise);
     }
 
     // Give the spear a new y position before slashing
-    private IEnumerator TakePosition(SynchronizedMusic music, float preWaitInBeats)
+    private IEnumerator TakePosition(MusicCursor cursor, float preWaitInBeats)
     {
-        yield return new WaitForSeconds(music.BeatsToSeconds(preWaitInBeats));
+        yield return new WaitForSeconds(cursor.BeatsToSeconds(preWaitInBeats));
 
         // Shift the spear to a new up or down position
-        float newY = Random.Range(-2.8f, 0.4f);
-        yield return rb2D.Get(this).MoveOverTime(new Vector2(rb2D.Get(this).position.x, newY), music.BeatsToSeconds(0.25f));
+        float newY = TargetYPosition(cursor.measureInPhrase);
+        yield return rb2D.Get(this).MoveOverTime(new Vector2(rb2D.Get(this).position.x, newY), cursor.BeatsToSeconds(0.25f));
 
         // Enable the line renderer as a warning
         SetLineRendererActive(true);
     }
 
-    private IEnumerator Slash(SynchronizedMusic music, float slashTimeInBeats)
+    private IEnumerator Throw(MusicCursor cursor, float slashTimeInBeats)
     {
         SetLineRendererActive(false);
         Vector2 shiftPos = slashDirection * 6.6f;
-        yield return rb2D.Get(this).ShiftOverTime(shiftPos, music.BeatsToSeconds(slashTimeInBeats));
+        yield return rb2D.Get(this).ShiftOverTime(shiftPos, cursor.BeatsToSeconds(slashTimeInBeats));
     }
 
-    private IEnumerator DoubleSlash(SynchronizedMusic music, float initialWaitInBeats)
+    private IEnumerator DoubleThrow(MusicCursor cursor, float initialWaitInBeats)
     {
-        yield return new WaitForSeconds(music.BeatsToSeconds(initialWaitInBeats));
+        yield return new WaitForSeconds(cursor.BeatsToSeconds(initialWaitInBeats));
 
-        yield return Slash(music, 0.25f);
-        yield return new WaitForSeconds(music.BeatsToSeconds(0.5f));
+        yield return Throw(cursor, 0.25f);
+        yield return new WaitForSeconds(cursor.BeatsToSeconds(0.5f));
 
         // Turn the spear around
         rb2D.Get(this).rotation += 180f;
 
-        yield return Slash(music, 0.25f);
+        yield return Throw(cursor, 0.25f);
     }
 
     private void SetLineRendererActive(bool active)
@@ -143,5 +145,46 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
             line.Get(this).RenderRay(rb2D.Get(this).position, slashDirection, 50f);
             StartCoroutine(line.Get(this).FadeGradient(Color.clear, new Color(1f, 1f, 1f, 0.3f), 0.1f));
         }
+    }
+
+    private float TargetYPosition(int measureInPhrase)
+    {
+        float targetY;
+
+        // Store field size adjusted by my margins
+        Vector2 margin = new Vector2(2f * MARGIN, 2f * MARGIN);
+        Vector2 fieldSize = Field.size - margin;
+
+        // For the second measure in phrase, go to the middle
+        if(measureInPhrase == 2)
+        {
+            targetY = Field.center.y;
+        }
+        // On the last measure in the phrase, go one quarter down from top
+        else if (measureInPhrase == 4)
+        {
+            targetY = Field.topY - ((3f * fieldSize.y) / 4f) - MARGIN;
+        }
+        // Otherwise, go to the top
+        else
+        {
+            targetY = Field.topY - MARGIN;
+        }
+
+        // Second phrase spear always half the height offset from the first phrase spear
+        if(type == PhraseType.SecondPhrase)
+        {
+            // This check for the last measure in phrase makes them criss-cross
+            if(measureInPhrase == 4)
+            {
+                targetY += (fieldSize.y / 2f);
+            }
+            else
+            {
+                targetY -= (fieldSize.y / 2f);
+            }
+        }
+
+        return targetY;
     }
 }

@@ -78,5 +78,8 @@ public static class MovementModule
 
         // Run the fixed update for some time, updating the rigidbody rotation
         yield return CoroutineModule.FixedUpdateForTime(time, updateRotation);
+        
+        // Make sure that the ending rotation is exactly the roation the rigidbody ends on
+        rb2D.rotation = endingRotation;
     }
 }

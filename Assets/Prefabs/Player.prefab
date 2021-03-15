@@ -133,7 +133,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &9113068864400674665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageClip: {fileID: 8300000, guid: 60de07bbdea4d7940896fc0c93bdba04, type: 3}
-  fadeTime: 0
+  fadeTime: 0.3
 --- !u!82 &6800762935738089546
 AudioSource:
   m_ObjectHideFlags: 0

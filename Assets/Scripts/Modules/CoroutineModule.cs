@@ -39,6 +39,11 @@ public static class CoroutineModule
         yield return baseEnum;
         yield return null;
     }
+    public static IEnumerator Then(this IEnumerator baseEnum, UnityAction action)
+    {
+        yield return baseEnum;
+        action.Invoke();
+    }
 
     // FIXED-UPDATE-FOR-TIME
     // Run an action on each physics update for the specified amount of time.

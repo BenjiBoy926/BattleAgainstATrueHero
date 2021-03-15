@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IMusicBeatListener
+public interface IMusicStartListener
 {
-    void OnMusicBeat(SynchronizedMusic music);
+    void OnMusicStart(MusicCursor cursor);
 }
