@@ -19,7 +19,7 @@ public struct MusicCursor
     {
         get
         {
-            return Mathf.RoundToInt(time / secondsPerBeat) + 1;
+            return Mathf.FloorToInt((time / secondsPerBeat) + 0.1f) + 1;
         }
     }
     // Current measure in the music
@@ -87,6 +87,14 @@ public struct MusicCursor
             return secondsPerMeasure * info.measuresPerPhrase;
         }
     }
+    // Time since last whole beat was hit
+    public float timeSinceLastBeat
+    {
+        get
+        {
+            return time - ((currentBeat - 1) * secondsPerBeat);
+        }
+    }
 
 
     // CONSTRUCTORS
@@ -114,7 +122,9 @@ public struct MusicCursor
     {
         return new MusicCursor(info, time + (beats * secondsPerBeat));
     }
-
+    // Move the cursor to the specified phrase, measure, and beat in the music
+    // Note that the measure is specified as number of measures BEYOND the given phrase,
+    // and the beat is specified as number of beats BEYOND the given measure
     public MusicCursor MoveTo(float phrase, float measure, float beat)
     {
         float newTime = (phrase - 1f) * secondsPerPhrase +

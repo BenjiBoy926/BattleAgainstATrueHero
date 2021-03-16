@@ -5,7 +5,7 @@ using UnityEngine;
 // Info on how to place the spear when it arrives
 public struct SpearPositionInfo
 {
-    public const float PADDING = 1f;
+    public static Vector2 padding = new Vector2(2f, 1f);
 
     // Whether the spear will start at a random position or a fixed position
     public enum PositionType
@@ -42,24 +42,19 @@ public struct SpearPositionInfo
         else
         {
             // Select random x-y coordinates
-            float x = UnityEngine.Random.Range(Field.leftX - PADDING, Field.rightX + PADDING);
-            float y = UnityEngine.Random.Range(Field.bottomY - PADDING, Field.topY + PADDING);
+            float x;
+            float y = UnityEngine.Random.Range(Field.bottomY - padding.y, Field.topY + padding.y);
 
-            // Select if we want to go on the left, bottom, or right
-            int side = UnityEngine.Random.Range(0, 3);
+            // Select if we want to go on the left or right
+            int side = UnityEngine.Random.Range(0, 2);
 
-            // Set x-y value based on side chosen
-            switch (side)
+            if(side == 0)
             {
-                case 0:
-                    x = Field.leftX - PADDING;
-                    break;
-                case 1:
-                    y = Field.bottomY - PADDING;
-                    break;
-                case 2:
-                    x = Field.rightX + PADDING;
-                    break;
+                x = Field.leftX - padding.x;
+            }
+            else
+            {
+                x = Field.rightX + padding.x;
             }
 
             return new Vector2(x, y);

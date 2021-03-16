@@ -21,6 +21,7 @@ public class Field : MonoBehaviour
         }
     }
 
+    // X-Y Positions
     public static float topY
     {
         get
@@ -49,6 +50,17 @@ public class Field : MonoBehaviour
             return instance.trigger.Get(instance).RightX();
         }
     }
+
+    // Diagonal extents
+    public static float diagonalExtent
+    {
+        get
+        {
+            return instance.trigger.Get(instance).DiagonalExtent();
+        }
+    }
+
+    // Center and size
     public static Vector2 center
     {
         get

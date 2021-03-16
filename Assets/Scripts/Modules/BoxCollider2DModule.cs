@@ -30,4 +30,30 @@ public static class BoxCollider2DModule
     {
         return box.WorldCenter().x + box.Extents().x;
     }
+
+    public static Vector2 TopLeft(this BoxCollider2D box)
+    {
+        return box.TopRight() - (Vector2.left * box.size.x);
+    }
+    public static Vector2 TopRight(this BoxCollider2D box)
+    {
+        return box.WorldCenter() + box.Extents();
+    }
+    public static Vector2 BottomLeft(this BoxCollider2D box)
+    {
+        return box.WorldCenter() - box.Extents();
+    }
+    public static Vector2 BottomRight(this BoxCollider2D box)
+    {
+        return box.BottomLeft() + (Vector2.right * box.size.x);
+    }
+
+    public static float Diagonal(this BoxCollider2D box)
+    {
+        return Mathf.Sqrt(box.size.x * box.size.x + box.size.y * box.size.y);
+    }
+    public static float DiagonalExtent(this BoxCollider2D box)
+    {
+        return box.Diagonal() / 2f;
+    }
 }

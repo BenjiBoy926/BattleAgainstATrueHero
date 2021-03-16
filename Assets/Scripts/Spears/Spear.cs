@@ -39,20 +39,32 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         }
         if(rushTime.currentBeat == cursor.currentBeat)
         {
-            Rush(cursor);
+            Rush();
         }
     }
 
     private void Appear(MusicCursor cursor)
     {
+        // Enable the object
         gameObject.SetActive(true);
 
-        // Setup the initial position and direction
-        transform.position = positionInfo.GetInitialPosition();
-        transform.up = directionInfo.GetDirection(rb2D.Get(this).position);
-        rb2D.Get(this).rotation = transform.rotation.eulerAngles.z;
+        // Make sure the sprite starts invisible
+        sprite.Get(this).color = Color.clear;
+        line.Get(this).enabled = false;
 
         isRushing = false;
+
+        // Start the fade-in
+        StartCoroutine(FadeIn(cursor));
+    }
+
+    private IEnumerator FadeIn(MusicCursor cursor)
+    {
+        // Wait for the time since the last whole beat in the music
+        yield return new WaitForSeconds(appearanceTime.timeSinceLastBeat);
+
+        // Setup the initial position
+        transform.position = positionInfo.GetInitialPosition();
 
         // Fade the sprite in
         StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));
@@ -61,7 +73,7 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         StartCoroutine(RotateAndEnableWarning(cursor));
     }
 
-    private void Rush(MusicCursor cursor)
+    private void Rush()
     {
         isRushing = true;
         rb2D.Get(this).Send(transform.up, rushSpeed);
@@ -71,6 +83,12 @@ public class Spear : MonoBehaviour, IMusicBeatListener
     private IEnumerator RotateAndEnableWarning(MusicCursor cursor)
     {
         yield return rb2D.Get(this).RotateOverTime(720f, cursor.BeatsToSeconds(1f), RotationDirection.Clockwise);
+
+        // Set the direction
+        transform.up = directionInfo.GetDirection(rb2D.Get(this).position);
+        rb2D.Get(this).rotation = transform.rotation.eulerAngles.z;
+
+        // Activate the warning
         SetWarningActive(true);
     }
 
@@ -82,7 +100,7 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         if (active)
         {
             SetLineRendererPositions();
-            StartCoroutine(line.Get(this).FadeGradient(Color.clear, new Color(1f, 1f, 1f, 0.3f), 0.5f));
+            StartCoroutine(line.Get(this).FadeGradient(Color.clear, new Color(1f, 1f, 1f, 0.3f), 0.2f));
         }
     }
     private void SetLineRendererPositions()
@@ -103,16 +121,16 @@ public class Spear : MonoBehaviour, IMusicBeatListener
     {
         // If this is a homing spear, then continually update the direction
         // and line renderer positions of the spear
-        if(!isRushing && directionInfo.directionType == SpearDirectionInfo.DirectionType.Homing)
-        {
-            transform.up = directionInfo.GetDirection(rb2D.Get(this).position);
-            SetLineRendererPositions();
-        }
+        //if(!isRushing && line.Get(this).enabled && directionInfo.directionType == SpearDirectionInfo.DirectionType.Homing)
+        //{
+        //    transform.up = directionInfo.GetDirection(rb2D.Get(this).position);
+        //    SetLineRendererPositions();
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Field"))
+        if (collision.CompareTag("Field") && isRushing)
         {
             StartCoroutine(FadeAway());
         }

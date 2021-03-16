@@ -52,8 +52,11 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
 
     public void OnMusicBeat(MusicCursor cursor)
     {
+        if (cursor.currentPhrase == 3 && cursor.measureInPhrase == 4) return;
+        if (cursor.currentPhrase >= 4) return;
+
         // For non-final phrases
-        if(cursor.measureInPhrase != 4)
+        if (cursor.measureInPhrase != 4)
         {
             if (type == PhraseType.FirstPhrase && cursor.beatInMeasure == 1)
             {
@@ -76,23 +79,22 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         else
         {
             // On the first beat, take position at different time for first and second spear types
-            if(cursor.beatInMeasure == 1)
+            if (cursor.beatInMeasure == 1)
             {
                 float preWait = type == PhraseType.FirstPhrase ? 0f : 0.75f;
                 StartCoroutine(TakePosition(cursor, preWait));
             }
             // After the second beat, turn around
-            else if(cursor.beatInMeasure == 2)
+            else if (cursor.beatInMeasure == 2)
             {
                 StartCoroutine(TurnAround(cursor, 0.5f));
             }
             // Just after the third beat, do a double slash!
-            else if(cursor.beatInMeasure == 3)
+            else if (cursor.beatInMeasure == 3)
             {
                 StartCoroutine(DoubleThrow(cursor, 0.25f));
             }
         }
-        
     }
 
     private IEnumerator TurnAround(MusicCursor cursor, float preWaitInBeats)
