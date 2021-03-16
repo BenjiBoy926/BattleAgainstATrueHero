@@ -53,7 +53,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     public void OnMusicBeat(MusicCursor cursor)
     {
         if (cursor.currentPhrase == 3 && cursor.measureInPhrase == 4) return;
-        if (cursor.currentPhrase >= 4) return;
+        if (cursor.currentPhrase >= 4 && cursor.measureInPhrase == 1) return;
 
         // For non-final phrases
         if (cursor.measureInPhrase != 4)

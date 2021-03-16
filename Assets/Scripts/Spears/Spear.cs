@@ -112,20 +112,9 @@ public class Spear : MonoBehaviour, IMusicBeatListener
     // Fade the spear so it is invisible, then disable it
     private IEnumerator FadeAway()
     {
+        yield return sprite.Get(this).Fade(Color.white, Color.clear, 0.2f);
         rb2D.Get(this).velocity = Vector2.zero;
-        yield return sprite.Get(this).Fade(Color.white, Color.clear, 1f);
         gameObject.SetActive(false);
-    }
-
-    private void Update()
-    {
-        // If this is a homing spear, then continually update the direction
-        // and line renderer positions of the spear
-        //if(!isRushing && line.Get(this).enabled && directionInfo.directionType == SpearDirectionInfo.DirectionType.Homing)
-        //{
-        //    transform.up = directionInfo.GetDirection(rb2D.Get(this).position);
-        //    SetLineRendererPositions();
-        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)
