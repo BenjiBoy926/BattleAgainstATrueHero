@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Spear : MonoBehaviour, IMusicBeatListener
 {
-    private SpearPositionInfo positionInfo;
-    private SpearDirectionInfo directionInfo;
+    private SpearPosition positionInfo;
+    private SpearDirection directionInfo;
 
     // Speed at which the spear rushes down the player
     private float rushSpeed;
@@ -20,7 +20,7 @@ public class Spear : MonoBehaviour, IMusicBeatListener
     private CachedComponent<LineRenderer> line = new CachedComponent<LineRenderer>();
     private CachedComponent<SpriteRenderer> sprite = new CachedComponent<SpriteRenderer>();
 
-    public void Setup(SpearPositionInfo positionInfo, SpearDirectionInfo directionInfo, float rushSpeed, MusicCursor appearanceTime, MusicCursor rushTime)
+    public void Setup(SpearPosition positionInfo, SpearDirection directionInfo, float rushSpeed, MusicCursor appearanceTime, MusicCursor rushTime)
     {
         this.positionInfo = positionInfo;
         this.directionInfo = directionInfo;
@@ -39,7 +39,7 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         }
         if(rushTime.currentBeat == cursor.currentBeat)
         {
-            Rush();
+            StartCoroutine(Rush());
         }
     }
 
@@ -73,8 +73,9 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         StartCoroutine(RotateAndEnableWarning(cursor));
     }
 
-    private void Rush()
+    private IEnumerator Rush()
     {
+        yield return new WaitForSeconds(rushTime.timeSinceLastBeat);
         isRushing = true;
         rb2D.Get(this).Send(transform.up, rushSpeed);
         SetWarningActive(false);

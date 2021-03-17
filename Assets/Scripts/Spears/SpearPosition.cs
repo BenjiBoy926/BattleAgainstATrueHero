@@ -3,39 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Info on how to place the spear when it arrives
-public struct SpearPositionInfo
+public struct SpearPosition
 {
     public static Vector2 padding = new Vector2(2f, 1f);
 
     // Whether the spear will start at a random position or a fixed position
-    public enum PositionType
+    public enum Type
     {
         Fixed, Random
     }
 
     // Initial position of the spear
-    public PositionType positionType { get; private set; }
+    public Type type { get; private set; }
     public Vector2 initialPosition { get; private set; }
 
-    private SpearPositionInfo(PositionType positionType, Vector2 initialPosition)
+    private SpearPosition(Type type, Vector2 initialPosition)
     {
-        this.positionType = positionType;
+        this.type = type;
         this.initialPosition = initialPosition;
     }
 
     // Static factory methods allow clients to initialize the data without providing data that is ultimately unused
-    public static SpearPositionInfo Random()
+    public static SpearPosition Random()
     {
-        return new SpearPositionInfo(PositionType.Random, Vector2.zero);
+        return new SpearPosition(Type.Random, Vector2.zero);
     }
-    public static SpearPositionInfo Fixed(Vector2 initialPosition)
+    public static SpearPosition Fixed(Vector2 initialPosition)
     {
-        return new SpearPositionInfo(PositionType.Fixed, initialPosition);
+        return new SpearPosition(Type.Fixed, initialPosition);
     }
 
     public Vector2 GetInitialPosition()
     {
-        if (positionType == PositionType.Fixed)
+        if (type == Type.Fixed)
         {
             return initialPosition;
         }

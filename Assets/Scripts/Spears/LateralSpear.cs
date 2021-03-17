@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class LateralSpear : MonoBehaviour, IMusicBeatListener
 {
-    // Y position at bottom of field
-    public const float MARGIN = 0.5f;
-
     public enum PhraseType
     {
         FirstPhrase,
@@ -53,7 +50,11 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     public void OnMusicBeat(MusicCursor cursor)
     {
         if (cursor.currentPhrase == 3 && cursor.measureInPhrase == 4) return;
-        if (cursor.currentPhrase >= 4 && cursor.measureInPhrase == 1) return;
+        if (cursor.currentPhrase >= 4 && cursor.currentPhrase < 6) return;
+        if (cursor.currentPhrase >= 6 && cursor.currentPhrase < 8 && 
+            (cursor.measureInPhrase == 1 || cursor.measureInPhrase == 4)) return;
+        if (cursor.currentPhrase >= 8 && cursor.currentPhrase < 12) return;
+        if (cursor.currentPhrase >= 16) return;
 
         // For non-final phrases
         if (cursor.measureInPhrase != 4)
@@ -111,8 +112,9 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         yield return new WaitForSeconds(cursor.BeatsToSeconds(preWaitInBeats));
 
         // Shift the spear to a new up or down position
+        float newX = transform.position.x < 0f ? Field.leftXOutside : Field.rightXOutside;
         float newY = TargetYPosition(cursor.measureInPhrase);
-        yield return rb2D.Get(this).MoveOverTime(new Vector2(rb2D.Get(this).position.x, newY), cursor.BeatsToSeconds(0.25f));
+        yield return rb2D.Get(this).MoveOverTime(new Vector2(newX, newY), cursor.BeatsToSeconds(0.25f));
 
         // Enable the line renderer as a warning
         SetLineRendererActive(true);
@@ -121,7 +123,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     private IEnumerator Throw(MusicCursor cursor, float slashTimeInBeats)
     {
         SetLineRendererActive(false);
-        Vector2 shiftPos = slashDirection * 6.6f;
+        Vector2 shiftPos = slashDirection * Field.outsideSize.x;
         yield return rb2D.Get(this).ShiftOverTime(shiftPos, cursor.BeatsToSeconds(slashTimeInBeats));
     }
 
@@ -153,10 +155,6 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     {
         float targetY;
 
-        // Store field size adjusted by my margins
-        Vector2 margin = new Vector2(2f * MARGIN, 2f * MARGIN);
-        Vector2 fieldSize = Field.size - margin;
-
         // For the second measure in phrase, go to the middle
         if(measureInPhrase == 2)
         {
@@ -165,12 +163,12 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         // On the last measure in the phrase, go one quarter down from top
         else if (measureInPhrase == 4)
         {
-            targetY = Field.topY - ((3f * fieldSize.y) / 4f) - MARGIN;
+            targetY = Field.topYInside - (3f * Field.insideSize.y / 4f);
         }
         // Otherwise, go to the top
         else
         {
-            targetY = Field.topY - MARGIN;
+            targetY = Field.topYInside;
         }
 
         // Second phrase spear always half the height offset from the first phrase spear
@@ -179,11 +177,11 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
             // This check for the last measure in phrase makes them criss-cross
             if(measureInPhrase == 4)
             {
-                targetY += (fieldSize.y / 2f);
+                targetY += Field.insideSize.y / 2f;
             }
             else
             {
-                targetY -= (fieldSize.y / 2f);
+                targetY -= Field.insideSize.y / 2f;
             }
         }
 

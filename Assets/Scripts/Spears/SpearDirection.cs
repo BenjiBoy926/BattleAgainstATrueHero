@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct SpearDirectionInfo
+public struct SpearDirection
 {
     // Whether the spear is thrown in a fixed direction or towards the player
-    public enum DirectionType
+    public enum Type
     {
         Fixed, Homing
     }
 
     // Initial facing direction of the spear
-    public DirectionType directionType { get; private set; }
+    public Type type { get; private set; }
     public Vector2 initialDirection { get; private set; }
     // Targets the player when it is a homing spear
     private System.Lazy<Transform> target;
 
-    private SpearDirectionInfo(DirectionType directionType, Vector2 initialDirection)
+    private SpearDirection(Type type, Vector2 initialDirection)
     {
-        this.directionType = directionType;
+        this.type = type;
         this.initialDirection = initialDirection;
 
         // Lazily load the target when requested
@@ -29,18 +29,18 @@ public struct SpearDirectionInfo
     }
 
     // Static factories prevent clients from providing unnecessary information
-    public static SpearDirectionInfo Homing()
+    public static SpearDirection Homing()
     {
-        return new SpearDirectionInfo(DirectionType.Homing, Vector2.zero);
+        return new SpearDirection(Type.Homing, Vector2.zero);
     }
-    public static SpearDirectionInfo Fixed(Vector2 initialDirection)
+    public static SpearDirection Fixed(Vector2 initialDirection)
     {
-        return new SpearDirectionInfo(DirectionType.Fixed, initialDirection);
+        return new SpearDirection(Type.Fixed, initialDirection);
     }
 
     public Vector2 GetDirection(Vector2 currentPosition)
     {
-        if (directionType == DirectionType.Fixed)
+        if (type == Type.Fixed)
         {
             return initialDirection;
         }
