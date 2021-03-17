@@ -43,7 +43,7 @@ public class SynchronizedMusic : MonoBehaviour
 
     private IEnumerator MusicSyncLoop()
     {
-        //yield return new WaitForSeconds(2f);
+        float timeOfNextBeat = (float)AudioSettings.dspTime;
 
         // Play that funky music, white boy!
         source.Get(this).clip = info.music;
@@ -59,7 +59,7 @@ public class SynchronizedMusic : MonoBehaviour
             onMusicBeat.Invoke(cursor);
 
             // Store the time when the next beat will drop
-            float timeOfNextBeat = (float)AudioSettings.dspTime + cursor.secondsPerBeat;
+            timeOfNextBeat += cursor.secondsPerBeat;
 
             // Wait for the next beat in the music
             yield return new WaitUntil(() =>
