@@ -255,5 +255,28 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
             appear = rush.Shift(-3f);
             InstantiateUppercutSpear(5, 5f, appear, rush);
         }
+
+        // SECTION: this is the slow section before the final push to the end of the song!
+
+        rush = cursor.MoveTo(16f, 1f, 1f);
+        appear = rush.Shift(-2f);
+
+        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.topYInside)),
+            SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
+        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.center.y)),
+            SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
+        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.bottomYInside)),
+            SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
+
+        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
+            SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
+            SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
+            SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+
+        rush = cursor.MoveTo(16f, 1f, 1f);
+        appear = rush.Shift(-2f);
+
     }
 }

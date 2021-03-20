@@ -481,8 +481,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     _music: {fileID: 8300000, guid: b75b91695a0713549be853e4b00935f2, type: 3}
+    _signature:
+      _beatsPerMeasure: 4
+      _beatsPerWholeNote: 0
+    theSignature:
+      signatures:
+      - _signature:
+          _beatsPerMeasure: 0
+          _beatsPerWholeNote: 0
+        _measure: 1
+      - _signature:
+          _beatsPerMeasure: 0
+          _beatsPerWholeNote: 0
+        _measure: 1
+      - _signature:
+          _beatsPerMeasure: 0
+          _beatsPerWholeNote: 0
+        _measure: 1
     _beatsPerMinute: 150
-    _beatsPerMeasure: 4
     _measuresPerPhrase: 4
   playOnAwake: 1
   onMusicStart:

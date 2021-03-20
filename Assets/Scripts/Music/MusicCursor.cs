@@ -4,7 +4,7 @@
 public struct MusicCursor 
 {
     // Info where the cursor indicates
-    public MusicInfo info
+    public MusicPiece info
     {
         get; private set;
     }
@@ -27,7 +27,7 @@ public struct MusicCursor
     {
         get
         {
-            return ((currentBeat - 1) / info.beatsPerMeasure) + 1;
+            return ((currentBeat - 1) / info.signature.beatsPerMeasure) + 1;
         }
     }
     // Current phrase of the music
@@ -45,7 +45,7 @@ public struct MusicCursor
     {
         get
         {
-            return ((currentBeat - 1) % info.beatsPerMeasure) + 1;
+            return ((currentBeat - 1) % info.signature.beatsPerMeasure) + 1;
         }
     }
     // The current measure in the current phrase
@@ -77,7 +77,7 @@ public struct MusicCursor
     {
         get
         {
-            return secondsPerBeat * info.beatsPerMeasure;
+            return secondsPerBeat * info.signature.beatsPerMeasure;
         }
     }
     public float secondsPerPhrase
@@ -98,7 +98,7 @@ public struct MusicCursor
 
 
     // CONSTRUCTORS
-    public MusicCursor(MusicInfo info)
+    public MusicCursor(MusicPiece info)
     {
         this = new MusicCursor(info, 0f);
     }
@@ -106,7 +106,7 @@ public struct MusicCursor
     {
         this = new MusicCursor(other.info, other.time);
     }
-    public MusicCursor(MusicInfo info, float time)
+    public MusicCursor(MusicPiece info, float time)
     {
         this.info = info;
         this.time = time;
