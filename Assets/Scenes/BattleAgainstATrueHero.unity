@@ -483,21 +483,16 @@ MonoBehaviour:
     _music: {fileID: 8300000, guid: b75b91695a0713549be853e4b00935f2, type: 3}
     _signature:
       _beatsPerMeasure: 4
-      _beatsPerWholeNote: 0
+      _beatsPerWholeNote: 4
     theSignature:
-      signatures:
+      _startingSignature:
+        _beatsPerMeasure: 4
+        _beatsPerWholeNote: 4
+      subsequentSignatures:
       - _signature:
-          _beatsPerMeasure: 0
-          _beatsPerWholeNote: 0
-        _measure: 1
-      - _signature:
-          _beatsPerMeasure: 0
-          _beatsPerWholeNote: 0
-        _measure: 1
-      - _signature:
-          _beatsPerMeasure: 0
-          _beatsPerWholeNote: 0
-        _measure: 1
+          _beatsPerMeasure: 3
+          _beatsPerWholeNote: 4
+        _measure: 0
     _beatsPerMinute: 150
     _measuresPerPhrase: 4
   playOnAwake: 1
