@@ -27,7 +27,7 @@ public struct MusicCursor
     {
         get
         {
-            return ((currentBeat - 1) / piece.oldSignature.beatsPerMeasure) + 1;
+            return piece.signature.GetMeasure(currentBeat);
         }
     }
     // Current phrase of the music

@@ -27,6 +27,33 @@ public struct MusicSignature
         }
     }
 
+    // Given a beat in the song, get the current measure in the song
+    public int GetMeasure(float beat)
+    {
+        List<TimeSignatureLocation> signatures = allSignatures;
+        int measure = 1;
+        int i = 0;
+
+        // Loop through all signatures, or until beat is less than the beats per measure in current signature
+        while(i < signatures.Count && beat > signatures[i].signature.beatsPerMeasure)
+        {
+            // Count the number of measures in this signature for the number of beats
+            float measuresInSignature = (beat - 1f) / signatures[i].signature.beatsPerMeasure;
+            measuresInSignature = Mathf.Min(CountMeasuresInSignature(i), measuresInSignature);
+
+            // Accumulate measures in this signature
+            measure += Mathf.FloorToInt(measuresInSignature);
+
+            // Remove the beats that were accumulated to the total measures
+            beat -= measuresInSignature * signatures[i].signature.beatsPerMeasure;
+
+            // Increment to check the next signature
+            i++;
+        }
+
+        return measure;
+    }
+
     // Compute the number of beats between start and ending measures
     public float BeatsBetweenMeasures(MeasureRange range)
     {
@@ -72,6 +99,11 @@ public struct MusicSignature
         {
             throw new System.IndexOutOfRangeException("Signature #" + signature + " is not defined in this music signature!");
         }
+    }
+
+    public int CountBeatsInSignature(int signature)
+    {
+        return 0;
     }
 
     // Get the measures in the current signature as a range from starting to ending measure
