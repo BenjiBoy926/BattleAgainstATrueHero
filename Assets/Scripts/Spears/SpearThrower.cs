@@ -98,27 +98,27 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
          * SECTION spears that appear with the low bass sounds
          */
 
-        for (float i = 0f; i < 1.1f; i++)
+        for (int i = 0; i < 2; i++)
         {
-            rush = cursor.MoveTo(2f + i, 1f, 1f);
+            rush = cursor.MoveTo(2 + i, 1, 1f);
             appear = rush.Shift(-2f);
             InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
-            rush = cursor.MoveTo(2f + i, 2f, 1f);
+            rush = cursor.MoveTo(2 + i, 2, 1f);
             appear = rush.Shift(-2f);
             InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
-            rush = cursor.MoveTo(2f + i, 2f, 4f);
+            rush = cursor.MoveTo(2 + i, 2, 4f);
             appear = rush.Shift(-2f);
             InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
-            rush = cursor.MoveTo(2f + i, 3f, 1f);
+            rush = cursor.MoveTo(2 + i, 3, 1f);
             appear = rush.Shift(-2f);
             InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
             if (i < 0.1f)
             {
-                rush = cursor.MoveTo(2f, 4f, 1f);
+                rush = cursor.MoveTo(2, 4, 1f);
                 appear = rush.Shift(-2f);
                 InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
             }
@@ -127,36 +127,36 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         /*
          * SECTION: spears for the bass drop
          */
-        appear = cursor.MoveTo(3f, 4f, 1f);
-        rush = cursor.MoveTo(4f, 1f, 1f);
+        appear = cursor.MoveTo(3, 4, 1f);
+        rush = cursor.MoveTo(4, 1, 1f);
         InstantiateSurroundSpears(15f, appear, rush);
 
         /*
          * SECTION: spears for the music just after the bass drop
          */
 
-        for (float i = 0f; i < 3.1f; i++)
+        for (int i = 0; i < 4; i++)
         {
-            rush = cursor.MoveTo(4f + i, 2f, 4f);
+            rush = cursor.MoveTo(4 + i, 2, 4f);
 
-            appear = cursor.MoveTo(4f + i, 2f, 1f);
+            appear = cursor.MoveTo(4 + i, 2, 1f);
             InstantiateSpear(SpearPosition.Fixed(Field.topLeftRadial),
                 SpearDirection.Fixed(new Vector2(1f, -1f)),
                 15f, appear, rush);
 
-            appear = cursor.MoveTo(4f + i, 2f, 2.5f);
+            appear = cursor.MoveTo(4 + i, 2, 2.5f);
             InstantiateSpear(SpearPosition.Fixed(Field.topRightRadial),
                 SpearDirection.Fixed(-Vector2.one),
                 15f, appear, rush);
 
-            rush = cursor.MoveTo(4f + i, 3f, 4f);
+            rush = cursor.MoveTo(4 + i, 3, 4f);
 
-            appear = cursor.MoveTo(4f + i, 3f, 1f);
+            appear = cursor.MoveTo(4 + i, 3, 1f);
             InstantiateSpear(SpearPosition.Fixed(Field.bottomLeftRadial),
                 SpearDirection.Fixed(Vector2.one),
                 15f, appear, rush);
 
-            appear = cursor.MoveTo(4f + i, 3f, 2.5f);
+            appear = cursor.MoveTo(4 + i, 3, 2.5f);
             InstantiateSpear(SpearPosition.Fixed(Field.bottomRightRadial),
                 SpearDirection.Fixed(new Vector2(-1f, 1f)),
                 15f, appear, rush);
@@ -164,8 +164,8 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
             // Make sure not to instantiate the surrounding spears before the transition into the next part of the music
             if (i < 2.1f)
             {
-                rush = cursor.MoveTo(5f + i, 1f, 1f);
-                appear = cursor.MoveTo(4f + i, 4f, 1f);
+                rush = cursor.MoveTo(5 + i, 1, 1f);
+                appear = cursor.MoveTo(4 + i, 4, 1f);
                 InstantiateSurroundSpears(15f, appear, rush);
             }
         }
@@ -174,91 +174,91 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
          * SECTION: spears for the music with the intense melody
          */
 
-        for (float i = 0f; i < 4.1f; i += 4f)
+        for (int i = 0; i < 5; i += 4)
         {
-            for (float j = 0f; j < 2.1f; j += 2)
+            for (int j = 0; j < 3; j += 2)
             {
-                rush = cursor.MoveTo(8f + i + j, 1f, 1f);
+                rush = cursor.MoveTo(8 + i + j, 1, 1f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(0, 15f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 1f, 1.75f);
+                rush = cursor.MoveTo(8 + i + j, 1, 1.75f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(1, 15f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 1f, 2.5f);
+                rush = cursor.MoveTo(8 + i + j, 1, 2.5f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(3, 15f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 1f, 3f);
+                rush = cursor.MoveTo(8 + i + j, 1, 3f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(1, 5f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 2f, 4f);
+                rush = cursor.MoveTo(8 + i + j, 2, 4f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(2, 15f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 2f, 4.5f);
+                rush = cursor.MoveTo(8 + i + j, 2, 4.5f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(3, 15f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 3f, 1f);
+                rush = cursor.MoveTo(8 + i + j, 3, 1f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(4, 5f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 4f, 3f);
+                rush = cursor.MoveTo(8 + i + j, 4, 3f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(2, 15f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 4f, 3.5f);
+                rush = cursor.MoveTo(8 + i + j, 4, 3.5f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(3, 15f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 4f, 4f);
+                rush = cursor.MoveTo(8 + i + j, 4, 4f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(4, 15f, appear, rush);
 
-                rush = cursor.MoveTo(8f + i + j, 4f, 4.5f);
+                rush = cursor.MoveTo(8 + i + j, 4, 4.5f);
                 appear = rush.Shift(-3f);
                 InstantiateUppercutSpear(5, 15f, appear, rush);
             }
 
             // Ending of that first phrase
 
-            rush = cursor.MoveTo(9f + i, 1f, 1f);
+            rush = cursor.MoveTo(9 + i, 1, 1f);
             appear = rush.Shift(-3f);
             InstantiateUppercutSpear(2, 5f, appear, rush);
 
-            rush = cursor.MoveTo(9f + i, 3f, 1f);
+            rush = cursor.MoveTo(9 + i, 3, 1f);
             appear = rush.Shift(-3f);
             InstantiateUppercutSpear(2, 5f, appear, rush);
 
-            rush = cursor.MoveTo(9f + i, 3f, 4f);
+            rush = cursor.MoveTo(9 + i, 3, 4f);
             appear = rush.Shift(-3f);
             InstantiateUppercutSpear(1, 10f, appear, rush);
 
-            rush = cursor.MoveTo(9f + i, 4f, 1f);
+            rush = cursor.MoveTo(9 + i, 4, 1f);
             appear = rush.Shift(-3f);
             InstantiateUppercutSpear(0, 5f, appear, rush);
 
             // Ending of the second phrase
 
-            rush = cursor.MoveTo(11f + i, 1f, 1f);
+            rush = cursor.MoveTo(11 + i, 1, 1f);
             appear = rush.Shift(-3f);
             InstantiateUppercutSpear(6, 5f, appear, rush);
 
-            rush = cursor.MoveTo(11f + i, 2f, 3f);
+            rush = cursor.MoveTo(11 + i, 2, 3f);
             appear = rush.Shift(-3f);
             InstantiateUppercutSpear(7, 10f, appear, rush);
 
-            rush = cursor.MoveTo(11f + i, 3f, 1f);
+            rush = cursor.MoveTo(11 + i, 3, 1f);
             appear = rush.Shift(-3f);
             InstantiateUppercutSpear(5, 5f, appear, rush);
         }
 
         // SECTION: this is the slow section before the final push to the end of the song!
 
-        rush = cursor.MoveTo(16f, 1f, 1f);
+        rush = cursor.MoveTo(16, 1, 1f);
         appear = rush.Shift(-2f);
 
         InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.topYInside)),
@@ -275,7 +275,7 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
             SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
 
-        rush = cursor.MoveTo(16f, 1f, 1f);
+        rush = cursor.MoveTo(16, 1, 1f);
         appear = rush.Shift(-2f);
 
     }

@@ -29,13 +29,10 @@ public class SynchronizedMusic : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Start has been called!");
         SetupMusicListeners();
-        Debug.Log("Music listeners set up!");
         if(playOnAwake)
         {
             BeginMusic();
-            Debug.Log("Music has begun!");
         }
     }
 
@@ -47,7 +44,6 @@ public class SynchronizedMusic : MonoBehaviour
     private IEnumerator MusicSyncLoop()
     {
         float timeOfNextBeat = (float)AudioSettings.dspTime;
-        Debug.Log("Time of next beat at start: " + timeOfNextBeat);
 
         // Play that funky music, white boy!
         source.Get(this).clip = info.music;
@@ -57,8 +53,6 @@ public class SynchronizedMusic : MonoBehaviour
         cursor = new MusicCursor(info);
         onMusicStart.Invoke(cursor);
 
-        Debug.Log("Audio time before entering while loop: " + AudioSettings.dspTime);
-
         while (source.Get(this).isPlaying)
         {
             // Invoke the beat hit event
@@ -66,7 +60,6 @@ public class SynchronizedMusic : MonoBehaviour
 
             // Store the time when the next beat will drop
             timeOfNextBeat += cursor.secondsPerBeat;
-            Debug.Log("Time of next beat after update: " + timeOfNextBeat);
 
             // Wait for the next beat in the music
             yield return new WaitUntil(() =>

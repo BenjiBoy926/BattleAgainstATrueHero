@@ -12,11 +12,18 @@ public struct MeasureRange
     {
         get; private set;
     }
+    public int length => end - start;
 
-    public MeasureRange(int start, int length)
+    public MeasureRange(int start, int end)
     {
-        length = Mathf.Max(length, 1);
         this.start = start;
-        end = start + length;
+        this.end = end;
+    }
+
+    public MeasureRange Intersect(MeasureRange other)
+    {
+        int newStart = Mathf.Max(start, other.start);
+        int newEnd = Mathf.Min(end, other.end);
+        return new MeasureRange(newStart, newEnd);
     }
 }

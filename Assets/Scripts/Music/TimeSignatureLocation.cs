@@ -23,6 +23,6 @@ public struct TimeSignatureLocation : System.IComparable<TimeSignatureLocation>
 
     public int CompareTo(TimeSignatureLocation other)
     {
-        return other._measure - _measure;
+        return _measure - other._measure;
     }
 }

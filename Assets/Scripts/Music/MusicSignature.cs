@@ -27,6 +27,34 @@ public struct MusicSignature
         }
     }
 
+    // Compute the number of beats between start and ending measures
+    public float BeatsBetweenMeasures(MeasureRange range)
+    {
+        List<TimeSignatureLocation> signatures = allSignatures;
+        float beats = 0f;
+        
+        for(int i = 0; i < signatures.Count; i++)
+        {
+            MeasureRange currentRange = MeasuresInSignature(i);
+
+            // If the current range ends before the first measure of interest, 
+            // continue to next signature
+            if (currentRange.end < range.start)
+                continue;
+
+            // If the current range starts after the last measure of interest,
+            // we can stop looping through time signatures
+            if (currentRange.start > range.end)
+                break;
+
+            // Compute the number of measures in the range being checked
+            MeasureRange overlap = range.Intersect(currentRange);
+            beats += signatures[i].signature.beatsPerMeasure * overlap.length;
+        }
+
+        return beats;
+    }
+
     // Given the signature number, return the number of measures that that signature is applied to in the music
     public int CountMeasuresInSignature(int signature)
     {
@@ -47,8 +75,19 @@ public struct MusicSignature
     }
 
     // Get the measures in the current signature as a range from starting to ending measure
+    // NOTE: the "end" property is the measure AFTER the last measure in the signature
+    // So if a piece goes form 4/4 to 3/4 at measure 9, then the measure range for the 4/4
+    // signature is 1-9, NOT 1-8
     public MeasureRange MeasuresInSignature(int signature)
     {
-        return new MeasureRange(allSignatures[signature].measure, CountMeasuresInSignature(signature));
+        int endMeasure;
+
+        if (signature < allSignatures.Count - 1)
+        {
+            endMeasure = allSignatures[signature + 1].measure;
+        }
+        else endMeasure = int.MaxValue;
+
+        return new MeasureRange(allSignatures[signature].measure, endMeasure);
     }
 }

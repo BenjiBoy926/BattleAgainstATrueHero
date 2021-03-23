@@ -10,10 +10,10 @@ public struct MusicPiece
     private AudioClip _music;
     [SerializeField]
     [Tooltip("Time signature for the piece of music")]
-    private TimeSignature _signature;
+    private TimeSignature _oldSignature;
     [SerializeField]
     [Tooltip("List of time signatures throughout the music")]
-    private MusicSignature theSignature;
+    private MusicSignature _signature;
     [SerializeField]
     [Tooltip("Number of beats per minute in the song")]
     private int _beatsPerMinute;
@@ -29,7 +29,8 @@ public struct MusicPiece
             return _music;
         }
     }
-    public TimeSignature signature => _signature;
+    public TimeSignature oldSignature => _oldSignature;
+    public MusicSignature signature => _signature;
     public int beatsPerMinute => _beatsPerMinute;
     public int measuresPerPhrase
     {
@@ -37,5 +38,17 @@ public struct MusicPiece
         {
             return _measuresPerPhrase;
         }
+    }
+
+    // Given start and end phrase, compute the number of beats between them
+    public float BeatsBetweenPhrases(int startPhrase, int endPhrase)
+    {
+        int startMeasure = PhraseToMeasure(startPhrase);
+        int endMeasure = PhraseToMeasure(endPhrase);
+        return _signature.BeatsBetweenMeasures(new MeasureRange(startMeasure, endMeasure));
+    }
+    public int PhraseToMeasure(int phrase)
+    {
+        return ((phrase - 1) * measuresPerPhrase) + 1;
     }
 }

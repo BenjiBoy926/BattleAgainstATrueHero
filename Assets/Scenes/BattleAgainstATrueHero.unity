@@ -481,10 +481,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     _music: {fileID: 8300000, guid: b75b91695a0713549be853e4b00935f2, type: 3}
-    _signature:
+    _oldSignature:
       _beatsPerMeasure: 4
       _beatsPerWholeNote: 4
-    theSignature:
+    _signature:
       _startingSignature:
         _beatsPerMeasure: 4
         _beatsPerWholeNote: 4
@@ -492,7 +492,7 @@ MonoBehaviour:
       - _signature:
           _beatsPerMeasure: 3
           _beatsPerWholeNote: 4
-        _measure: 0
+        _measure: 61
     _beatsPerMinute: 150
     _measuresPerPhrase: 4
   playOnAwake: 1
