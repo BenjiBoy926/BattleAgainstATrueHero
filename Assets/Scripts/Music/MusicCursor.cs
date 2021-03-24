@@ -27,7 +27,7 @@ public struct MusicCursor
     {
         get
         {
-            return piece.signature.GetMeasure(currentBeat);
+            return piece.signature.BeatToMeasure(currentBeat);
         }
     }
     // Current phrase of the music
@@ -45,7 +45,7 @@ public struct MusicCursor
     {
         get
         {
-            return ((currentBeat - 1) % piece.oldSignature.beatsPerMeasure) + 1;
+            return piece.signature.BeatInMeasure(currentBeat);
         }
     }
     // The current measure in the current phrase
@@ -56,7 +56,6 @@ public struct MusicCursor
             return ((currentMeasure - 1) % piece.measuresPerPhrase) + 1;
         }
     }
-    
     // Number of beats in one second
     public float beatsPerSecond
     {
@@ -81,7 +80,6 @@ public struct MusicCursor
             return time - ((currentBeat - 1) * secondsPerBeat);
         }
     }
-
 
     // CONSTRUCTORS
     public MusicCursor(MusicPiece info)
@@ -113,19 +111,10 @@ public struct MusicCursor
     // and the beat is specified as number of beats BEYOND the given measure
     public MusicCursor MoveTo(int phrase, int measure, float beat)
     {
-        // Compute the number of beats between the first and indicated phrase
-        float phraseBeats = piece.BeatsBetweenPhrases(1, phrase);
-
-        // Compute the number of beats beyond the start phrase in the measures signified
-        int startMeasure = piece.PhraseToMeasure(phrase);
-        int endMeasure = startMeasure + (measure - 1);
-        float measureBeats = piece.signature.BeatsBetweenMeasures(new MeasureRange(startMeasure, endMeasure));
-
-        // Compute the total time
-        float totalTime = (phraseBeats + measureBeats + (beat - 1f)) * secondsPerBeat;
-
-        // Create the new cursor
-        return new MusicCursor(piece, totalTime);
+        // Compute the new time by computing the starting beat of the phrase and measure,
+        // plus the additional beat times seconds per beat
+        float newTime = (piece.PhraseAndMeasureToBeat(phrase, measure) + (beat - 1f)) * secondsPerBeat;
+        return new MusicCursor(piece, newTime);
     }
     public MusicCursor MoveTo(int measure, float beat)
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct MeasureRange
+public struct IntRange
 {
     public int start
     {
@@ -14,16 +14,16 @@ public struct MeasureRange
     }
     public int length => end - start;
 
-    public MeasureRange(int start, int end)
+    public IntRange(int start, int end)
     {
         this.start = start;
         this.end = end;
     }
 
-    public MeasureRange Intersect(MeasureRange other)
+    public IntRange Intersect(IntRange other)
     {
         int newStart = Mathf.Max(start, other.start);
         int newEnd = Mathf.Min(end, other.end);
-        return new MeasureRange(newStart, newEnd);
+        return new IntRange(newStart, newEnd);
     }
 }

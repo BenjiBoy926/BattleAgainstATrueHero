@@ -58,8 +58,6 @@ public class SynchronizedMusic : MonoBehaviour
             // Invoke the beat hit event
             onMusicBeat.Invoke(cursor);
 
-            Debug.Log("Phrase: " + cursor.currentPhrase + ", Measure: " + cursor.currentMeasure + ", Beat: " + cursor.currentBeat);
-
             // Store the time when the next beat will drop
             timeOfNextBeat += cursor.secondsPerBeat;
 
