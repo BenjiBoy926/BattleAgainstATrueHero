@@ -258,25 +258,140 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
 
         // SECTION: this is the slow section before the final push to the end of the song!
 
-        rush = cursor.MoveTo(16, 1, 1f);
-        appear = rush.Shift(-2f);
+        for (int i = 0; i < 4; i += 2)
+        {
+            appear = cursor.MoveTo(16 + i, 1, 1f);
+            rush = cursor.MoveTo(16 + i, 2, 1f);
 
-        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.topYInside)),
-            SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
-        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.center.y)),
-            SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
-        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.bottomYInside)),
-            SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.topYInside)),
+                SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.center.y)),
+                SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.bottomYInside)),
+                SpearDirection.Fixed(Vector2.left), 5f, appear, rush);
 
-        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
-            SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
-            SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-        InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
-            SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
 
-        rush = cursor.MoveTo(16, 1, 1f);
-        appear = rush.Shift(-2f);
+            appear = cursor.MoveTo(16 + i, 3, 1f);
+            rush = cursor.MoveTo(16 + i, 4, 1f);
 
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXInside, Field.bottomYOutside)),
+                SpearDirection.Fixed(Vector2.up), 5f, appear, rush);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.center.x, Field.bottomYOutside)),
+                SpearDirection.Fixed(Vector2.up), 5f, appear, rush);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXInside, Field.bottomYOutside)),
+                SpearDirection.Fixed(Vector2.up), 5f, appear, rush);
+
+            appear = cursor.MoveTo(16 + i + 1, 1, 1f);
+            rush = cursor.MoveTo(16 + i + 1, 2, 1f);
+
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+
+            float y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+
+            y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+
+            appear = cursor.MoveTo(16 + i + 1, 3, 1f);
+            rush = cursor.MoveTo(16 + i + 1, 4, 1f);
+
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+
+            y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+
+            y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
+                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
+        }
+
+        // SECITON: the final push to the end!
+
+        for(int j = 0; j < 5; j += 4)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                rush = cursor.MoveTo(20 + i + j, 1, 1f);
+                appear = rush.Shift(-1f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.topYInside)),
+                    SpearDirection.Fixed(Vector2.left), 25f, appear, rush);
+                rush = cursor.MoveTo(20 + i + j, 1, 1.5f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
+                    SpearDirection.Fixed(Vector2.right), 25f, appear, rush);
+
+                rush = cursor.MoveTo(20 + i + j, 1, 2f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.center.y)),
+                    SpearDirection.Fixed(Vector2.left), 25f, appear, rush);
+                rush = cursor.MoveTo(20 + i + j, 1, 2.5f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
+                    SpearDirection.Fixed(Vector2.right), 25f, appear, rush);
+
+                rush = cursor.MoveTo(20 + i + j, 1, 3f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.bottomYInside)),
+                    SpearDirection.Fixed(Vector2.left), 25f, appear, rush);
+                rush = cursor.MoveTo(20 + i + j, 1, 3.5f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
+                    SpearDirection.Fixed(Vector2.right), 25f, appear, rush);
+
+                rush = cursor.MoveTo(20 + i + j, 2, 1f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXInside, Field.bottomYOutside)),
+                    SpearDirection.Fixed(Vector2.up), 25f, appear, rush);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.center.x, Field.bottomYOutside)),
+                    SpearDirection.Fixed(Vector2.up), 25f, appear, rush);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXInside, Field.bottomYOutside)),
+                    SpearDirection.Fixed(Vector2.up), 25f, appear, rush);
+
+                rush = cursor.MoveTo(20 + i + j, 3, 1f);
+                appear = rush.Shift(-2f);
+
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
+                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+
+                float y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
+                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
+                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+
+                y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
+                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+
+                rush = cursor.MoveTo(20 + i + j, 4, 1f);
+                appear = rush.Shift(-2f);
+
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
+                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+
+                y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
+                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
+                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+
+                y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f);
+                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
+                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LateralSpear : MonoBehaviour, IMusicBeatListener
+public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListener
 {
     public enum PhraseType
     {
@@ -21,6 +21,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
 
     private CachedComponent<Rigidbody2D> rb2D = new CachedComponent<Rigidbody2D>();
     private CachedComponent<LineRenderer> line = new CachedComponent<LineRenderer>();
+    private CachedComponent<SpriteRenderer> sprite = new CachedComponent<SpriteRenderer>();
 
     // Current direction that the spear will move when it slashes
     private Vector2 slashDirection
@@ -47,6 +48,15 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         }
     }
 
+    // When music begins, fade the spears in
+    public void OnMusicStart(MusicCursor cursor)
+    {
+        gameObject.SetActive(true);
+
+        // Fade the sprite in
+        StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));
+    }
+
     public void OnMusicBeat(MusicCursor cursor)
     {
         if (cursor.currentPhrase == 3 && cursor.measureInPhrase == 4) return;
@@ -54,6 +64,13 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         if (cursor.currentPhrase >= 6 && cursor.currentPhrase < 8 && 
             (cursor.measureInPhrase == 1 || cursor.measureInPhrase == 4)) return;
         if (cursor.currentPhrase >= 8 && cursor.currentPhrase < 12) return;
+
+        // On phrase 16, fade away
+        if(cursor.currentPhrase == 16 && gameObject.activeInHierarchy)
+        {
+            StartCoroutine(FadeAway());
+        }
+
         if (cursor.currentPhrase >= 16) return;
 
         // For non-final phrases
@@ -186,5 +203,12 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         }
 
         return targetY;
+    }
+
+    // Fade the spear so it is invisible, then disable it
+    private IEnumerator FadeAway()
+    {
+        yield return sprite.Get(this).Fade(Color.white, Color.clear, 0.2f);
+        gameObject.SetActive(false);
     }
 }
