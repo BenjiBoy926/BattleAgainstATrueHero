@@ -38,12 +38,12 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         // Setup spear at top-left corner
         InstantiateSpear(SpearPosition.Fixed(Field.topLeftRadial),
             SpearDirection.Fixed(new Vector2(1f, -1f)),
-            15f, appear, rush);
+            rushSpeed, appear, rush);
 
         // Setup spear at top-right corner
         InstantiateSpear(SpearPosition.Fixed(Field.topRightRadial),
             SpearDirection.Fixed(new Vector2(-1f, -1f)),
-            15f, appear, rush);
+            rushSpeed, appear, rush);
 
         // Change start to hit on the second note
         appear = appear.Shift(0.75f);
@@ -51,12 +51,12 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         // Setup spear on the left
         InstantiateSpear(SpearPosition.Fixed(Field.leftRadial),
             SpearDirection.Fixed(Vector2.right),
-            15f, appear, rush);
+            rushSpeed, appear, rush);
 
         // Setup spear on the right
         InstantiateSpear(SpearPosition.Fixed(Field.rightRadial),
             SpearDirection.Fixed(Vector2.left),
-            15f, appear, rush);
+            rushSpeed, appear, rush);
 
         // Change appear to hit on the third note
         appear = appear.Shift(0.75f);
@@ -64,12 +64,12 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         // Setup spear on the bottom left
         InstantiateSpear(SpearPosition.Fixed(Field.bottomLeftRadial),
             SpearDirection.Fixed(Vector2.one),
-            15f, appear, rush);
+            rushSpeed, appear, rush);
 
         // Setup spear on the bottom right
         InstantiateSpear(SpearPosition.Fixed(Field.bottomRightRadial),
             SpearDirection.Fixed(new Vector2(-1f, 1f)),
-            15f, appear, rush);
+            rushSpeed, appear, rush);
 
         // Change start to hit on the fourth note
         appear = appear.Shift(0.75f);
@@ -77,7 +77,7 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         // Setup spear on the bottom
         InstantiateSpear(SpearPosition.Fixed(Field.bottomRadial),
             SpearDirection.Fixed(Vector2.up),
-            15f, appear, rush);
+            rushSpeed, appear, rush);
     }
 
     private void InstantiateUppercutSpear(int spearIndex, float speed, MusicCursor appear, MusicCursor rush)
@@ -88,6 +88,16 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
             SpearDirection.Fixed(Vector2.up),
             speed, appear, rush);
     }
+
+    private void InstantiateSpearWall(Vector2 start, Vector2 end, int numSpears, Vector2 direction, float speed, MusicCursor appear, MusicCursor rush)
+    {
+        for(int i = 0; i < numSpears; i++)
+        {
+            Vector2 current = Vector2.Lerp(start, end, (float)i / (numSpears - 1));
+            InstantiateSpear(SpearPosition.Fixed(current), SpearDirection.Fixed(direction), speed, appear, rush);
+        }
+    }
+
 
     private void InstantiateAllSpears(MusicCursor cursor)
     {
@@ -140,29 +150,31 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
             rush = cursor.MoveTo(4 + i, 2, 4f);
 
             appear = cursor.MoveTo(4 + i, 2, 1f);
-            InstantiateSpear(SpearPosition.Fixed(Field.topLeftRadial),
-                SpearDirection.Fixed(new Vector2(1f, -1f)),
+            float x = Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.75f);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(x, Field.bottomYOutside)),
+                SpearDirection.Fixed(Vector2.up),
                 15f, appear, rush);
 
             appear = cursor.MoveTo(4 + i, 2, 2.5f);
-            InstantiateSpear(SpearPosition.Fixed(Field.topRightRadial),
-                SpearDirection.Fixed(-Vector2.one),
+            x = Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.25f);
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(x, Field.bottomYOutside)),
+                SpearDirection.Fixed(Vector2.up),
                 15f, appear, rush);
 
             rush = cursor.MoveTo(4 + i, 3, 4f);
 
             appear = cursor.MoveTo(4 + i, 3, 1f);
-            InstantiateSpear(SpearPosition.Fixed(Field.bottomLeftRadial),
-                SpearDirection.Fixed(Vector2.one),
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXInside, Field.bottomYOutside)),
+                SpearDirection.Fixed(Vector2.up),
                 15f, appear, rush);
 
             appear = cursor.MoveTo(4 + i, 3, 2.5f);
-            InstantiateSpear(SpearPosition.Fixed(Field.bottomRightRadial),
-                SpearDirection.Fixed(new Vector2(-1f, 1f)),
+            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXInside, Field.bottomYOutside)),
+                SpearDirection.Fixed(Vector2.up),
                 15f, appear, rush);
 
             // Make sure not to instantiate the surrounding spears before the transition into the next part of the music
-            if (i < 2.1f)
+            if (i < 3)
             {
                 rush = cursor.MoveTo(5 + i, 1, 1f);
                 appear = cursor.MoveTo(4 + i, 4, 1f);
@@ -286,56 +298,59 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
                 SpearDirection.Fixed(Vector2.up), 5f, appear, rush);
             InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXInside, Field.bottomYOutside)),
                 SpearDirection.Fixed(Vector2.up), 5f, appear, rush);
-
-            appear = cursor.MoveTo(16 + i + 1, 1, 1f);
-            rush = cursor.MoveTo(16 + i + 1, 2, 1f);
-
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
-                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-
-            float y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f);
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
-                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
-                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-
-            y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f);
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
-                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-
-            appear = cursor.MoveTo(16 + i + 1, 3, 1f);
-            rush = cursor.MoveTo(16 + i + 1, 4, 1f);
-
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
-                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-
-            y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f);
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
-                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
-                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
-
-            y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f);
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
-                SpearDirection.Fixed(Vector2.right), 5f, appear, rush);
         }
+        
+        // First time, instantiate a horizontal wall of spears
+        appear = cursor.MoveTo(17, 1, 1f);
+        rush = cursor.MoveTo(17, 2, 1f);
+
+        // Spears with some space on the bottom of the wall to slip through
+        InstantiateSpearWall(new Vector2(Field.leftXOutside, Field.topYInside),
+            new Vector2(Field.leftXOutside, Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f)),
+            5, Vector2.right, 5f, appear, rush);
+
+        appear = cursor.MoveTo(17, 3, 1f);
+        rush = cursor.MoveTo(17, 4, 1f);
+
+        // Spears with some space on the top of the wall to slip through
+        InstantiateSpearWall(new Vector2(Field.leftXOutside, Field.bottomYInside),
+            new Vector2(Field.leftXOutside, Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f)),
+            5, Vector2.right, 5f, appear, rush);
+
+        // Next time instantiate a vertical wall of spears
+        appear = cursor.MoveTo(19, 1, 1f);
+        rush = cursor.MoveTo(19, 2, 1f);
+
+        // Instantiate vertial wall with some space to slip through on the right
+        InstantiateSpearWall(new Vector2(Field.leftXInside, Field.bottomYOutside),
+            new Vector2(Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.75f), Field.bottomYOutside),
+            5, Vector2.up, 5f, appear, rush);
+
+        appear = cursor.MoveTo(19, 3, 1f);
+        rush = cursor.MoveTo(19, 4, 1f);
+
+        // Instantiate vertical wall with some space to slip through on the left
+        InstantiateSpearWall(new Vector2(Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.25f), Field.bottomYOutside),
+            new Vector2(Field.rightXInside, Field.bottomYOutside),
+            5, Vector2.up, 5f, appear, rush);
 
         // SECITON: the final push to the end!
 
-        for(int j = 0; j < 5; j += 4)
+        for (int j = 0; j < 5; j += 4)
         {
             for (int i = 0; i < 3; i++)
             {
                 rush = cursor.MoveTo(20 + i + j, 1, 1f);
-                appear = rush.Shift(-1f);
+                appear = rush.Shift(-3f);
+
+                // Top two spears
                 InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.topYInside)),
                     SpearDirection.Fixed(Vector2.left), 25f, appear, rush);
                 rush = cursor.MoveTo(20 + i + j, 1, 1.5f);
                 InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
                     SpearDirection.Fixed(Vector2.right), 25f, appear, rush);
 
+                // Middle two spears
                 rush = cursor.MoveTo(20 + i + j, 1, 2f);
                 InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.center.y)),
                     SpearDirection.Fixed(Vector2.left), 25f, appear, rush);
@@ -343,6 +358,7 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
                 InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
                     SpearDirection.Fixed(Vector2.right), 25f, appear, rush);
 
+                // Bottom two spears
                 rush = cursor.MoveTo(20 + i + j, 1, 3f);
                 InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXOutside, Field.bottomYInside)),
                     SpearDirection.Fixed(Vector2.left), 25f, appear, rush);
@@ -350,6 +366,7 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
                 InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
                     SpearDirection.Fixed(Vector2.right), 25f, appear, rush);
 
+                // Rush from bottom to top
                 rush = cursor.MoveTo(20 + i + j, 2, 1f);
                 InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXInside, Field.bottomYOutside)),
                     SpearDirection.Fixed(Vector2.up), 25f, appear, rush);
@@ -357,40 +374,104 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
                     SpearDirection.Fixed(Vector2.up), 25f, appear, rush);
                 InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXInside, Field.bottomYOutside)),
                     SpearDirection.Fixed(Vector2.up), 25f, appear, rush);
+            }
 
-                rush = cursor.MoveTo(20 + i + j, 3, 1f);
+            for(int i = 0; i < 2; i++)
+            {
+                // First time, instantiate a horizontal wall of spears
+                rush = cursor.MoveTo(20 + j, 3, 1f);
                 appear = rush.Shift(-2f);
 
-                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.topYInside)),
-                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+                // Spears with some space on the bottom of the wall to slip through
+                InstantiateSpearWall(new Vector2(Field.leftXOutside, Field.topYInside),
+                    new Vector2(Field.leftXOutside, Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f)),
+                    5, Vector2.right, 15f, appear, rush);
 
-                float y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f);
-                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
-                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
-
-                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
-                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
-
-                y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f);
-                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
-                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
-
-                rush = cursor.MoveTo(20 + i + j, 4, 1f);
+                rush = cursor.MoveTo(20 + j, 4, 1f);
                 appear = rush.Shift(-2f);
 
-                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.bottomYInside)),
-                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+                // Spears with some space on the top of the wall to slip through
+                InstantiateSpearWall(new Vector2(Field.leftXOutside, Field.bottomYInside),
+                    new Vector2(Field.leftXOutside, Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f)),
+                    5, Vector2.right, 15f, appear, rush);
 
-                y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f);
-                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
-                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+                // Next time instantiate a vertical wall of spears
+                rush = cursor.MoveTo(21 + j, 3, 1f);
+                appear = rush.Shift(-2f);
 
-                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, Field.center.y)),
-                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+                // Instantiate vertial wall with some space to slip through on the right
+                InstantiateSpearWall(new Vector2(Field.leftXInside, Field.bottomYOutside),
+                    new Vector2(Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.75f), Field.bottomYOutside),
+                    5, Vector2.up, 15f, appear, rush);
 
-                y = Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f);
-                InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXOutside, y)),
-                    SpearDirection.Fixed(Vector2.right), 15f, appear, rush);
+                rush = cursor.MoveTo(21 + j, 4, 1f);
+                appear = rush.Shift(-2f);
+
+                // Instantiate vertical wall with some space to slip through on the left
+                InstantiateSpearWall(new Vector2(Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.25f), Field.bottomYOutside),
+                    new Vector2(Field.rightXInside, Field.bottomYOutside),
+                    5, Vector2.up, 15f, appear, rush);
+
+                // Third time, instantiate a horizontal wall of spears from right to left
+                rush = cursor.MoveTo(22 + j, 3, 1f);
+                appear = rush.Shift(-2f);
+
+                // Spears with some space on the bottom of the wall to slip through
+                InstantiateSpearWall(new Vector2(Field.rightXOutside, Field.topYInside),
+                    new Vector2(Field.rightXOutside, Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.25f)),
+                    5, Vector2.left, 15f, appear, rush);
+
+                rush = cursor.MoveTo(22 + j, 4, 1f);
+                appear = rush.Shift(-2f);
+
+                // Spears with some space on the top of the wall to slip through
+                InstantiateSpearWall(new Vector2(Field.rightXOutside, Field.bottomYInside),
+                    new Vector2(Field.rightXOutside, Mathf.Lerp(Field.bottomYInside, Field.topYInside, 0.75f)),
+                    5, Vector2.left, 15f, appear, rush);
+
+                appear = cursor.MoveTo(23 + j, 1, 1f);
+
+                // Setup spear at top-left corner
+                rush = cursor.MoveTo(23 + j, 1, 2.5f);
+                InstantiateSpear(SpearPosition.Fixed(Field.topLeftRadial),
+                    SpearDirection.Fixed(new Vector2(1f, -1f)),
+                    25f, appear, rush);
+
+                // Setup spear on the left
+                rush = cursor.MoveTo(23 + j, 1, 3f);
+                InstantiateSpear(SpearPosition.Fixed(Field.leftRadial),
+                    SpearDirection.Fixed(Vector2.right),
+                    25f, appear, rush);
+
+                // Setup spear on the bottom left
+                rush = cursor.MoveTo(23 + j, 1, 3.5f);
+                InstantiateSpear(SpearPosition.Fixed(Field.bottomLeftRadial),
+                    SpearDirection.Fixed(Vector2.one),
+                    25f, appear, rush);
+
+                // Setup spear on the bottom
+                rush = cursor.MoveTo(23 + j, 2, 1f);
+                InstantiateSpear(SpearPosition.Fixed(Field.bottomRadial),
+                    SpearDirection.Fixed(Vector2.up),
+                    15f, appear, rush);
+
+                // Setup spear on the bottom right
+                rush = cursor.MoveTo(23 + j, 2, 2f);
+                InstantiateSpear(SpearPosition.Fixed(Field.bottomRightRadial),
+                    SpearDirection.Fixed(new Vector2(-1f, 1f)),
+                    15f, appear, rush);
+
+                // Setup spear on the right
+                rush = cursor.MoveTo(23 + j, 2, 3f);
+                InstantiateSpear(SpearPosition.Fixed(Field.rightRadial),
+                    SpearDirection.Fixed(Vector2.left),
+                    15f, appear, rush);
+
+                // Setup spear at top-right corner
+                rush = cursor.MoveTo(23 + j, 3, 1f);
+                InstantiateSpear(SpearPosition.Fixed(Field.topRightRadial),
+                    SpearDirection.Fixed(new Vector2(-1f, -1f)),
+                    5f, appear, rush);
             }
         }
     }
