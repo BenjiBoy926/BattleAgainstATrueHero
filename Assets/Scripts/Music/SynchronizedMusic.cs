@@ -26,19 +26,29 @@ public class SynchronizedMusic : MonoBehaviour
     private CachedComponent<AudioSource> source = new CachedComponent<AudioSource>();
     // Cursor used to indicate the current position in the music
     private MusicCursor cursor;
+    private Coroutine musicRoutine;
 
     private void Start()
     {
         SetupMusicListeners();
         if(playOnAwake)
         {
-            BeginMusic();
+            StartMusic();
         }
     }
 
-    public void BeginMusic()
+    public void StartMusic()
     {
-        StartCoroutine(MusicSyncLoop());
+        musicRoutine = StartCoroutine(MusicSyncLoop());
+    }
+
+    public void StopMusic()
+    {
+        // Stop the music routine
+        StopCoroutine(musicRoutine);
+
+        // Stop the audio
+        source.Get(this).Stop();
     }
 
     private IEnumerator MusicSyncLoop()

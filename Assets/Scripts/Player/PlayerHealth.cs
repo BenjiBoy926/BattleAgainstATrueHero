@@ -39,6 +39,8 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         effects = GetComponent<PlayerHealthEffects>();
+        effects.Setup(health);
+
         timeSinceLastHit = -invincibilityTime;
     }
 
@@ -65,15 +67,16 @@ public class PlayerHealth : MonoBehaviour
         health -= damagePerHit;
         timeSinceLastHit = Time.time;
 
-        if(health <= 0)
+        if (health <= 0)
         {
             // Die!
             _deathEvent.Invoke();
+            effects.DeathEffect();
         }
         // If the player isn't dead yet, play the effect for the player taking damage
         else
         {
-            effects.TakeDamageEffect(invincibilityTime);
+            effects.TakeDamageEffect(health, invincibilityTime);
         }
     }
 }

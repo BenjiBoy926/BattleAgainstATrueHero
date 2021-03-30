@@ -64,13 +64,18 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         yield return new WaitForSeconds(appearanceTime.timeSinceLastBeat);
 
         // Setup the initial position
-        transform.position = positionInfo.GetInitialPosition();
+        //Vector2 initialPos = positionInfo.GetInitialPosition();
+        //transform.position = initialPos;
+        rb2D.Get(this).position = positionInfo.GetInitialPosition();
+
+        // Activate the warning
+        SetWarningActive(true);
 
         // Fade the sprite in
         StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));
 
         // Have the spear rotate as it appears, then enable the warning
-        StartCoroutine(RotateAndEnableWarning(cursor));
+        StartCoroutine(Rotate(cursor));
     }
 
     private IEnumerator Rush()
@@ -81,16 +86,13 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         SetWarningActive(false);
     }
 
-    private IEnumerator RotateAndEnableWarning(MusicCursor cursor)
+    private IEnumerator Rotate(MusicCursor cursor)
     {
         yield return rb2D.Get(this).RotateOverTime(720f, cursor.BeatsToSeconds(1f), RotationDirection.Clockwise);
 
         // Set the direction
         transform.up = directionInfo.GetDirection(rb2D.Get(this).position);
         rb2D.Get(this).rotation = transform.rotation.eulerAngles.z;
-
-        // Activate the warning
-        SetWarningActive(true);
     }
 
     // Set the warning of the spear using a line renderer showing the spear's intended path

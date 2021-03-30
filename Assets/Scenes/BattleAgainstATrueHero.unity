@@ -420,6 +420,7 @@ GameObject:
   - component: {fileID: 604801824}
   - component: {fileID: 604801826}
   - component: {fileID: 604801825}
+  - component: {fileID: 604801827}
   m_Layer: 0
   m_Name: BattleAgainstATrueHeroMusic
   m_TagString: Untagged
@@ -580,6 +581,33 @@ MonoBehaviour:
   onMusicEnd:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &604801827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604801823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948b31b4997143e48b984c652bcdd66e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: Player
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 604801826}
+        m_MethodName: StopMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &620577551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1241,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Field
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248695564877735625, guid: b34c208be238fa0439e126f70bf7ae35,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272769803679548952, guid: b34c208be238fa0439e126f70bf7ae35,
+        type: 3}
+      propertyPath: damagePerHit
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585983434350977473, guid: b34c208be238fa0439e126f70bf7ae35,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9085032253341370868, guid: b34c208be238fa0439e126f70bf7ae35,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9085032253341370868, guid: b34c208be238fa0439e126f70bf7ae35,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b34c208be238fa0439e126f70bf7ae35, type: 3}
