@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -18,6 +18,12 @@ public class PlayerHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("Appearance of the player when the heart cracks")]
     private Sprite crackSprite;
+    [SerializeField]
+    [Tooltip("Object that represents the heart splinter")]
+    private GameObject splinterObject;
+    [SerializeField]
+    [Tooltip("The number of splinters instantiated when the player dies")]
+    private int splinterCount;
 
     // AUDIO
     [SerializeField]
@@ -88,6 +94,18 @@ public class PlayerHealthEffects : MonoBehaviour
         // Play the heart splinter clip
         source.clip = splinterClip;
         source.Play();
+
+        // Instantiate multiple splinters. The objects themselves take care of other things
+        // like initial velocity and rotation
+        for(int i = 0; i < splinterCount; i++)
+        {
+            Instantiate(splinterObject, transform.position, splinterObject.transform.rotation);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        // Startup game over manager
+        GameOver.BeginGameOver("BattleAgainstATrueHero");
     }
 
     private IEnumerator Flicker(float invincibleTime)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IMusicStartListener
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Speed at which the player moves")]
@@ -17,14 +17,6 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     private float v;
     private Vector2 move = new Vector2();
 
-    // Initial position. Stored so that we can move the player back to initial position at the start of the music
-    private Vector2 initialPos;
-
-    private void Awake()
-    {
-        initialPos = rb2D.Get(this).position;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -36,13 +28,6 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     private void FixedUpdate()
     {
         rb2D.Get(this).Shift(move, speed);
-    }
-
-    // Move to initial position and enable movement once the music begins
-    public void OnMusicStart(MusicCursor cursor)
-    {
-        rb2D.Get(this).position = initialPos;
-        enabled = true;
     }
     // Cannot move once player dies
     public void OnPlayerDeath()

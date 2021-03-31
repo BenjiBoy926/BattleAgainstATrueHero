@@ -1,0 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+public static class AudioModule
+{
+    public static IEnumerator FadeOut(this AudioSource source, float time)
+    {
+        UnityAction<float> updateVolume = currentTime =>
+        {
+            source.volume = Mathf.Lerp(1f, 0f, currentTime);
+        };
+        yield return CoroutineModule.UpdateForTime(time, updateVolume);
+    }
+}
