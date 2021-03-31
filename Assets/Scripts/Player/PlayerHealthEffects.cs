@@ -77,7 +77,7 @@ public class PlayerHealthEffects : MonoBehaviour
 
     private IEnumerator DeathRoutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         // After a second, make the heart crack
         renderer.sprite = crackSprite;
@@ -86,7 +86,7 @@ public class PlayerHealthEffects : MonoBehaviour
         source.clip = crackClip;
         source.Play();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         // After a second, make the heart crack
         renderer.enabled = false;

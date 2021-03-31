@@ -15,6 +15,9 @@ public class GameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Time it takes for the game over title text to fade it")]
     private float fadeTime;
+    [SerializeField]
+    [Tooltip("Text spoken when the player gets a game over")]
+    private Monologue monologue;
 
     // Scene that the game over script loads when the game over is finished
     private static string sceneCallback;
@@ -29,8 +32,8 @@ public class GameOver : MonoBehaviour
         // Fade the text in
         yield return ColorModule.Fade(Color.clear, Color.white, fadeTime, SetTextColor);
         
-        // Wait a few seconds (this will change when we have a little monologue setup)
-        yield return new WaitForSeconds(3f);
+        // Wait until the monologue is finished
+        yield return monologue.Speak();
 
         // Fade the music and the text
         StartCoroutine(music.FadeOut(fadeTime));
