@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/BattleAgainstATrueHeroPrologue.unity
+    guid: feed4a805f0a4a143a845f9e56c8a1b4
+  - enabled: 1
     path: Assets/Scenes/BattleAgainstATrueHero.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

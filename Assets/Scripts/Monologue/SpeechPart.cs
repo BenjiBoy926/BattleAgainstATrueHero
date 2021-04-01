@@ -52,8 +52,8 @@ public class SpeechPart
             // Add the character to the display
             display.text += c;
 
-            // Play the speech sound for non punctuation and non whitespace
-            if(!char.IsPunctuation(c) && !char.IsWhiteSpace(c))
+            // Play the speech sound for non whitespace
+            if(!char.IsWhiteSpace(c))
             {
                 audio.Play();
             }
