@@ -15,11 +15,15 @@ public class SpeechPart
     [SerializeField]
     [Tooltip("Delay time between the reveal of each character in the speech")]
     private float characterDelay;
+    [SerializeField]
+    [Tooltip("Event invoked when this speech part begins")]
+    private UnityEvent onBegin;
 
     // True if the speech should skip to the end
     private bool skip = false;
+    private string currentText = "";
 
-    public IEnumerator Speak(AudioSource audio, AudioClip speechSound, Text display, string advanceButton)
+    public IEnumerator Speak(AudioSource audio, AudioClip speechSound, UnityEvent<string> onUpdate, string advanceButton)
     {
         float startTime = Time.time;
 
@@ -35,8 +39,11 @@ public class SpeechPart
         skip = false;
 
         // Set display to be empty and set the speech sound
-        display.text = "";
+        SetText("", onUpdate);
         audio.clip = speechSound;
+
+        // Invoke the speech begin event
+        onBegin.Invoke();
 
         // Loop through each character in the speech
         foreach(char c in speech)
@@ -44,13 +51,13 @@ public class SpeechPart
             // If the advance button is pressed, then display all text and break out of the loop
             if(skip)
             {
-                display.text = speech;
+                SetText(speech, onUpdate);
                 audio.Play();
                 break;
             }
 
             // Add the character to the display
-            display.text += c;
+            SetText(currentText + c, onUpdate);
 
             // Play the speech sound for non whitespace
             if(!char.IsWhiteSpace(c))
@@ -67,5 +74,11 @@ public class SpeechPart
 
         // Wait until the advance button is pressed to exit the coroutine
         yield return new WaitUntil(() => Input.GetButtonDown(advanceButton));
+    }
+
+    private void SetText(string newText, UnityEvent<string> onUpdate)
+    {
+        currentText = newText;
+        onUpdate.Invoke(newText);
     }
 }

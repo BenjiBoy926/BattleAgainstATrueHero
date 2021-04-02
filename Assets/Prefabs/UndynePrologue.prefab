@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e70717ec188aa4ba7f914bbb05ee3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 2
+  startDelay: 0
   endDelay: 2
   deathClip: {fileID: 8300000, guid: 5cc7d87892a07f24596f91c9a124a6ed, type: 3}
   nextSceneName: BattleAgainstATrueHero
