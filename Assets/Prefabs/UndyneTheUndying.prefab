@@ -167,6 +167,7 @@ Transform:
   m_LocalScale: {x: 1.5801499, y: 1.5801499, z: 1.2155}
   m_Children:
   - {fileID: 7083344820035107565}
+  - {fileID: 2826869869483997810}
   - {fileID: 2969319713418933264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -295,10 +296,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dyingPosition: {x: -0.32, y: 2.5, z: 0}
   dyingScale: {x: 1.25, y: 1.25, z: 0.96}
+  undyingStillPosition: {x: 0, y: 2.7, z: 0}
+  undyingStillScale: {x: 0.8, y: 0.8, z: 0.6}
   undyingPosition: {x: 0.78, y: 2.73, z: 0}
   undyingScale: {x: 1.58, y: 1.58, z: 1.2}
   openingFadeTime: 2
+  transformFadeInTime: 3
+  transformFadeOutTime: 1
+  transformClip: {fileID: 8300000, guid: 5bccde96ff2d7bf43bda54bae14ce085, type: 3}
   overlayTag: Overlay
+  monologueMusic: {fileID: 8230720508763130502}
+  musicTag: GameController
   monologue:
     audio: {fileID: 7263211270299930738}
     voiceClip: {fileID: 8300000, guid: e3dc2826ca15dd946aecf3da4a34d991, type: 3}
@@ -351,7 +359,18 @@ MonoBehaviour:
       characterDelay: 0.05
       onBegin:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 6189232159469817789}
+            m_MethodName: MusicFadeIn
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
     - speech: 'Like any instant...
 
         I''ll scatter into a million pieces.'
@@ -451,6 +470,126 @@ MonoBehaviour:
               m_StringArgument: DyingSmile
               m_BoolArgument: 0
             m_CallState: 2
+    - speech: Right now, everyone in the world...
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
+    - speech: I can feel their feet dancing as one.
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 6189232159469817789}
+            m_MethodName: SetDyingAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Determined
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: And we all have ONE goal
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
+    - speech: To out-dance YOU
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 6189232159469817789}
+            m_MethodName: SetDyingAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: DeterminedSquint
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: Human, no, WHATEVER you are.
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 6189232159469817789}
+            m_MethodName: SetDyingAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Determined
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: For the sake of the whole world...
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 6189232159469817789}
+            m_MethodName: SetDyingAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: DeterminedSquint
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: I, UNDYNE, will out-dance you!
+      characterDelay: 0.2
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 6189232159469817789}
+            m_MethodName: SetDyingAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Threatening
+              m_BoolArgument: 0
+            m_CallState: 2
+  transformMonologue:
+    audio: {fileID: 7263211270299930738}
+    voiceClip: {fileID: 8300000, guid: 74126faf0676b75419ce735dc2bf8f7e, type: 3}
+    advanceButton: Submit
+    onMonologueBegin:
+      m_PersistentCalls:
+        m_Calls: []
+    onMonologueUpdate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2587538771343679998}
+          m_MethodName: set_text
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onMonologueEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    speechParts:
+    - speech: You're going to have to dance a little better than THAT
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &4191969492723539897
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +824,7 @@ RectTransform:
   m_Children:
   - {fileID: 6025000473519029071}
   m_Father: {fileID: 3686561403231730038}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -752,3 +891,130 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &8527301118233454616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2826869869483997810}
+  - component: {fileID: 8230720508763130502}
+  m_Layer: 0
+  m_Name: MonologueMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2826869869483997810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527301118233454616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3686561403231730038}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &8230720508763130502
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527301118233454616}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6935aa4dd3d17744cbe62c3b71b77532, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
