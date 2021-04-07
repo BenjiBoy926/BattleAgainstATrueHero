@@ -13,6 +13,12 @@ public class PlayerHealthEffects : MonoBehaviour
 
     // VISUAL
     [SerializeField]
+    [Tooltip("Time between the crack and the splinter of the heart shape when the player dies")]
+    private float splitDelay;
+    [SerializeField]
+    [Tooltip("Time after the player splinters away that the game over text appears")]
+    private float gameOverDelay;
+    [SerializeField]
     [Tooltip("Default appearance of the player")]
     private Sprite defaultSprite;
     [SerializeField]
@@ -77,7 +83,7 @@ public class PlayerHealthEffects : MonoBehaviour
 
     private IEnumerator DeathRoutine()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(splitDelay);
 
         // After a second, make the heart crack
         renderer.sprite = crackSprite;
@@ -86,7 +92,7 @@ public class PlayerHealthEffects : MonoBehaviour
         source.clip = crackClip;
         source.Play();
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(splitDelay);
 
         // After a second, make the heart crack
         renderer.enabled = false;
@@ -102,7 +108,7 @@ public class PlayerHealthEffects : MonoBehaviour
             Instantiate(splinterObject, transform.position, splinterObject.transform.rotation);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(gameOverDelay);
 
         // Startup game over manager
         GameOver.BeginGameOver("BattleAgainstATrueHero");

@@ -203,15 +203,40 @@ MonoBehaviour:
   monologue:
     audio: {fileID: 1650366529491614692}
     voiceClip: {fileID: 8300000, guid: b9772a2f365eb734d879e1ad66d2311b, type: 3}
-    textUI: {fileID: 1650366529914278479}
     advanceButton: Submit
+    onMonologueBegin:
+      m_PersistentCalls:
+        m_Calls: []
+    onMonologueUpdate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1650366529914278479}
+          m_MethodName: set_text
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onMonologueEnd:
+      m_PersistentCalls:
+        m_Calls: []
     speechParts:
     - speech: You cannot give up just yet...
       characterDelay: 0.08
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
     - speech: 'Frisk!
 
         Stay determined...'
       characterDelay: 0.08
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &1650366529243445388
 GameObject:
   m_ObjectHideFlags: 0

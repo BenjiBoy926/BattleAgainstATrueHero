@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 604801826}
   - component: {fileID: 604801825}
   - component: {fileID: 604801827}
+  - component: {fileID: 604801828}
   m_Layer: 0
   m_Name: BattleAgainstATrueHeroMusic
   m_TagString: GameController
@@ -609,6 +610,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &604801828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604801823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8efcba06e0b9b4f95bef77d9f271f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: Player
 --- !u!1 &620577551
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +942,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 604801824}
     m_Modifications:
+    - target: {fileID: 2823727187616156791, guid: 4dacc8082a6683e488606bbafef79d19,
+        type: 3}
+      propertyPath: damagePerHit
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 4390622800792777709, guid: 4dacc8082a6683e488606bbafef79d19,
         type: 3}
       propertyPath: m_Name
@@ -1156,14 +1175,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1ff688706d060c8419e0e6f28833574b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1488,6 +1507,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LateralSpear1
       objectReference: {fileID: 0}
+    - target: {fileID: 1309124540873772822, guid: d3628732c10b5ef498a4a0a84fa853a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3628732c10b5ef498a4a0a84fa853a5, type: 3}
 --- !u!1001 &1796187596123310587
@@ -1501,6 +1525,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LateralSpear2
+      objectReference: {fileID: 0}
+    - target: {fileID: 458118575245507041, guid: 521c5bfd61a73014e81a807ee220b9b4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 458118575245507043, guid: 521c5bfd61a73014e81a807ee220b9b4,
         type: 3}
@@ -1631,16 +1660,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UndyneTheUndying
-      objectReference: {fileID: 0}
-    - target: {fileID: 5355938346471607534, guid: d5da4a326f8a8b64c8135115faee9054,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 8248579840860198779, guid: d5da4a326f8a8b64c8135115faee9054,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5da4a326f8a8b64c8135115faee9054, type: 3}

@@ -47,40 +47,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e70717ec188aa4ba7f914bbb05ee3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 0
+  startDelay: 1
   endDelay: 2
   deathClip: {fileID: 8300000, guid: 5cc7d87892a07f24596f91c9a124a6ed, type: 3}
   nextSceneName: BattleAgainstATrueHero
   monologue:
     audio: {fileID: 351256321}
     voiceClip: {fileID: 8300000, guid: e3dc2826ca15dd946aecf3da4a34d991, type: 3}
-    textUI: {fileID: 8120726737159526995}
     advanceButton: Submit
+    onMonologueBegin:
+      m_PersistentCalls:
+        m_Calls: []
+    onMonologueUpdate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8120726737159526995}
+          m_MethodName: set_text
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onMonologueEnd:
+      m_PersistentCalls:
+        m_Calls: []
     speechParts:
     - speech: '... heh...
 
         "It''s nothing"...'
       characterDelay: 0.1
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
     - speech: 'No... s-somehow,
 
         with just one hit...'
       characterDelay: 0.1
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
     - speech: I'm already...
       characterDelay: 0.1
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
     - speech: Already...
       characterDelay: 0.1
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
     - speech: D... damn it...
       characterDelay: 0.1
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
     - speech: 'Papyrus...
 
         Alphys...
 
         ASGORE...'
       characterDelay: 0.2
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
     - speech: Just like that, I...
       characterDelay: 0.2
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
     - speech: I've failed you.
       characterDelay: 0.2
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!82 &351256321
 AudioSource:
   m_ObjectHideFlags: 0

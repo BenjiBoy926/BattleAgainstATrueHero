@@ -36,13 +36,16 @@ public class Introduction : MonoBehaviour
     [Tooltip("Time it takes to fade out for the transformation")]
     private float transformFadeOutTime;
     [SerializeField]
-    [Tooltip("Audio clip that plays when undyn transforms")]
+    [Tooltip("Audio clip that plays when undyne transforms")]
     private AudioClip transformClip;
     [SerializeField]
     [TagSelector]
     [Tooltip("Tag of the object with a panel that overlays the full scene")]
     private string overlayTag;
 
+    [SerializeField]
+    [Tooltip("Root game object for the speech bubble")]
+    private GameObject speechBubble;
     [SerializeField]
     [Tooltip("Audio source to play the music while Undyne is monologing")]
     private AudioSource monologueMusic;
@@ -70,13 +73,24 @@ public class Introduction : MonoBehaviour
         GameObject overlayObject = GameObject.FindGameObjectWithTag(overlayTag);
         overlay = overlayObject.GetComponent<Image>();
 
-        SetDyingAnimation("Dying");
-
-        StartCoroutine(IntroductionRoutine());
+        // If this is the player's first attempt, give them the long introduction
+        if(UndyneBattleManager.attempts == 0)
+        {
+            StartCoroutine(LongIntroduction());
+        }
+        // If this is not the first attempt, give them the short introduction
+        else
+        {
+            StartCoroutine(ShortIntroduction());
+        }
     }
 
-    private IEnumerator IntroductionRoutine()
+    private IEnumerator LongIntroduction()
     {
+        // Start
+        SetDyingAnimation("Dying");
+
+        // Fade in, then speak the opening monologue
         yield return overlay.Fade(Color.black, Color.clear, openingFadeTime);
         yield return monologue.Speak();
 
@@ -85,6 +99,7 @@ public class Introduction : MonoBehaviour
         monologueMusic.loop = false;
         monologueMusic.Play();
 
+        // Fade out to conceal undyne's transformation
         yield return overlay.Fade(Color.clear, Color.white, transformFadeInTime);
         yield return new WaitUntil(() => !monologueMusic.isPlaying);
 
@@ -93,13 +108,19 @@ public class Introduction : MonoBehaviour
         yield return overlay.Fade(Color.white, Color.clear, transformFadeOutTime);
 
         // Do the brief introduction
-        yield return BreifIntroduction();
+        yield return UndyneTheUndyingIntroduction();
+    }
+
+    private IEnumerator ShortIntroduction()
+    {
+        SetUndyingStillAnimation();
+        yield return overlay.Fade(Color.black, Color.clear, openingFadeTime);
+        yield return UndyneTheUndyingIntroduction();
     }
 
     // Breif introduction simply has Undyne the Undying say something, then start the music
-    private IEnumerator BreifIntroduction()
+    private IEnumerator UndyneTheUndyingIntroduction()
     {
-        SetUndyingStillAnimation();
         yield return transformMonologue.Speak();
 
         // Set undying animation
@@ -124,6 +145,7 @@ public class Introduction : MonoBehaviour
     public void SetUndyingAnimation()
     {
         SetAnimation(undyingPosition, undyingScale, "Undying");
+        speechBubble.SetActive(false);
     }
     // Set an animation with position and scale
     private void SetAnimation(Vector3 pos, Vector3 scale, string trigger)
