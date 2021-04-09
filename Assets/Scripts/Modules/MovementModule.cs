@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public static class MovementModule
 {
     // SHIFT
-    // Change the position of the rigidbody by the given direction
+    // Change the position by the given direction
     public static void Shift(this Rigidbody2D rb2D, Vector2 dir, float speed)
     {
         dir = dir.normalized * speed * Time.fixedDeltaTime;
@@ -31,6 +31,32 @@ public static class MovementModule
     public static IEnumerator ShiftOverTime(this Rigidbody2D rb2D, Vector2 shift, float time)
     {
         yield return rb2D.MoveOverTime(rb2D.position + shift, time);
+    }
+
+    public static IEnumerator MoveOverTime(this Transform transform, Vector3 endingPos, float time)
+    {
+        float inverseTime = 1f / time;
+
+        // Store the starting position of the transform
+        Vector3 startPos = transform.position;
+
+        UnityAction<float> updatePosition = currentTime =>
+        {
+            transform.position = Vector3.Lerp(startPos, endingPos, currentTime * inverseTime);
+        };
+
+        // Run an update loop for time, updating position
+        yield return CoroutineModule.UpdateForTime(time, updatePosition);
+    }
+
+    // Infinitely ping-pong the transform
+    public static IEnumerator PingPong(this Transform transform, Vector3 startingPos, Vector3 endingPos, float moveTime)
+    {
+        while(true)
+        {
+            yield return transform.MoveOverTime(endingPos, moveTime);
+            yield return transform.MoveOverTime(startingPos, moveTime);
+        }
     }
 
     public static IEnumerator MoveOverTime(this Rigidbody2D rb2D, Vector2 endingPos, float time)

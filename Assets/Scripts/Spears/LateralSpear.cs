@@ -51,7 +51,7 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
     // When music begins, fade the spears in
     public void OnMusicStart(MusicCursor cursor)
     {
-        gameObject.SetActive(true);
+        sprite.Get(this).enabled = true;
 
         // Fade the sprite in
         StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));

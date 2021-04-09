@@ -14,8 +14,8 @@ public class Monologue
     [Tooltip("Voice clip that plays when each character is revealed")]
     private AudioClip voiceClip;
     [SerializeField]
-    [Tooltip("Name of the button in the input manager that advances the monologue to the next text")]
-    private string advanceButton;
+    [Tooltip("Information on the automatic advancement of the monologue")]
+    private MonologueAdvanceSettings advanceSettings;
 
     [SerializeField]
     [Tooltip("Event invoked when the monologue begins")]
@@ -39,11 +39,14 @@ public class Monologue
         // Loop over all speech parts
         foreach(SpeechPart speech in speechParts)
         {
-            yield return speech.Speak(audio, voiceClip, onMonologueUpdate, advanceButton);
+            yield return speech.Speak(audio, voiceClip, onMonologueUpdate, advanceSettings);
             yield return null;
 
         }
         onMonologueUpdate.Invoke("");
+
+        // Disable the advance indicator
+        advanceSettings.SetIndicatorActive(false);
 
         // Invoke monologue end event
         onMonologueEnd.Invoke();

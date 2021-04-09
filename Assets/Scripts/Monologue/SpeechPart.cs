@@ -23,15 +23,19 @@ public class SpeechPart
     private bool skip = false;
     private string currentText = "";
 
-    public IEnumerator Speak(AudioSource audio, AudioClip speechSound, UnityEvent<string> onUpdate, string advanceButton)
+    public IEnumerator Speak(AudioSource audio, AudioClip speechSound, UnityEvent<string> onUpdate, MonologueAdvanceSettings advance)
     {
         float startTime = Time.time;
 
+        // Disable the advancement indicator
+        advance.SetIndicatorActive(false);
+
         // This more sophisticated waiting function needs to be used in case the player wants to skip the voice line
+        // while the algorithm is still waiting to display the next character
         // The wait ends either if the player wants to skip or if we are done displaying the current character
         WaitUntil characterWait = new WaitUntil(() =>
         {
-            skip = skip || Input.GetButtonDown(advanceButton);
+            skip = skip || advance.getAdvanceButtonDown;
             return skip || (Time.time - startTime > characterDelay);
         });
 
@@ -72,8 +76,25 @@ public class SpeechPart
 
         yield return null;
 
-        // Wait until the advance button is pressed to exit the coroutine
-        yield return new WaitUntil(() => Input.GetButtonDown(advanceButton));
+        // Set the time when the speech finished
+        float readTime = advance.readTime + Time.time;
+
+        // Try to enable the indicator (does not activate if auto-advancing)
+        advance.SetIndicatorActive(true);
+
+        yield return new WaitUntil(() =>
+        {
+            // If we should automatically advance, wait for the time to exceed the read time
+            if (advance.autoAdvance)
+            {
+                return Time.time > readTime;
+            }
+            // If we do not automatically advance, then wait for the button to go down
+            else
+            {
+                return advance.getAdvanceButtonDown;
+            }
+        });
     }
 
     private void SetText(string newText, UnityEvent<string> onUpdate)
