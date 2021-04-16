@@ -29,9 +29,4 @@ public class PlayerMovement : MonoBehaviour
     {
         rb2D.Get(this).Shift(move, speed);
     }
-    // Cannot move once player dies
-    public void OnPlayerDeath()
-    {
-        enabled = false;
-    }
 }

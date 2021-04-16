@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -30,6 +32,12 @@ public class PlayerHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("The number of splinters instantiated when the player dies")]
     private int splinterCount;
+    [SerializeField]
+    [Tooltip("Reference to the slider that manages the invincibility shield effect")]
+    private Slider invincibilitySlider;
+    [SerializeField]
+    [Tooltip("Image that displays invincibility")]
+    private Image invincibilityImage;
 
     // AUDIO
     [SerializeField]
@@ -44,15 +52,29 @@ public class PlayerHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("Time it takes for the player to fade in and out while invincible")]
     private float fadeTime;
+    [SerializeField]
+    [Tooltip("Deflect sound effect")]
+    private AudioClip deflectClip;
+    [SerializeField]
+    [Tooltip("Sound effect for healing")]
+    private AudioClip healClip;
+    [SerializeField]
+    [Tooltip("Effect played when the player powers down")]
+    private AudioClip powerDownClip;
 
     // Reference to the audio source that plays effects for the player
-    private AudioSource source;
+    private new AudioSource audio;
     private new SpriteRenderer renderer;
+    private Color baseInvincibilityImageColor;
 
     private void Awake()
     {
-        source = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
         renderer = GetComponent<SpriteRenderer>();
+
+        invincibilitySlider.value = 0f;
+        baseInvincibilityImageColor = invincibilityImage.color;
+        invincibilityImage.enabled = false;
     }
 
     // Setup the max value on the slider
@@ -68,8 +90,8 @@ public class PlayerHealthEffects : MonoBehaviour
         ui.UpdateUI(newHealth);
 
         // Play the damage clip
-        source.clip = damageClip;
-        source.Play();
+        audio.clip = damageClip;
+        audio.Play();
 
         // Start the fading in and out coroutine
         StartCoroutine(Flicker(invincibleTime));
@@ -89,8 +111,8 @@ public class PlayerHealthEffects : MonoBehaviour
         renderer.sprite = crackSprite;
 
         // Play the heart crack clip
-        source.clip = crackClip;
-        source.Play();
+        audio.clip = crackClip;
+        audio.Play();
 
         yield return new WaitForSeconds(splitDelay);
 
@@ -98,8 +120,8 @@ public class PlayerHealthEffects : MonoBehaviour
         renderer.enabled = false;
 
         // Play the heart splinter clip
-        source.clip = splinterClip;
-        source.Play();
+        audio.clip = splinterClip;
+        audio.Play();
 
         // Instantiate multiple splinters. The objects themselves take care of other things
         // like initial velocity and rotation
@@ -112,6 +134,55 @@ public class PlayerHealthEffects : MonoBehaviour
 
         // Startup game over manager
         GameOver.BeginGameOver("BattleAgainstATrueHero");
+    }
+
+    public void ActivateInvincibilityEffect()
+    {
+        // Play a sound!
+        audio.clip = deflectClip;
+        audio.Play();
+
+        invincibilitySlider.value = 1f;
+        invincibilityImage.enabled = true;
+        invincibilityImage.color = baseInvincibilityImageColor;
+    }
+
+    public void DeactivateInvincibilityEffect(float rechargeTime)
+    {
+        // Play a sound
+        audio.clip = powerDownClip;
+        audio.Play();
+
+        // This function updates the slider
+        UnityAction<float> updateSlider = currentTime =>
+        {
+            float t = currentTime / rechargeTime;
+            invincibilitySlider.value = Mathf.Lerp(1f, 0f, t);
+        };
+        StartCoroutine(CoroutineModule.UpdateForTime(rechargeTime, updateSlider));
+
+        // Make the image flash while we are not invincible
+        UnityAction<Color> updateSliderColor = color =>
+        {
+            invincibilityImage.color = color;
+        };
+        StartCoroutine(ColorModule.Flicker(baseInvincibilityImageColor, Color.clear, rechargeTime, 0.25f, updateSliderColor));
+    }
+
+    public void AttackBlockEffect()
+    {
+        // Play a sound!
+        audio.clip = deflectClip;
+        audio.Play();
+    }
+
+    public void InvincibilityReadyEffect()
+    {
+        // Play a sound!  Or, you know, SOMETHING
+        audio.clip = healClip;
+        audio.Play();
+
+        invincibilityImage.enabled = false;
     }
 
     private IEnumerator Flicker(float invincibleTime)
