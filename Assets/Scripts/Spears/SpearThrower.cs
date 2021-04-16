@@ -147,31 +147,31 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
 
         for (int i = 0; i < 4; i++)
         {
-            rush = cursor.MoveTo(4 + i, 2, 4f);
+            //rush = cursor.MoveTo(4 + i, 2, 4f);
 
-            appear = cursor.MoveTo(4 + i, 2, 1f);
-            float x = Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.75f);
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(x, Field.bottomYOutside)),
-                SpearDirection.Fixed(Vector2.up),
-                15f, appear, rush);
+            //appear = cursor.MoveTo(4 + i, 2, 1f);
+            //float x = Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.75f);
+            //InstantiateSpear(SpearPosition.Fixed(new Vector2(x, Field.bottomYOutside)),
+            //    SpearDirection.Fixed(Vector2.up),
+            //    15f, appear, rush);
 
-            appear = cursor.MoveTo(4 + i, 2, 2.5f);
-            x = Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.25f);
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(x, Field.bottomYOutside)),
-                SpearDirection.Fixed(Vector2.up),
-                15f, appear, rush);
+            //appear = cursor.MoveTo(4 + i, 2, 2.5f);
+            //x = Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.25f);
+            //InstantiateSpear(SpearPosition.Fixed(new Vector2(x, Field.bottomYOutside)),
+            //    SpearDirection.Fixed(Vector2.up),
+            //    15f, appear, rush);
 
-            rush = cursor.MoveTo(4 + i, 3, 4f);
+            //rush = cursor.MoveTo(4 + i, 3, 4f);
 
-            appear = cursor.MoveTo(4 + i, 3, 1f);
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXInside, Field.bottomYOutside)),
-                SpearDirection.Fixed(Vector2.up),
-                15f, appear, rush);
+            //appear = cursor.MoveTo(4 + i, 3, 1f);
+            //InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXInside, Field.bottomYOutside)),
+            //    SpearDirection.Fixed(Vector2.up),
+            //    15f, appear, rush);
 
-            appear = cursor.MoveTo(4 + i, 3, 2.5f);
-            InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXInside, Field.bottomYOutside)),
-                SpearDirection.Fixed(Vector2.up),
-                15f, appear, rush);
+            //appear = cursor.MoveTo(4 + i, 3, 2.5f);
+            //InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXInside, Field.bottomYOutside)),
+            //    SpearDirection.Fixed(Vector2.up),
+            //    15f, appear, rush);
 
             // Make sure not to instantiate the surrounding spears before the transition into the next part of the music
             if (i < 3)

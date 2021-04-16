@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListener
+public class LateralSpear : MonoBehaviour, IMusicBeatListener
 {
     public enum PhraseType
     {
@@ -61,13 +61,6 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
     private void Awake()
     {
         rb2D.Get(this).rotation = Vector2.SignedAngle(Vector2.down, slashDirection);
-    }
-
-    // When music begins, fade the spears in
-    public void OnMusicStart(MusicCursor cursor)
-    {
-        sprite.Get(this).enabled = true;
-
     }
 
     public void OnMusicBeat(MusicCursor cursor)
