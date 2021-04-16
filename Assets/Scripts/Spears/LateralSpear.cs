@@ -9,15 +9,17 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         FirstPhrase,
         SecondPhrase
     }
-
-    public enum VerticalPositionType
+    public enum SlashOrientation
     {
-        Upper, Lower, Middle
+        Horizontal, Vertical
     }
 
     [SerializeField]
     [Tooltip("Will the cross spear move into position at the first phrase or second phrase?")]
     private PhraseType type;
+    [SerializeField]
+    [Tooltip("Whether this spear will slash up and down or side to side")]
+    private SlashOrientation orientation;
 
     private CachedComponent<Rigidbody2D> rb2D = new CachedComponent<Rigidbody2D>();
     private CachedComponent<LineRenderer> line = new CachedComponent<LineRenderer>();
@@ -28,24 +30,34 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
     {
         get
         {
-            if (rb2D.Get(this).position.x < 0f)
+            // Check if orientation is horizontal
+            if(orientation == SlashOrientation.Horizontal)
             {
-                return Vector2.right;
+                // If we are on the left side, slash to the right
+                if (rb2D.Get(this).position.x < Field.center.x)
+                {
+                    return Vector2.right;
+                }
+                // Otherwise, slash to the left
+                else return Vector2.left;
             }
-            else return Vector2.left;
+            // This is if orientation is vertical
+            else
+            {
+                // If we are on the bottom, slash up
+                if (rb2D.Get(this).position.y < Field.center.y)
+                {
+                    return Vector2.up;
+                }
+                // Otherwise, slash down
+                else return Vector2.down;
+            }
         }
     }
 
     private void Awake()
-    { 
-        if(slashDirection == Vector2.left)
-        {
-            rb2D.Get(this).rotation = -90;
-        }
-        else
-        {
-            rb2D.Get(this).rotation = 90;
-        }
+    {
+        rb2D.Get(this).rotation = Vector2.SignedAngle(Vector2.down, slashDirection);
     }
 
     // When music begins, fade the spears in
@@ -129,9 +141,7 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         yield return new WaitForSeconds(cursor.BeatsToSeconds(preWaitInBeats));
 
         // Shift the spear to a new up or down position
-        float newX = transform.position.x < 0f ? Field.leftXOutside : Field.rightXOutside;
-        float newY = TargetYPosition(cursor.measureInPhrase);
-        yield return rb2D.Get(this).MoveOverTime(new Vector2(newX, newY), cursor.BeatsToSeconds(0.25f));
+        yield return rb2D.Get(this).MoveOverTime(TargetPosition(cursor.measureInPhrase), cursor.BeatsToSeconds(0.25f));
 
         // Enable the line renderer as a warning
         SetLineRendererActive(true);
@@ -140,8 +150,7 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
     private IEnumerator Throw(MusicCursor cursor, float slashTimeInBeats)
     {
         SetLineRendererActive(false);
-        Vector2 shiftPos = slashDirection * Field.outsideSize.x;
-        yield return rb2D.Get(this).ShiftOverTime(shiftPos, cursor.BeatsToSeconds(slashTimeInBeats));
+        yield return rb2D.Get(this).ShiftOverTime(TargetShift(), cursor.BeatsToSeconds(slashTimeInBeats));
     }
 
     private IEnumerator DoubleThrow(MusicCursor cursor, float initialWaitInBeats)
@@ -168,24 +177,63 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         }
     }
 
+    private Vector2 TargetShift()
+    {
+        if (orientation == SlashOrientation.Horizontal)
+        {
+            return slashDirection * Field.outsideSize.x;
+        }
+        else return slashDirection * Field.outsideSize.y;
+    }
+
+    private Vector2 TargetPosition(int measureInPhrase)
+    {
+        Vector2 pos = new Vector2();
+
+        // Check orientation
+        if(orientation == SlashOrientation.Horizontal)
+        {
+            // If slashing horizontally, slide to new Y position
+            pos.x = transform.position.x < Field.center.x ? Field.leftXOutside : Field.rightXOutside;
+            pos.y = TargetYPosition(measureInPhrase);
+        }
+        else
+        {
+            // If slashing vertically, slide to new X position
+            pos.x = TargetXPosition(measureInPhrase);
+            pos.y = transform.position.y < Field.center.y ? Field.bottomYOutside : Field.topYOutside;
+        }
+
+        return pos;
+    }
+    private float TargetXPosition(int measureInPhrase)
+    {
+        return TargetAxisPosition(measureInPhrase, Field.leftXInside, Field.rightXInside);
+    }
     private float TargetYPosition(int measureInPhrase)
     {
-        float targetY;
+        return TargetAxisPosition(measureInPhrase, Field.bottomYInside, Field.topYInside);
+    }
+    private float TargetAxisPosition(int measureInPhrase, float min, float max)
+    {
+        float targetPos;
+        float length = Mathf.Abs(max - min);
+        float midpoint = min + (length / 2f);
 
         // For the second measure in phrase, go to the middle
         if(measureInPhrase == 2)
         {
-            targetY = Field.center.y;
+            targetPos = midpoint;
         }
         // On the last measure in the phrase, go one quarter down from top
         else if (measureInPhrase == 4)
         {
-            targetY = Field.topYInside - (3f * Field.insideSize.y / 4f);
+            targetPos = max - (3f * length / 4f);
         }
         // Otherwise, go to the top
         else
         {
-            targetY = Field.topYInside;
+            targetPos = max;
         }
 
         // Second phrase spear always half the height offset from the first phrase spear
@@ -194,15 +242,15 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
             // This check for the last measure in phrase makes them criss-cross
             if(measureInPhrase == 4)
             {
-                targetY += Field.insideSize.y / 2f;
+                targetPos += length / 2f;
             }
             else
             {
-                targetY -= Field.insideSize.y / 2f;
+                targetPos -= length / 2f;
             }
         }
 
-        return targetY;
+        return targetPos;
     }
 
     // Fade the spear so it is invisible, then disable it

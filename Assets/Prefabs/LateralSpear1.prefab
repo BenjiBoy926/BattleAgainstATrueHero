@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  orientation: 0
 --- !u!120 &7812799362535866449
 LineRenderer:
   m_ObjectHideFlags: 0
