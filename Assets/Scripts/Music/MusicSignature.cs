@@ -38,10 +38,10 @@ public struct MusicSignature
             IntRange currentBeats = BeatsInSignature(i);
 
             // Check if the beat requested is in the beat range of the current signature
-            if (beat >= currentBeats.start && beat < currentBeats.end)
+            if (beat >= currentBeats.min && beat < currentBeats.max)
             {
                 // Compute the number of beats in this signature
-                int beatsInSignature = beat - currentBeats.start;
+                int beatsInSignature = beat - currentBeats.min;
 
                 // Mod the number of beats into this signature by the number of beats per measure this signature
                 return (beatsInSignature % signatures[i].signature.beatsPerMeasure) + 1;
@@ -62,10 +62,10 @@ public struct MusicSignature
             IntRange currentBeats = BeatsInSignature(i);
 
             // Check if the beat requested is in the beat range of the current signature
-            if(beat >= currentBeats.start && beat < currentBeats.end)
+            if(beat >= currentBeats.min && beat < currentBeats.max)
             {
                 // Compute the number of beats in this signature
-                int beatsInSignature = beat - currentBeats.start;
+                int beatsInSignature = beat - currentBeats.min;
 
                 // Compute number of measures in this signature and add it
                 measure += beatsInSignature / signatures[i].signature.beatsPerMeasure + 1;
@@ -93,10 +93,10 @@ public struct MusicSignature
             IntRange currentMeasures = MeasuresInSignature(i);
 
             // Check if the measure requested is in the measure range of the current signature
-            if (measure >= currentMeasures.start && measure < currentMeasures.end)
+            if (measure >= currentMeasures.min && measure < currentMeasures.max)
             {
                 // Compute the number of measures in this signature
-                int measuresInSignature = measure - currentMeasures.start;
+                int measuresInSignature = measure - currentMeasures.min;
 
                 // Compute number of beats in this signature and add it
                 beat += measuresInSignature * signatures[i].signature.beatsPerMeasure + 1;

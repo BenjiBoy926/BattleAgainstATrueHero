@@ -20,6 +20,9 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
     [SerializeField]
     [Tooltip("Whether this spear will slash up and down or side to side")]
     private SlashOrientation orientation;
+    [SerializeField]
+    [Tooltip("Measure ranges where the spear is active and moving, spear is dormant on other measures")]
+    private List<IntRange> measureRanges;
 
     private CachedComponent<Rigidbody2D> rb2D = new CachedComponent<Rigidbody2D>();
     private CachedComponent<LineRenderer> line = new CachedComponent<LineRenderer>();
@@ -65,64 +68,63 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
     {
         sprite.Get(this).enabled = true;
 
-        // Fade the sprite in
-        StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));
     }
 
     public void OnMusicBeat(MusicCursor cursor)
     {
-        if (cursor.currentPhrase == 3 && cursor.measureInPhrase == 4) return;
-        if (cursor.currentPhrase >= 4 && cursor.currentPhrase < 6) return;
-        if (cursor.currentPhrase >= 6 && cursor.currentPhrase < 8 && 
-            (cursor.measureInPhrase == 1 || cursor.measureInPhrase == 4)) return;
-        if (cursor.currentPhrase >= 8 && cursor.currentPhrase < 12) return;
-
-        // On phrase 16, fade away
-        if(cursor.currentPhrase == 16 && gameObject.activeInHierarchy)
+        // If this is the first move, fade the sprite in
+        if(FirstMove(cursor))
         {
-            StartCoroutine(FadeAway());
+            StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));
+        }
+        // If this is the first move, fade the sprite out
+        if (LastMove(cursor))
+        {
+            StartCoroutine(sprite.Get(this).Fade(Color.white, Color.clear, cursor.BeatsToSeconds(1f)));
         }
 
-        if (cursor.currentPhrase >= 16) return;
-
-        // For non-final phrases
-        if (cursor.measureInPhrase != 4)
+        // Only move if this measure is within the range of possible motions
+        if (MoveThisMeasure(cursor.currentMeasure))
         {
-            if (type == PhraseType.FirstPhrase && cursor.beatInMeasure == 1)
+            // For non-final phrases
+            if (cursor.measureInPhrase != 4)
             {
-                // For the first phrase spear type, take position, wait, then turn around
-                StartCoroutine(TakePosition(cursor, 0f).Then(TurnAround(cursor, 0.5f)));
+                if (type == PhraseType.FirstPhrase && cursor.beatInMeasure == 1)
+                {
+                    // For the first phrase spear type, take position, wait, then turn around
+                    StartCoroutine(TakePosition(cursor, 0f).Then(TurnAround(cursor, 0.5f)));
+                }
+                else if (type == PhraseType.SecondPhrase && cursor.beatInMeasure == 2)
+                {
+                    // For the second phrase, we need to wait for the right notes in the beat
+                    // Then take position and turn around
+                    StartCoroutine(TakePosition(cursor, 0.5f).Then(TurnAround(cursor, 0.5f)));
+                }
+                // Slash on the fourth beat
+                else if (cursor.beatInMeasure == 4)
+                {
+                    StartCoroutine(Throw(cursor, 0.5f));
+                }
             }
-            else if (type == PhraseType.SecondPhrase && cursor.beatInMeasure == 2)
+            // For the final phrase, do something else
+            else
             {
-                // For the second phrase, we need to wait for the right notes in the beat
-                // Then take position and turn around
-                StartCoroutine(TakePosition(cursor, 0.5f).Then(TurnAround(cursor, 0.5f)));
-            }
-            // Slash on the fourth beat
-            else if (cursor.beatInMeasure == 4)
-            {
-                StartCoroutine(Throw(cursor, 0.5f));
-            }
-        }
-        // For the final phrase, do something else
-        else
-        {
-            // On the first beat, take position at different time for first and second spear types
-            if (cursor.beatInMeasure == 1)
-            {
-                float preWait = type == PhraseType.FirstPhrase ? 0f : 0.75f;
-                StartCoroutine(TakePosition(cursor, preWait));
-            }
-            // After the second beat, turn around
-            else if (cursor.beatInMeasure == 2)
-            {
-                StartCoroutine(TurnAround(cursor, 0.5f));
-            }
-            // Just after the third beat, do a double slash!
-            else if (cursor.beatInMeasure == 3)
-            {
-                StartCoroutine(DoubleThrow(cursor, 0.25f));
+                // On the first beat, take position at different time for first and second spear types
+                if (cursor.beatInMeasure == 1)
+                {
+                    float preWait = type == PhraseType.FirstPhrase ? 0f : 0.75f;
+                    StartCoroutine(TakePosition(cursor, preWait));
+                }
+                // After the second beat, turn around
+                else if (cursor.beatInMeasure == 2)
+                {
+                    StartCoroutine(TurnAround(cursor, 0.5f));
+                }
+                // Just after the third beat, do a double slash!
+                else if (cursor.beatInMeasure == 3)
+                {
+                    StartCoroutine(DoubleThrow(cursor, 0.25f));
+                }
             }
         }
     }
@@ -253,10 +255,24 @@ public class LateralSpear : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         return targetPos;
     }
 
-    // Fade the spear so it is invisible, then disable it
-    private IEnumerator FadeAway()
+    private bool MoveThisMeasure(int currentMeasure)
     {
-        yield return sprite.Get(this).Fade(Color.white, Color.clear, 0.2f);
-        gameObject.SetActive(false);
+        foreach(IntRange range in measureRanges)
+        {
+            if(currentMeasure >= range.min && currentMeasure <= range.max)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool FirstMove(MusicCursor cursor)
+    {
+        return measureRanges[0].min == cursor.currentMeasure && cursor.beatInMeasure == 1;
+    }
+    private bool LastMove(MusicCursor cursor)
+    {
+        return (measureRanges[measureRanges.Count - 1].max + 1) == cursor.currentMeasure && cursor.beatInMeasure == 1;
     }
 }

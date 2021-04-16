@@ -161,6 +161,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   orientation: 0
+  measureRanges:
+  - _min: 1
+    _max: 11
+  - _min: 14
+    _max: 15
+  - _min: 18
+    _max: 19
+  - _min: 22
+    _max: 23
+  - _min: 26
+    _max: 28
+  - _min: 45
+    _max: 60
 --- !u!120 &7812799362535866449
 LineRenderer:
   m_ObjectHideFlags: 0
