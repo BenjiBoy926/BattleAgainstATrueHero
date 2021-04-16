@@ -167,10 +167,6 @@ MonoBehaviour:
   - _min: 14
     _max: 15
   - _min: 18
-    _max: 19
-  - _min: 22
-    _max: 23
-  - _min: 26
     _max: 28
   - _min: 45
     _max: 60

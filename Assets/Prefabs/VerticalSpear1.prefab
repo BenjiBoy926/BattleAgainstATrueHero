@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 1309124540873772809, guid: d3628732c10b5ef498a4a0a84fa853a5,
         type: 3}
       propertyPath: measureRanges.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1309124540873772809, guid: d3628732c10b5ef498a4a0a84fa853a5,
         type: 3}
@@ -30,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 1309124540873772809, guid: d3628732c10b5ef498a4a0a84fa853a5,
         type: 3}
       propertyPath: measureRanges.Array.data[1]._max
-      value: 19
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 1309124540873772809, guid: d3628732c10b5ef498a4a0a84fa853a5,
         type: 3}
@@ -65,12 +65,12 @@ PrefabInstance:
     - target: {fileID: 1309124540873772820, guid: d3628732c10b5ef498a4a0a84fa853a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.15
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 1309124540873772820, guid: d3628732c10b5ef498a4a0a84fa853a5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 1.24
       objectReference: {fileID: 0}
     - target: {fileID: 1309124540873772820, guid: d3628732c10b5ef498a4a0a84fa853a5,
         type: 3}
@@ -115,7 +115,7 @@ PrefabInstance:
     - target: {fileID: 1309124540873772822, guid: d3628732c10b5ef498a4a0a84fa853a5,
         type: 3}
       propertyPath: m_Name
-      value: VerticalSpear1 Variant
+      value: VerticalSpear1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3628732c10b5ef498a4a0a84fa853a5, type: 3}

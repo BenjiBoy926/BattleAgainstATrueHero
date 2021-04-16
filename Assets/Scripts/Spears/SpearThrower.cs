@@ -135,51 +135,33 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         }
 
         /*
-         * SECTION: spears for the bass drop
+         * SECTION: surround spears for the music at and after the bass drop
          */
-        appear = cursor.MoveTo(3, 4, 1f);
-        rush = cursor.MoveTo(4, 1, 1f);
-        InstantiateSurroundSpears(15f, appear, rush);
+
+        for (int i = 0; i < 2; i++)
+        {
+            rush = cursor.MoveTo(4 + i, 1, 1f);
+            appear = cursor.MoveTo(3 + i, 4, 1f);
+            InstantiateSurroundSpears(15f, appear, rush);
+        }
 
         /*
-         * SECTION: spears for the music just after the bass drop
-         */
+         * SECTION: random slow-moving homing spears for the part with the low, drawn out notes just after the bass drop
+         */ 
 
-        for (int i = 0; i < 4; i++)
+        for(int i = 0; i < 2; i++)
         {
-            //rush = cursor.MoveTo(4 + i, 2, 4f);
+            rush = cursor.MoveTo(6 + i, 1, 1f);
+            appear = rush.Shift(-2f);
+            InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 2f, appear, rush);
 
-            //appear = cursor.MoveTo(4 + i, 2, 1f);
-            //float x = Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.75f);
-            //InstantiateSpear(SpearPosition.Fixed(new Vector2(x, Field.bottomYOutside)),
-            //    SpearDirection.Fixed(Vector2.up),
-            //    15f, appear, rush);
+            rush = cursor.MoveTo(6 + i, 3, 1f);
+            appear = rush.Shift(-2f);
+            InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
-            //appear = cursor.MoveTo(4 + i, 2, 2.5f);
-            //x = Mathf.Lerp(Field.leftXInside, Field.rightXInside, 0.25f);
-            //InstantiateSpear(SpearPosition.Fixed(new Vector2(x, Field.bottomYOutside)),
-            //    SpearDirection.Fixed(Vector2.up),
-            //    15f, appear, rush);
-
-            //rush = cursor.MoveTo(4 + i, 3, 4f);
-
-            //appear = cursor.MoveTo(4 + i, 3, 1f);
-            //InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.leftXInside, Field.bottomYOutside)),
-            //    SpearDirection.Fixed(Vector2.up),
-            //    15f, appear, rush);
-
-            //appear = cursor.MoveTo(4 + i, 3, 2.5f);
-            //InstantiateSpear(SpearPosition.Fixed(new Vector2(Field.rightXInside, Field.bottomYOutside)),
-            //    SpearDirection.Fixed(Vector2.up),
-            //    15f, appear, rush);
-
-            // Make sure not to instantiate the surrounding spears before the transition into the next part of the music
-            if (i < 3)
-            {
-                rush = cursor.MoveTo(5 + i, 1, 1f);
-                appear = cursor.MoveTo(4 + i, 4, 1f);
-                InstantiateSurroundSpears(15f, appear, rush);
-            }
+            rush = cursor.MoveTo(6 + i, 4, 1f);
+            appear = rush.Shift(-2f);
+            InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
         }
 
         /*
