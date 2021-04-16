@@ -9,11 +9,17 @@ using UnityEngine.Events;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealthEffects : MonoBehaviour
 {
+    [Header("Sub-Components")]
+
     [SerializeField]
     [Tooltip("Reference to the script that manages the player UI")]
-    private PlayerHealthUI ui;
+    private PlayerHealthUI healthUi;
+    [SerializeField]
+    [Tooltip("Script that manages the player invincibility UI")]
+    private PlayerInvincibilityUI invincibilityUI;
 
-    // VISUAL
+    [Header("Visual Elements")]
+
     [SerializeField]
     [Tooltip("Time between the crack and the splinter of the heart shape when the player dies")]
     private float splitDelay;
@@ -32,14 +38,9 @@ public class PlayerHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("The number of splinters instantiated when the player dies")]
     private int splinterCount;
-    [SerializeField]
-    [Tooltip("Reference to the slider that manages the invincibility shield effect")]
-    private Slider invincibilitySlider;
-    [SerializeField]
-    [Tooltip("Image that displays invincibility")]
-    private Image invincibilityImage;
 
-    // AUDIO
+    [Header("Audio Elements")]
+
     [SerializeField]
     [Tooltip("Sound effect that plays when the player takes damage")]
     private AudioClip damageClip;
@@ -65,29 +66,24 @@ public class PlayerHealthEffects : MonoBehaviour
     // Reference to the audio source that plays effects for the player
     private new AudioSource audio;
     private new SpriteRenderer renderer;
-    private Color baseInvincibilityImageColor;
 
     private void Awake()
     {
         audio = GetComponent<AudioSource>();
         renderer = GetComponent<SpriteRenderer>();
-
-        invincibilitySlider.value = 0f;
-        baseInvincibilityImageColor = invincibilityImage.color;
-        invincibilityImage.enabled = false;
     }
 
     // Setup the max value on the slider
     // This makes it so that the effects don't need to know how much health the player has
     public void Setup(int max)
     {
-        ui.Setup(max);
+        healthUi.Setup(max);
     }
 
     public void TakeDamageEffect(int newHealth, float invincibleTime)
     {
         // Update health UI
-        ui.UpdateUI(newHealth);
+        healthUi.UpdateUI(newHealth);
 
         // Play the damage clip
         audio.clip = damageClip;
@@ -99,7 +95,7 @@ public class PlayerHealthEffects : MonoBehaviour
 
     public void DeathEffect()
     {
-        ui.SetUIActive(false);
+        healthUi.SetUIActive(false);
         StartCoroutine(DeathRoutine());
     }
 
@@ -142,9 +138,8 @@ public class PlayerHealthEffects : MonoBehaviour
         audio.clip = deflectClip;
         audio.Play();
 
-        invincibilitySlider.value = 1f;
-        invincibilityImage.enabled = true;
-        invincibilityImage.color = baseInvincibilityImageColor;
+        // Activate the UI
+        invincibilityUI.Activate();
     }
 
     public void DeactivateInvincibilityEffect(float rechargeTime)
@@ -154,26 +149,16 @@ public class PlayerHealthEffects : MonoBehaviour
         audio.Play();
 
         // This function updates the slider
-        UnityAction<float> updateSlider = currentTime =>
-        {
-            float t = currentTime / rechargeTime;
-            invincibilitySlider.value = Mathf.Lerp(1f, 0f, t);
-        };
-        StartCoroutine(CoroutineModule.UpdateForTime(rechargeTime, updateSlider));
-
-        // Make the image flash while we are not invincible
-        UnityAction<Color> updateSliderColor = color =>
-        {
-            invincibilityImage.color = color;
-        };
-        StartCoroutine(ColorModule.Flicker(baseInvincibilityImageColor, Color.clear, rechargeTime, 0.25f, updateSliderColor));
+        invincibilityUI.Recharge(rechargeTime);
     }
 
-    public void AttackBlockEffect()
+    public void AttackDeflectEffect()
     {
         // Play a sound!
         audio.clip = deflectClip;
         audio.Play();
+
+        invincibilityUI.StartDeflect();
     }
 
     public void InvincibilityReadyEffect()
@@ -182,7 +167,7 @@ public class PlayerHealthEffects : MonoBehaviour
         audio.clip = healClip;
         audio.Play();
 
-        invincibilityImage.enabled = false;
+        invincibilityUI.Ready();
     }
 
     private IEnumerator Flicker(float invincibleTime)

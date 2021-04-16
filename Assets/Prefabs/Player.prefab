@@ -335,6 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4090446462142866686}
   - component: {fileID: 3195676244234628019}
+  - component: {fileID: 2597530680344470810}
   m_Layer: 5
   m_Name: InvincibilitySlider
   m_TagString: Untagged
@@ -412,6 +413,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2597530680344470810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4337392991030409717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3d9ee276727dd429d7b1845af6b800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 3195676244234628019}
+  image: {fileID: 5074227677419174051}
+  deflectTime: 0.3
 --- !u!1 &4390622800792777709
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,8 +593,8 @@ MonoBehaviour:
   health: 56
   damagePerHit: 8
   invincibilityAfterHit: 2
-  invincibilityTime: 1
-  invincibilityRechargeTime: 1
+  invincibilityTime: 2
+  invincibilityRechargeTime: 3
   _deathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -636,7 +652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: babd29e9136c30746962799bc188569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 4899158727241668658}
+  healthUi: {fileID: 4899158727241668658}
+  invincibilityUI: {fileID: 2597530680344470810}
   splitDelay: 1
   gameOverDelay: 2
   defaultSprite: {fileID: 21300000, guid: 945805dfd8ddf054da8198c22bdb4610, type: 3}
@@ -644,8 +661,6 @@ MonoBehaviour:
   splinterObject: {fileID: 5797063230756344259, guid: 2eb885294bc81724b8929412cf209eb4,
     type: 3}
   splinterCount: 5
-  invincibilitySlider: {fileID: 3195676244234628019}
-  invincibilityImage: {fileID: 5074227677419174051}
   damageClip: {fileID: 8300000, guid: 30eb221546f793d4b8819b2507a32053, type: 3}
   crackClip: {fileID: 8300000, guid: 4502f0aa55a4a574482763887444aef9, type: 3}
   splinterClip: {fileID: 8300000, guid: f4ecfde2c0549914f8afdb7786fc6d3f, type: 3}

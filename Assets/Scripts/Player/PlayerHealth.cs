@@ -106,7 +106,7 @@ public class PlayerHealth : MonoBehaviour
         // If we are invincible from active invincibility, tell the effects script
         else if(invincibilityActive)
         {
-            effects.AttackBlockEffect();
+            effects.AttackDeflectEffect();
         }
     }
 
