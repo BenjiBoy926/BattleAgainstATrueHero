@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealthEffects : MonoBehaviour
 {
@@ -42,6 +41,12 @@ public class PlayerHealthEffects : MonoBehaviour
     [Header("Audio Elements")]
 
     [SerializeField]
+    [Tooltip("Source to play damaging effects")]
+    private AudioSource healthAudio;
+    [SerializeField]
+    [Tooltip("Source to play invincibility effects")]
+    private AudioSource invincibilityAudio;
+    [SerializeField]
     [Tooltip("Sound effect that plays when the player takes damage")]
     private AudioClip damageClip;
     [SerializeField]
@@ -63,13 +68,10 @@ public class PlayerHealthEffects : MonoBehaviour
     [Tooltip("Effect played when the player powers down")]
     private AudioClip powerDownClip;
 
-    // Reference to the audio source that plays effects for the player
-    private new AudioSource audio;
     private new SpriteRenderer renderer;
 
     private void Awake()
     {
-        audio = GetComponent<AudioSource>();
         renderer = GetComponent<SpriteRenderer>();
     }
 
@@ -86,8 +88,8 @@ public class PlayerHealthEffects : MonoBehaviour
         healthUi.UpdateUI(newHealth);
 
         // Play the damage clip
-        audio.clip = damageClip;
-        audio.Play();
+        healthAudio.clip = damageClip;
+        healthAudio.Play();
 
         // Start the fading in and out coroutine
         StartCoroutine(Flicker(invincibleTime));
@@ -107,8 +109,8 @@ public class PlayerHealthEffects : MonoBehaviour
         renderer.sprite = crackSprite;
 
         // Play the heart crack clip
-        audio.clip = crackClip;
-        audio.Play();
+        healthAudio.clip = crackClip;
+        healthAudio.Play();
 
         yield return new WaitForSeconds(splitDelay);
 
@@ -116,8 +118,8 @@ public class PlayerHealthEffects : MonoBehaviour
         renderer.enabled = false;
 
         // Play the heart splinter clip
-        audio.clip = splinterClip;
-        audio.Play();
+        healthAudio.clip = splinterClip;
+        healthAudio.Play();
 
         // Instantiate multiple splinters. The objects themselves take care of other things
         // like initial velocity and rotation
@@ -135,8 +137,8 @@ public class PlayerHealthEffects : MonoBehaviour
     public void ActivateInvincibilityEffect()
     {
         // Play a sound!
-        audio.clip = deflectClip;
-        audio.Play();
+        invincibilityAudio.clip = deflectClip;
+        invincibilityAudio.Play();
 
         // Activate the UI
         invincibilityUI.Activate();
@@ -145,8 +147,8 @@ public class PlayerHealthEffects : MonoBehaviour
     public void DeactivateInvincibilityEffect(float rechargeTime)
     {
         // Play a sound
-        audio.clip = powerDownClip;
-        audio.Play();
+        invincibilityAudio.clip = powerDownClip;
+        invincibilityAudio.Play();
 
         // This function updates the slider
         invincibilityUI.Recharge(rechargeTime);
@@ -155,8 +157,8 @@ public class PlayerHealthEffects : MonoBehaviour
     public void AttackDeflectEffect()
     {
         // Play a sound!
-        audio.clip = deflectClip;
-        audio.Play();
+        invincibilityAudio.clip = deflectClip;
+        invincibilityAudio.Play();
 
         invincibilityUI.StartDeflect();
     }
@@ -164,8 +166,8 @@ public class PlayerHealthEffects : MonoBehaviour
     public void InvincibilityReadyEffect()
     {
         // Play a sound!  Or, you know, SOMETHING
-        audio.clip = healClip;
-        audio.Play();
+        invincibilityAudio.clip = healClip;
+        invincibilityAudio.Play();
 
         invincibilityUI.Ready();
     }

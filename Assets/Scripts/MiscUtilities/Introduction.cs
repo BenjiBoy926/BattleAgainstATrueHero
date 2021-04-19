@@ -6,27 +6,6 @@ using UnityEngine.UI;
 public class Introduction : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("Position undyne should be in while a 'dying' animation is playing")]
-    private Vector3 dyingPosition;
-    [SerializeField]
-    [Tooltip("Size undyne should be while a 'dying' animation is playing")]
-    private Vector3 dyingScale;
-
-    [SerializeField]
-    [Tooltip("Position of undyne while she is standing still after undying transformation")]
-    private Vector3 undyingStillPosition;
-    [SerializeField]
-    [Tooltip("Size of undyne while she is standing still after undying transformation")]
-    private Vector3 undyingStillScale;
-
-    [SerializeField]
-    [Tooltip("Position undyne should be in while an 'undying' animation is playing")]
-    private Vector3 undyingPosition;
-    [SerializeField]
-    [Tooltip("Size undyng should be while an 'undying' animation is playing")]
-    private Vector3 undyingScale;
-
-    [SerializeField]
     [Tooltip("Time it takes for the scene to fade into view")]
     private float openingFadeTime;
     [SerializeField]
@@ -55,6 +34,20 @@ public class Introduction : MonoBehaviour
     [Tooltip("Tag attached to the object that plays the music")]
     private string musicTag;
 
+    [Header("Animation positions")]
+
+    [SerializeField]
+    [Tooltip("Transform data for when a 'dying' animation is playing")]
+    private TransformData dyingTransform;
+    [SerializeField]
+    [Tooltip("Transform data for when undying is standing still after undying transformation")]
+    private TransformData undyingStillTransform;
+    [SerializeField]
+    [Tooltip("Transform data for when the 'undying' animation is playing")]
+    private TransformData undyingTransform;
+
+    [Header("Monologues")]
+
     [SerializeField]
     [Tooltip("Monologue for the character when the level is being introduced")]
     private Monologue monologue;
@@ -74,7 +67,7 @@ public class Introduction : MonoBehaviour
         overlay = overlayObject.GetComponent<Image>();
 
         // If this is the player's first attempt, give them the long introduction
-        if(UndyneBattleManager.attempts == 0)
+        if(BattleData.attempts == 0)
         {
             StartCoroutine(LongIntroduction());
         }
@@ -135,23 +128,22 @@ public class Introduction : MonoBehaviour
     // Set an animation with dying position and scale
     public void SetDyingAnimation(string trigger)
     {
-        SetAnimation(dyingPosition, dyingScale, trigger);
+        SetAnimation(dyingTransform, trigger);
     }
     public void SetUndyingStillAnimation()
     {
-        SetAnimation(undyingStillPosition, undyingStillScale, "UndyingStill");
+        SetAnimation(undyingStillTransform, "UndyingStill");
     }
     // Set an animation with undying position and scale
     public void SetUndyingAnimation()
     {
-        SetAnimation(undyingPosition, undyingScale, "Undying");
+        SetAnimation(undyingTransform, "Undying");
         speechBubble.SetActive(false);
     }
     // Set an animation with position and scale
-    private void SetAnimation(Vector3 pos, Vector3 scale, string trigger)
+    private void SetAnimation(TransformData transformData, string trigger)
     {
-        transform.position = pos;
-        transform.localScale = scale;
+        transformData.SetTransform(transform);
         animator.Get(this).SetTrigger(trigger);
     }
     public void MusicFadeIn()

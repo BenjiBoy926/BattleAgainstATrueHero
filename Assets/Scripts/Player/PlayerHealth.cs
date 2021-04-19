@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerHealthEffects))]
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IMusicStartListener
 {
     [SerializeField]
     [TagSelector]
@@ -171,5 +171,10 @@ public class PlayerHealth : MonoBehaviour
 
         // Let the effects know that invincibility is ready to be activated
         effects.InvincibilityReadyEffect();
+    }
+
+    public void OnMusicStart(MusicCursor cursor)
+    {
+        enabled = true;
     }
 }

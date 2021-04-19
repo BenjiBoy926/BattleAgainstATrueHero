@@ -7,6 +7,9 @@ TagManager:
   - Hazard
   - Field
   - Overlay
+  - Enemy
+  - Slash
+  - EnemyHealth
   layers:
   - Default
   - TransparentFX

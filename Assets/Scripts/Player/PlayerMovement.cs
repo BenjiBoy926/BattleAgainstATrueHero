@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IMusicStartListener
 {
     [SerializeField]
     [Tooltip("Speed at which the player moves")]
@@ -28,5 +28,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb2D.Get(this).Shift(move, speed);
+    }
+
+    public void OnMusicStart(MusicCursor cursor)
+    {
+        enabled = true;
     }
 }

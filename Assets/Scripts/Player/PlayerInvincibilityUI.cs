@@ -40,12 +40,11 @@ public class PlayerInvincibilityUI : MonoBehaviour
         StopDeflect();
 
         // This function updates the slider
-        UnityAction<float> updateSlider = currentTime =>
+        UnityAction<float> updateSlider = t =>
         {
-            float t = currentTime / rechargeTime;
             slider.value = Mathf.Lerp(1f, 0f, t);
         };
-        StartCoroutine(CoroutineModule.UpdateForTime(rechargeTime, updateSlider));
+        StartCoroutine(CoroutineModule.LerpForTime(rechargeTime, updateSlider));
 
         // Make the image flash while we are not invincible
         UnityAction<Color> updateSliderColor = color =>
