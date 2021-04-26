@@ -34,8 +34,14 @@ public class Introduction : MonoBehaviour
     [Tooltip("Tag attached to the object that plays the music")]
     private string musicTag;
 
-    [Header("Animation positions")]
+    [Header("Animation")]
 
+    [SerializeField]
+    [Tooltip("Animator on undyne's costume")]
+    private Animator animator;
+    [SerializeField]
+    [Tooltip("Transform component on undyne's costume animation")]
+    private Transform costumeTransform;
     [SerializeField]
     [Tooltip("Transform data for when a 'dying' animation is playing")]
     private TransformData dyingTransform;
@@ -55,8 +61,6 @@ public class Introduction : MonoBehaviour
     [Tooltip("Monologue that undyne speaks after she transforms")]
     private Monologue transformMonologue;
 
-    // Reference to the animator on Undyne
-    private CachedComponent<Animator> animator = new CachedComponent<Animator>();
     // Image overlaying the full scene
     private Image overlay;
 
@@ -143,8 +147,8 @@ public class Introduction : MonoBehaviour
     // Set an animation with position and scale
     private void SetAnimation(TransformData transformData, string trigger)
     {
-        transformData.SetTransform(transform);
-        animator.Get(this).SetTrigger(trigger);
+        transformData.SetTransform(costumeTransform);
+        animator.SetTrigger(trigger);
     }
     public void MusicFadeIn()
     {

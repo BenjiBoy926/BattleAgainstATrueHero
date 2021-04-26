@@ -124,4 +124,10 @@ public struct MusicCursor
     {
         return MoveTo(1, beat);
     }
+
+    // Return true if the given music position is in the same beat as the current cursor
+    public bool SameBaseBeat(MusicPosition position)
+    {
+        return (currentPhrase == position.phrase) && (measureInPhrase == position.measure) && (beatInMeasure == position.baseBeat);
+    }
 }

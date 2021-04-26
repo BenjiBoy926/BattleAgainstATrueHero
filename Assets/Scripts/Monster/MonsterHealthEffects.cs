@@ -10,6 +10,12 @@ public class MonsterHealthEffects : MonoBehaviour
     [Header("References")]
 
     [SerializeField]
+    [Tooltip("Transform on the monster's costume")]
+    private Transform costumeTransform;
+    [SerializeField]
+    [Tooltip("Object instantiated to create the slash animation")]
+    private GameObject slashObject;
+    [SerializeField]
     [Tooltip("Reference to the animator on the monster")]
     private Animator animator;
     [SerializeField]
@@ -20,7 +26,7 @@ public class MonsterHealthEffects : MonoBehaviour
     private AudioClip damageClip;
     [SerializeField]
     [Tooltip("Text instantiated to display the damage that the monster took")]
-    private TextMeshPro textPrefab;
+    private Transform textPrefab;
 
     [Header("Damage animation")]
 
@@ -31,12 +37,11 @@ public class MonsterHealthEffects : MonoBehaviour
     [Tooltip("Name of the animation of the monster taking damage")]
     private string damageAnimation;
     [SerializeField]
-    [TagSelector]
-    [Tooltip("Tag on the object with the monster's health slider")]
-    private string healthSliderTag;
+    [Tooltip("Time that the algorithm waits after the slash to display the other effects")]
+    private float slashTime;
     [SerializeField]
-    [Tooltip("Min-max possible numbers to display for the monster's damage")]
-    private IntRange damageRange;
+    [Tooltip("Health slider for the monster")]
+    private Slider healthSlider;
     [SerializeField]
     [Tooltip("Time it takes for the monster to move between ping-pong positions when shaking")]
     private float damageShakeTime;
@@ -62,14 +67,9 @@ public class MonsterHealthEffects : MonoBehaviour
     [Tooltip("Event invoked when the idle anmation activates")]
     private UnityEvent idleAnimationEvent;
 
-    private GameObject healthSliderObject;
-    private Slider healthSlider;
-
     private void Start()
     {
-        healthSliderObject = GameObject.FindGameObjectWithTag(healthSliderTag);
-        healthSlider = healthSliderObject.GetComponent<Slider>();
-        healthSliderObject.SetActive(false);
+        healthSlider.gameObject.SetActive(false);
     }
 
     public void TakeDamageEffect()
@@ -79,38 +79,43 @@ public class MonsterHealthEffects : MonoBehaviour
 
     private IEnumerator TakeDamageEffectRoutine()
     {
+        // Instantiate the slash object at the enemy's position
+        Instantiate(slashObject, costumeTransform.transform.position, slashObject.transform.rotation);
+
+        // Wait for the slash to complete
+        yield return new WaitForSeconds(slashTime);
+
         // Play the damage audio clip
         audio.clip = damageClip;
         audio.Play();
 
         // Put the monster in the damage animation
-        damageTransform.SetTransform(transform);
+        damageTransform.SetTransform(costumeTransform);
         animator.SetTrigger(damageAnimation);
 
         // Invoke the damage animation
         damageAnimationEvent.Invoke();
 
         // Update the health slider
-        healthSliderObject.SetActive(true);
+        healthSlider.gameObject.SetActive(true);
         healthSlider.value--;
 
         // Instantiate text at our position telling the damage that the monster received
-        TextMeshPro text = Instantiate(textPrefab, transform.position, textPrefab.transform.rotation);
-        text.text = Mathf.FloorToInt(Random.Range(damageRange.min, damageRange.max)).ToString();
+        Instantiate(textPrefab, costumeTransform.position, textPrefab.transform.rotation);
 
         // Quiver back and forth
         UnityAction<int> tick = currentTick =>
         {
-            damageTransform.SetTransform(transform);
+            damageTransform.SetTransform(costumeTransform);
 
             // Move slightly to the left or right, depending on the current tick value
             if(currentTick % 2 == 0)
             {
-                transform.position += Vector3.right * shakeMagnitude;
+                costumeTransform.localPosition += Vector3.right * shakeMagnitude;
             }
             else
             {
-                transform.position += Vector3.left * shakeMagnitude;
+                costumeTransform.localPosition += Vector3.left * shakeMagnitude;
             }
         };
         yield return CoroutineModule.Tick(damageShakeTime, numDamageShakes, tick);
@@ -119,10 +124,10 @@ public class MonsterHealthEffects : MonoBehaviour
         idleAnimationEvent.Invoke();
 
         // Set back to idle animation
-        idleTransform.SetTransform(transform);
+        idleTransform.SetTransform(costumeTransform);
         animator.SetTrigger(idleAnimation);
 
         // Disable the health slider when we return to normal
-        healthSliderObject.SetActive(false);
+        healthSlider.gameObject.SetActive(false);
     }
 }

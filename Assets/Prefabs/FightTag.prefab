@@ -362,16 +362,13 @@ MonoBehaviour:
   deadColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
   text: {fileID: 8304560278942158956}
   outline: {fileID: 8304560279132119524}
-  slashObject: {fileID: 3829798212887703284, guid: d107fd057d85bd74980e723009377e5c,
-    type: 3}
   sliderObject: {fileID: 342384857643993898}
   collider2D: {fileID: 930591822}
   audio: {fileID: 7082177235231447009}
   collectClip: {fileID: 8300000, guid: c63916953a781944e8cec6d984e0b887, type: 3}
-  lifetime: 4
+  lifetime: 5
   fadeOutTime: 0.5
   collectTime: 0.3
-  slashTime: 1
 --- !u!61 &930591822
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -409,8 +406,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 69f34e1f86471a14b853504978390a29,
     type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 81cdeb4906d25bd4a98220026fec6c96, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

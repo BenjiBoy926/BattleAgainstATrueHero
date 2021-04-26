@@ -40,9 +40,6 @@ public class FightTag : MonoBehaviour
     [Tooltip("The outline that surrounds the fight text")]
     private SpriteRenderer outline;
     [SerializeField]
-    [Tooltip("Game object that shows the slash animation")]
-    private GameObject slashObject;
-    [SerializeField]
     [Tooltip("Slider that shows how long the fight tag has left")]
     private GameObject sliderObject;
     [SerializeField]
@@ -64,11 +61,8 @@ public class FightTag : MonoBehaviour
     [Tooltip("Time it takes for the tag to fade away")]
     private float fadeOutTime;
     [SerializeField]
-    [Tooltip("Time after collecting that the slash animation appears")]
+    [Tooltip("Time after collecting that the enemy takes damage")]
     private float collectTime;
-    [SerializeField]
-    [Tooltip("Time to wait after slash animation before dealing damage")]
-    private float slashTime;
 
     private Vector3 startSize;
     private Coroutine lifetimeRoutine;
@@ -133,17 +127,9 @@ public class FightTag : MonoBehaviour
         };
         yield return CoroutineModule.LerpForTime(collectTime, updateSize);
 
-        // Get the enemy object
+        // Deal damage to the enemy health on the enemy object
         GameObject enemy = GameObject.FindGameObjectWithTag(enemyTag);
-
-        // Instantiate the slash object at the enemy's position
-        Instantiate(slashObject, enemy.transform.position, slashObject.transform.rotation);
-
-        // Wait for the slash to complete
-        yield return new WaitForSeconds(slashTime);
-
-        // Now, deal damage!
-        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+        MonsterHealth enemyHealth = enemy.GetComponent<MonsterHealth>();
         enemyHealth.TakeDamage();
 
         // Destroy the tag

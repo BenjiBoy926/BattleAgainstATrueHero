@@ -108,31 +108,21 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
          * SECTION spears that appear with the low bass sounds
          */
 
-        for (int i = 0; i < 2; i++)
-        {
-            rush = cursor.MoveTo(2 + i, 1, 1f);
-            appear = rush.Shift(-2f);
-            InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
+        rush = cursor.MoveTo(3, 1, 1f);
+        appear = rush.Shift(-2f);
+        InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
-            rush = cursor.MoveTo(2 + i, 2, 1f);
-            appear = rush.Shift(-2f);
-            InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
+        rush = cursor.MoveTo(3, 2, 1f);
+        appear = rush.Shift(-2f);
+        InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
-            rush = cursor.MoveTo(2 + i, 2, 4f);
-            appear = rush.Shift(-2f);
-            InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
+        rush = cursor.MoveTo(3, 2, 4f);
+        appear = rush.Shift(-2f);
+        InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
-            rush = cursor.MoveTo(2 + i, 3, 1f);
-            appear = rush.Shift(-2f);
-            InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
-
-            if (i < 0.1f)
-            {
-                rush = cursor.MoveTo(2, 4, 1f);
-                appear = rush.Shift(-2f);
-                InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
-            }
-        }
+        rush = cursor.MoveTo(3, 3, 1f);
+        appear = rush.Shift(-2f);
+        InstantiateSpear(SpearPosition.Random(), SpearDirection.Homing(), 5f, appear, rush);
 
         /*
          * SECTION: surround spears for the music at and after the bass drop
