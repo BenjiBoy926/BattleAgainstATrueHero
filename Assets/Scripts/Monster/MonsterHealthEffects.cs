@@ -6,9 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class MonsterHealthEffects : MonoBehaviour
-{
-    [Header("References")]
-
+{ 
     [SerializeField]
     [Tooltip("Transform on the monster's costume")]
     private Transform costumeTransform;
@@ -27,6 +25,12 @@ public class MonsterHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("Text instantiated to display the damage that the monster took")]
     private Transform textPrefab;
+    [SerializeField]
+    [Tooltip("Event invoked when the effect begins")]
+    private UnityEvent onEffectStart;
+    [SerializeField]
+    [Tooltip("Event invoked when the effect finishes")]
+    private UnityEvent onEffectEnd;
 
     [Header("Damage animation")]
 
@@ -67,18 +71,51 @@ public class MonsterHealthEffects : MonoBehaviour
     [Tooltip("Event invoked when the idle anmation activates")]
     private UnityEvent idleAnimationEvent;
 
+    [Header("Death animation")]
+
+    [SerializeField]
+    [Tooltip("Position of the monster when in the death animation")]
+    private TransformData dyingTransform;
+    [SerializeField]
+    [Tooltip("Name of the dying animation of the monster")]
+    private string dyingAnimation;
+    [SerializeField]
+    [Tooltip("Time it takes for the monster to move between ping-pong positions when shaking after taking the last hit")]
+    private float deathShakeTime;
+    [SerializeField]
+    [Tooltip("Number of times that the monster shakes when they take the last hit")]
+    private int numDeathShakes;
+    [SerializeField]
+    [Tooltip("Event invoked when the monster takes the last hit")]
+    private UnityEvent deathAnimationEvent;
+
     private void Start()
     {
         healthSlider.gameObject.SetActive(false);
     }
 
-    public void TakeDamageEffect()
+    public void SetupEffects(int startingHealth)
     {
-        StartCoroutine(TakeDamageEffectRoutine());
+        healthSlider.maxValue = startingHealth;
     }
 
-    private IEnumerator TakeDamageEffectRoutine()
+    public void TakeDamageEffect(int currentHealth)
     {
+        StartCoroutine(TakeDamageEffectRoutine(currentHealth));
+    }
+
+    private IEnumerator TakeDamageEffectRoutine(int currentHealth)
+    {
+        // Invoke the effect start event
+        onEffectStart.Invoke();
+
+        // Setup the shake time and animation events
+        TransformData transformData = currentHealth > 0 ? damageTransform : dyingTransform;
+        string trigger = currentHealth > 0 ? damageAnimation : dyingAnimation;
+        float shakeTime = currentHealth > 0 ? damageShakeTime : deathShakeTime;
+        int numShakes = currentHealth > 0 ? numDamageShakes : numDeathShakes;
+        UnityEvent animationEvent = currentHealth > 0 ? damageAnimationEvent : deathAnimationEvent; 
+
         // Instantiate the slash object at the enemy's position
         Instantiate(slashObject, costumeTransform.transform.position, slashObject.transform.rotation);
 
@@ -90,15 +127,15 @@ public class MonsterHealthEffects : MonoBehaviour
         audio.Play();
 
         // Put the monster in the damage animation
-        damageTransform.SetTransform(costumeTransform);
-        animator.SetTrigger(damageAnimation);
+        transformData.SetTransform(costumeTransform);
+        animator.SetTrigger(trigger);
 
-        // Invoke the damage animation
-        damageAnimationEvent.Invoke();
+        // Invoke the animation event
+        animationEvent.Invoke();
 
         // Update the health slider
         healthSlider.gameObject.SetActive(true);
-        healthSlider.value--;
+        healthSlider.value = currentHealth;
 
         // Instantiate text at our position telling the damage that the monster received
         Instantiate(textPrefab, costumeTransform.position, textPrefab.transform.rotation);
@@ -118,16 +155,23 @@ public class MonsterHealthEffects : MonoBehaviour
                 costumeTransform.localPosition += Vector3.left * shakeMagnitude;
             }
         };
-        yield return CoroutineModule.Tick(damageShakeTime, numDamageShakes, tick);
-
-        // Invoke the event for when the idle animation starts
-        idleAnimationEvent.Invoke();
-
-        // Set back to idle animation
-        idleTransform.SetTransform(costumeTransform);
-        animator.SetTrigger(idleAnimation);
+        yield return CoroutineModule.Tick(shakeTime, numShakes, tick);
 
         // Disable the health slider when we return to normal
         healthSlider.gameObject.SetActive(false);
+
+        // Set animation back to idle, only if the monster still has health left
+        if(currentHealth > 0)
+        {
+            // Invoke the event for when the idle animation starts
+            idleAnimationEvent.Invoke();
+
+            // Set back to idle animation
+            idleTransform.SetTransform(costumeTransform);
+            animator.SetTrigger(idleAnimation);
+        }
+
+        // Invoke the effect end event
+        onEffectEnd.Invoke();
     }
 }

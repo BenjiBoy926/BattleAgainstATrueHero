@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 114355580119183250}
   - component: {fileID: 114355580119183254}
   - component: {fileID: 114355580119183253}
+  - component: {fileID: 7107689418069916895}
   m_Layer: 0
   m_Name: UndyneTheUndying
   m_TagString: Enemy
@@ -793,13 +794,10 @@ MonoBehaviour:
   health: 16
   startEvent:
     m_PersistentCalls:
-      m_Calls: []
-  takeDamageEvent:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114355580119183253}
-        m_MethodName: TakeDamageEffect
-        m_Mode: 1
+        m_MethodName: SetupEffects
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -808,7 +806,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  deathEvent:
+  _takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114355580119183253}
+        m_MethodName: TakeDamageEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _deathEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &114355580119183253
@@ -831,6 +843,34 @@ MonoBehaviour:
   damageClip: {fileID: 8300000, guid: 6e695121faf94054884568606a9723a1, type: 3}
   textPrefab: {fileID: 315684056907774408, guid: e94f86974f6914e42b7481e58dfe8e30,
     type: 3}
+  onEffectStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onEffectEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2204382278535889357}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7107689418069916895}
+        m_MethodName: TryStartEpilogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   damageTransform:
     _position: {x: 0, y: 0.1, z: 0}
     _rotation: {x: 0, y: 0, z: 0}
@@ -862,18 +902,257 @@ MonoBehaviour:
   idleAnimation: Undying
   idleAnimationEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2204382278535889357}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  dyingTransform:
+    _position: {x: 0, y: 0.1, z: 0}
+    _rotation: {x: 0, y: 0, z: 0}
+    _scale: {x: 0.8, y: 0.8, z: 1}
+  dyingAnimation: Defeated
+  deathShakeTime: 0.3
+  numDeathShakes: 12
+  deathAnimationEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7107689418069916895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114355580119183248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa9f18c29b6809441883318f51ec67c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  undyneHealth: {fileID: 114355580119183254}
+  costumeTransform: {fileID: 5689107826679378493}
+  deathEffectSource: {fileID: 4307336869158280951}
+  deathEffect: {fileID: 8300000, guid: 5cc7d87892a07f24596f91c9a124a6ed, type: 3}
+  startDelay: 1
+  shakeMagnitude: 0.05
+  shakeInterval: 0.1
+  fadeTime: 2
+  defeatedTransform:
+    _position: {x: 0, y: 0.1, z: 0}
+    _rotation: {x: 0, y: 0, z: 0}
+    _scale: {x: 0.8, y: 0.8, z: 1}
+  meltingTransform:
+    _position: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0}
+    _scale: {x: 0.8, y: 0.8, z: 1}
+  meltingAwayTransform:
+    _position: {x: 0, y: -0.1, z: 0}
+    _rotation: {x: 0, y: 0, z: 0}
+    _scale: {x: 0.8, y: 0.8, z: 1}
+  monologue:
+    audio: {fileID: 1807796499023911737}
+    voiceClip: {fileID: 8300000, guid: 74126faf0676b75419ce735dc2bf8f7e, type: 3}
+    advanceSettings:
+      _autoAdvance: 0
+      _readTime: 0
+      _advanceButton: Submit
+      _advanceIndicator: {fileID: 1411809795597655148}
+    onMonologueBegin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1110159812629807450}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    onMonologueUpdate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6787559816398711477}
+          m_MethodName: set_text
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onMonologueEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1110159812629807450}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    speechParts:
+    - speech: Damn it...
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
+    - speech: 'So even THAT power...
+
+        It wasn''t enough...?'
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
+    - speech: ...
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
+    - speech: Heh...
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 7107689418069916895}
+            m_MethodName: SetDefeatedAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Grinning
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: Heheheh...
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
+    - speech: If you...
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 7107689418069916895}
+            m_MethodName: SetDefeatedAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Smiling
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: If you think I'm gonna give up hope, you're wrong.
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
+    - speech: '''Cause I''ve...
+
+        Got my friends behind me.'
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls: []
+    - speech: Alphys told me that she would watch me fight you...
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 7107689418069916895}
+            m_MethodName: SetDefeatedAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Sweating
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: And if anything went wrong, she would... evacuate everyone.
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 7107689418069916895}
+            m_MethodName: SetDefeatedAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Glancing
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: By now, she's called ASGORE and told him to absorb the 6 human SOULs.
+      characterDelay: 0.05
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 7107689418069916895}
+            m_MethodName: SetDefeatedAnimation
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Sweating
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: And with that power...
+      characterDelay: 0.1
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 7107689418069916895}
+            m_MethodName: StopShaking
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 7107689418069916895}
+            m_MethodName: SetMeltingAnimation
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - speech: This world will live on...!
+      characterDelay: 0.2
+      onBegin:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 7107689418069916895}
+            m_MethodName: SetMeltingAwayAnimation
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
 --- !u!1 &832469195115209555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,7 +1865,7 @@ SpriteRenderer:
   m_SortingLayerID: 403459545
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3b73978e9d33da44b808d6afa07b6dd6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5a85f5b8bf995a418de41414498eddd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

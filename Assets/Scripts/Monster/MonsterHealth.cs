@@ -14,10 +14,14 @@ public class MonsterHealth : MonoBehaviour
     private IntEvent startEvent;
     [SerializeField]
     [Tooltip("Event invoked when the enemy takes damage")]
-    private UnityEvent takeDamageEvent;
+    private IntEvent _takeDamageEvent;
     [SerializeField]
     [Tooltip("Event invoked when the enemy dies")]
-    private UnityEvent deathEvent;
+    private UnityEvent _deathEvent;
+
+    public UnityEvent<int> takeDamageEvent => _takeDamageEvent;
+    public UnityEvent deathEvent => _deathEvent;
+    public bool dead => health <= 0;
 
     private void Start()
     {
@@ -28,7 +32,7 @@ public class MonsterHealth : MonoBehaviour
     {
         // Decrease health, invoke the event
         health--;
-        takeDamageEvent.Invoke();
+        _takeDamageEvent.Invoke(health);
 
         // If health is depleted, then die
         if(health <= 0)
@@ -39,7 +43,7 @@ public class MonsterHealth : MonoBehaviour
 
     private void Die()
     {
-        deathEvent.Invoke();
+        _deathEvent.Invoke();
     }
 
     [System.Serializable]

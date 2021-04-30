@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Prologue : MonoBehaviour
+public class UndynePrologue : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Wait time at the start of the game before monologue begins")]

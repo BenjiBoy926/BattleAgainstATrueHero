@@ -443,6 +443,7 @@ GameObject:
   - component: {fileID: 9113068864400674665}
   - component: {fileID: 2823727187616156791}
   - component: {fileID: 3188220078637654758}
+  - component: {fileID: 8930691121498938615}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -670,6 +671,47 @@ MonoBehaviour:
   deflectClip: {fileID: 8300000, guid: 5d63789914540544586bd1543fe580fa, type: 3}
   healClip: {fileID: 8300000, guid: b23cbfa3f63ecad4482ed82d28769406, type: 3}
   powerDownClip: {fileID: 8300000, guid: 2ffcb9f9f2f2f044bac65f15855a4ee6, type: 3}
+--- !u!114 &8930691121498938615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4390622800792777709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684714030f61cf547b12793eea1934ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterTag: Enemy
+  takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2823727187616156791}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9113068864400674665}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4433854945966425363
 GameObject:
   m_ObjectHideFlags: 0

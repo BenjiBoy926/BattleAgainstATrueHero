@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Introduction : MonoBehaviour
+public class UndyneIntroduction : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Time it takes for the scene to fade into view")]
