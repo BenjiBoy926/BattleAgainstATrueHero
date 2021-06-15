@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UndyneEpilogue : MonoBehaviour
 {
+    [Header("References")]
+
     [SerializeField]
     [Tooltip("Reference to the health script that gives Undyne's health")]
     private MonsterHealth undyneHealth;
@@ -16,6 +20,15 @@ public class UndyneEpilogue : MonoBehaviour
     [SerializeField]
     [Tooltip("Audio clip that plays when Undyne dies")]
     private AudioClip deathEffect;
+    [SerializeField]
+    [TagSelector]
+    [Tooltip("Tag attached to the object used to fade the scene in and out")]
+    private string overlayTag;
+    [SerializeField]
+    [Tooltip("Name of the next scene in the build settings")]
+    private string nextSceneName;
+
+    [Header("Timing")]
 
     [SerializeField]
     [Tooltip("Delay before starting the epilogue")]
@@ -29,6 +42,14 @@ public class UndyneEpilogue : MonoBehaviour
     [SerializeField]
     [Tooltip("Time it takes for Undyne to fade away when she dies")]
     private float fadeTime;
+    [SerializeField]
+    [Tooltip("Delay after undyne dies before the scene fades to the next scene")]
+    private float sceneFadeDelay;
+    [SerializeField]
+    [Tooltip("Scene fade out time")]
+    private float sceneFadeTime;
+
+    [Header("Transforms")]
 
     [SerializeField]
     [Tooltip("Transform data for when undyne is defeated")]
@@ -40,6 +61,8 @@ public class UndyneEpilogue : MonoBehaviour
     [Tooltip("Transform data for when undyne is finally melting away")]
     private TransformData meltingAwayTransform;
 
+    [Header("Monologue")]
+
     [SerializeField]
     [Tooltip("Monologue that undyne says as she is dying")]
     private Monologue monologue;
@@ -47,6 +70,7 @@ public class UndyneEpilogue : MonoBehaviour
     // Animator on the costume
     private Animator costumeAnimator;
     private SpriteRenderer costumeSprite;
+    private Image overlay;
 
     // Coroutine that makes the costume shake as undyne is dying
     private Coroutine shakeRoutine;
@@ -56,6 +80,9 @@ public class UndyneEpilogue : MonoBehaviour
     {
         costumeAnimator = costumeTransform.GetComponent<Animator>();
         costumeSprite = costumeTransform.GetComponent<SpriteRenderer>();
+
+        GameObject overlayObject = GameObject.FindGameObjectWithTag(overlayTag);
+        overlay = overlayObject.GetComponent<Image>();
     }
 
     // Check if undyne is dead, if so start the epilogue
@@ -89,6 +116,15 @@ public class UndyneEpilogue : MonoBehaviour
 
         // Fade out the sprite
         yield return costumeSprite.Fade(Color.white, Color.clear, fadeTime);
+
+        // Delay fading out the scene
+        yield return new WaitForSeconds(sceneFadeDelay);
+
+        // Fade out the scene
+        yield return overlay.Fade(Color.clear, Color.black, sceneFadeTime);
+
+        // Load the next scene
+        SceneManager.LoadScene(nextSceneName);
     }
 
     public void StartShaking()

@@ -11,6 +11,9 @@ public class SynchronizedMusic : MonoBehaviour
     [SerializeField]
     [Tooltip("Play the music when the scene starts")]
     private bool playOnAwake;
+    [SerializeField]
+    [Tooltip("If true, the music loops infinitely unless stopped")]
+    private bool loop;
 
     [SerializeField]
     [Tooltip("Event invoked when the music begins")]
@@ -27,6 +30,12 @@ public class SynchronizedMusic : MonoBehaviour
     // Cursor used to indicate the current position in the music
     private MusicCursor cursor;
     private Coroutine musicRoutine;
+
+    private void Awake()
+    {
+        // Source should not loop on its own, but looping is now controlled by this script
+        source.Get(this).loop = false;
+    }
 
     private void Start()
     {
@@ -45,41 +54,57 @@ public class SynchronizedMusic : MonoBehaviour
     public void StopMusic()
     {
         // Stop the music routine
-        StopCoroutine(musicRoutine);
+        TryStopMusicRoutine();
 
         // Stop the audio
         source.Get(this).Stop();
     }
 
+    public void FadeOutMusic(float fadeTime)
+    {
+        TryStopMusicRoutine();
+        StartCoroutine(source.Get(this).FadeOut(fadeTime));
+    }
+
     private IEnumerator MusicSyncLoop()
     {
-        float timeOfNextBeat = (float)AudioSettings.dspTime;
+        float timeOfNextBeat;   // Time in the audio system when the next beat will drop
 
-        // Play that funky music, white boy!
-        source.Get(this).clip = info.music;
-        source.Get(this).Play();
+        // Create a brand new cursor
+        cursor = new MusicCursor(info);
 
         // Invoke music start event
-        cursor = new MusicCursor(info);
         onMusicStart.Invoke(cursor);
 
-        while (source.Get(this).isPlaying)
+        do // while(loop)
         {
-            // Invoke the beat hit event
-            onMusicBeat.Invoke(cursor);
+            // Move the cursor to the beginning, and start time of next beat
+            cursor = cursor.MoveTo(1f);
+            timeOfNextBeat = (float)AudioSettings.dspTime;
 
-            // Store the time when the next beat will drop
-            timeOfNextBeat += cursor.secondsPerBeat;
+            // Play that funky music, white boy!
+            source.Get(this).clip = info.music;
+            source.Get(this).Play();
 
-            // Wait for the next beat in the music
-            yield return new WaitUntil(() =>
+            while (cursor.currentPhrase < (info.finalPhrase + 1))
             {
-                return AudioSettings.dspTime >= timeOfNextBeat;
-            });
+                // Invoke the beat hit event
+                onMusicBeat.Invoke(cursor);
 
-            // Assign the cursor to a new cursor moved one beat forward
-            cursor = cursor.Shift(1f);
+                // Store the time when the next beat will drop
+                timeOfNextBeat += cursor.secondsPerBeat;
+
+                // Wait for the next beat in the music
+                yield return new WaitUntil(() =>
+                {
+                    return AudioSettings.dspTime >= timeOfNextBeat;
+                });
+
+                // Assign the cursor to a new cursor moved one beat forward
+                cursor = cursor.Shift(1f);
+            }
         }
+        while (loop);
 
         // Invoke music end event
         onMusicEnd.Invoke(cursor);
@@ -87,17 +112,26 @@ public class SynchronizedMusic : MonoBehaviour
 
     private void SetupMusicListeners()
     {
+        IMusicStartListener[] musicStartListeners = GetComponentsInChildren<IMusicStartListener>();
+        foreach (IMusicStartListener listener in musicStartListeners)
+        {
+            onMusicStart.AddListener(listener.OnMusicStart);
+        }
+
         IMusicBeatListener[] musicBeatListeners = GetComponentsInChildren<IMusicBeatListener>();
         foreach(IMusicBeatListener listener in musicBeatListeners)
         {
             onMusicBeat.AddListener(listener.OnMusicBeat);
         }
+    }
 
-        IMusicStartListener[] musicStartListeners = GetComponentsInChildren<IMusicStartListener>();
-        foreach(IMusicStartListener listener in musicStartListeners)
+    private void TryStopMusicRoutine()
+    {
+        if(musicRoutine != null)
         {
-            onMusicStart.AddListener(listener.OnMusicStart);
+            StopCoroutine(musicRoutine);
         }
+        onMusicEnd.Invoke(cursor);
     }
 
     // TYPEDEFS

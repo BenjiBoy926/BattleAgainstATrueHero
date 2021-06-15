@@ -929,10 +929,14 @@ MonoBehaviour:
   costumeTransform: {fileID: 5689107826679378493}
   deathEffectSource: {fileID: 4307336869158280951}
   deathEffect: {fileID: 8300000, guid: 5cc7d87892a07f24596f91c9a124a6ed, type: 3}
+  overlayTag: Overlay
+  nextSceneName: ThanksForPlaying
   startDelay: 1
   shakeMagnitude: 0.05
   shakeInterval: 0.1
   fadeTime: 2
+  sceneFadeDelay: 1
+  sceneFadeTime: 1
   defeatedTransform:
     _position: {x: 0, y: 0.1, z: 0}
     _rotation: {x: 0, y: 0, z: 0}
@@ -1193,7 +1197,7 @@ AudioSource:
   m_GameObject: {fileID: 832469195115209555}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 69f34e1f86471a14b853504978390a29,
+  OutputAudioMixerGroup: {fileID: 4286148674231450435, guid: 69f34e1f86471a14b853504978390a29,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 6935aa4dd3d17744cbe62c3b71b77532, type: 3}
   m_PlayOnAwake: 0
@@ -1502,7 +1506,7 @@ AudioSource:
   m_GameObject: {fileID: 3526996487023200616}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 69f34e1f86471a14b853504978390a29,
+  OutputAudioMixerGroup: {fileID: -6050653381263716521, guid: 69f34e1f86471a14b853504978390a29,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1705,7 +1709,7 @@ AudioSource:
   m_GameObject: {fileID: 5513407960198531743}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 69f34e1f86471a14b853504978390a29,
+  OutputAudioMixerGroup: {fileID: -6050653381263716521, guid: 69f34e1f86471a14b853504978390a29,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0

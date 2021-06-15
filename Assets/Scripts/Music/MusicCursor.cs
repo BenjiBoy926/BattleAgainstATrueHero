@@ -38,6 +38,8 @@ public struct MusicCursor
             return ((currentMeasure - 1) / piece.measuresPerPhrase) + 1;
         }
     }
+    // Get the current position in the music
+    public MusicPosition currentPosition => new MusicPosition(currentPhrase, measureInPhrase, beatInMeasure);
 
     // INSIDE OF
     // The current beat in the current measure
@@ -113,7 +115,8 @@ public struct MusicCursor
     {
         // Compute the new time by computing the starting beat of the phrase and measure,
         // plus the additional beat times seconds per beat
-        float newTime = (piece.PhraseAndMeasureToBeat(phrase, measure) + (beat - 1f)) * secondsPerBeat;
+        // NOTE: we have to subtract a "2" from here because music measures and beats are one-based, NOT zero-based
+        float newTime = (piece.PhraseAndMeasureToBeat(phrase, measure) + beat - 2) * secondsPerBeat;
         return new MusicCursor(piece, newTime);
     }
     public MusicCursor MoveTo(int measure, float beat)

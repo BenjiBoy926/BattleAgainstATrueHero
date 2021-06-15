@@ -98,7 +98,6 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
         }
     }
 
-
     private void InstantiateAllSpears(MusicCursor cursor)
     {
         MusicCursor appear;

@@ -18,13 +18,9 @@ public class ItemSpawner : MonoBehaviour, IMusicBeatListener
 
     public void OnMusicBeat(MusicCursor cursor)
     {
-        // Keep on checking the time at the front
-        // If it matches the current cursor, then spawn the item and remove the position from the list
-        while (spawnTimes.Count >= 1 && cursor.SameBaseBeat(spawnTimes[0]))
-        {
-            StartCoroutine(SpawnItemRoutine(cursor, spawnTimes[0]));
-            spawnTimes.RemoveAt(0);
-        }
+        // Use binary search for efficient lookup
+        int index = spawnTimes.BinarySearch(cursor.currentPosition);
+        if (index >= 0) StartCoroutine(SpawnItemRoutine(cursor, spawnTimes[index]));
     }
 
     private IEnumerator SpawnItemRoutine(MusicCursor cursor, MusicPosition position)

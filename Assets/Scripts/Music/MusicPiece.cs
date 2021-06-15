@@ -17,6 +17,9 @@ public struct MusicPiece
     [SerializeField]
     [Tooltip("Number of measures in one 'phrase' of music, where 'phrase' is user-defined")]
     private int _measuresPerPhrase;
+    [SerializeField]
+    [Tooltip("The last phrase of music")]
+    private int _finalPhrase;
 
     // Basic getters to access the private members
     public AudioClip music
@@ -35,6 +38,7 @@ public struct MusicPiece
             return _measuresPerPhrase;
         }
     }
+    public int finalPhrase => _finalPhrase;
     // Given phrase number and measure, get the starting beat
     public int PhraseAndMeasureToBeat(int phrase, int measure)
     {
