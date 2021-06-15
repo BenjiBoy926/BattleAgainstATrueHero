@@ -88,7 +88,7 @@ public class UndyneIntroduction : MonoBehaviour
         SetDyingAnimation("Dying");
 
         // Fade in, then speak the opening monologue
-        yield return overlay.Fade(Color.black, Color.clear, openingFadeTime);
+        yield return overlay.FadeOut(Color.black, openingFadeTime);
         yield return monologue.Speak();
 
         // Play the transform clip
@@ -97,12 +97,12 @@ public class UndyneIntroduction : MonoBehaviour
         monologueMusic.Play();
 
         // Fade out to conceal undyne's transformation
-        yield return overlay.Fade(Color.clear, Color.white, transformFadeInTime);
+        yield return overlay.FadeIn(Color.white, transformFadeInTime);
         yield return new WaitUntil(() => !monologueMusic.isPlaying);
 
         // Set the correct animation for undyne to stand still in her new transformation position
         SetUndyingStillAnimation();
-        yield return overlay.Fade(Color.white, Color.clear, transformFadeOutTime);
+        yield return overlay.FadeOut(Color.white, transformFadeOutTime);
 
         // Do the brief introduction
         yield return UndyneTheUndyingIntroduction();
@@ -111,7 +111,7 @@ public class UndyneIntroduction : MonoBehaviour
     private IEnumerator ShortIntroduction()
     {
         SetUndyingStillAnimation();
-        yield return overlay.Fade(Color.black, Color.clear, openingFadeTime);
+        yield return overlay.FadeOut(Color.black, openingFadeTime);
         yield return UndyneTheUndyingIntroduction();
     }
 
