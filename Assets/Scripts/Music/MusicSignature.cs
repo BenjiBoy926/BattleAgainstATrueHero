@@ -179,7 +179,6 @@ public struct MusicSignature
     // Return the beats inside the desired signature
     public IntRange BeatsInSignature(int signature)
     {
-        List<TimeSignatureLocation> signatures = allSignatures;
         int currentBeat = 0;
 
         // Check if signature is out of range

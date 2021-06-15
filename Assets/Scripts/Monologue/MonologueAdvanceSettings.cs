@@ -27,7 +27,7 @@ public class MonologueAdvanceSettings
     {
         get
         {
-            if(!_autoAdvance)
+            if(!_autoAdvance && !PauseManager.isPaused)
             {
                 return Input.GetButtonDown(_advanceButton);
             }

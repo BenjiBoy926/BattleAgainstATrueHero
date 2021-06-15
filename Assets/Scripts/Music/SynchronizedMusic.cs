@@ -49,6 +49,8 @@ public class SynchronizedMusic : MonoBehaviour
     public void StartMusic()
     {
         musicRoutine = StartCoroutine(MusicSyncLoop());
+        // DEBUG
+        //Time.timeScale = 0f;
     }
 
     public void StopMusic()
@@ -58,6 +60,15 @@ public class SynchronizedMusic : MonoBehaviour
 
         // Stop the audio
         source.Get(this).Stop();
+    }
+
+    public void PauseMusic()
+    {
+        source.Get(this).Pause();
+    }
+    public void ResumeMusic()
+    {
+        source.Get(this).UnPause();
     }
 
     public void FadeOutMusic(float fadeTime)
@@ -80,7 +91,7 @@ public class SynchronizedMusic : MonoBehaviour
         {
             // Move the cursor to the beginning, and start time of next beat
             cursor = cursor.MoveTo(1f);
-            timeOfNextBeat = (float)AudioSettings.dspTime;
+            timeOfNextBeat = Time.time;
 
             // Play that funky music, white boy!
             source.Get(this).clip = info.music;
@@ -97,7 +108,7 @@ public class SynchronizedMusic : MonoBehaviour
                 // Wait for the next beat in the music
                 yield return new WaitUntil(() =>
                 {
-                    return AudioSettings.dspTime >= timeOfNextBeat;
+                    return Time.time >= timeOfNextBeat;
                 });
 
                 // Assign the cursor to a new cursor moved one beat forward
