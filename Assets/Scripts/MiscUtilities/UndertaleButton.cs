@@ -21,11 +21,18 @@ public class UndertaleButton : MonoBehaviour, IPointerEnterHandler
     [Tooltip("Audio source that will play the button audio")]
     private new AudioSource audio;
     [SerializeField]
+    [Tooltip("Parent of the object with the default graphics for the button")]
+    private GameObject defaultGraphic;
+    [SerializeField]
+    [Tooltip("Parent of the object that displays the heart while button is hovered")]
+    private GameObject heartGraphic;
+    [SerializeField]
     [Tooltip("List of all graphics in the button to change color")]
     private List<Graphic> graphics;
 
     private void Start()
     {
+        heartGraphic.SetActive(false);
         // Button has no transition as it will be customized by this script
         button.transition = Selectable.Transition.None;
         // Play click sound when button pressed
@@ -38,9 +45,7 @@ public class UndertaleButton : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-        // Set the highlight color while it is inside the rect of =[pthe target graphic
-        if (GetTargetRect().Contains(Input.mousePosition)) SetColor(highlightColor);
-        else SetColor(normalColor);
+        SetHovered(GetTargetRect().Contains(Input.mousePosition));
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -48,6 +53,16 @@ public class UndertaleButton : MonoBehaviour, IPointerEnterHandler
         // Play the hover audio
         audio.clip = hoverClip.Value;
         audio.Play();
+    }
+
+    // Set if the button is hovered or not using colors and swapping graphics
+    private void SetHovered(bool hovered)
+    {
+        defaultGraphic.SetActive(!hovered);
+        heartGraphic.SetActive(hovered);
+
+        if (hovered) SetColor(highlightColor);
+        else SetColor(normalColor);
     }
 
     private void SetColor(Color color)
