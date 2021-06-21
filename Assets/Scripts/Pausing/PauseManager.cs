@@ -19,8 +19,8 @@ public class PauseManager : MonoBehaviour, IMusicStartListener
     [Tooltip("Source used to play the audio for the pause manager")]
     private new AudioSource audio;
     [SerializeField]
-    [Tooltip("Audio that plays when the game pauses/unpauses")]
-    private AudioClip pauseClip;
+    [Tooltip("Audio that plays when the game unpauses")]
+    private AudioClip unpauseClip;
     [SerializeField]
     [Tooltip("Information on the controls that appear when the game is paused")]
     private PauseControls controls;
@@ -48,7 +48,7 @@ public class PauseManager : MonoBehaviour, IMusicStartListener
         // Set pause to false when unpause button is clicked
         unpauseButton.onClick.AddListener(() => Pause(false));
         // Initialize the controls and disable them so they are invisible
-        controls.Start();
+        controls.Start(audio);
         controls.SetActive(false);
         // Initialize countdown
         countdown.Start();
@@ -74,9 +74,6 @@ public class PauseManager : MonoBehaviour, IMusicStartListener
     {
         // Set is paused
         isPaused = pause;
-        // Play the pause clip
-        audio.clip = pauseClip;
-        audio.Play();
         // Set controls active or inactive based on whether we are pausing
         controls.SetActive(pause);
         // Pause button only interactable when not paused
@@ -96,6 +93,10 @@ public class PauseManager : MonoBehaviour, IMusicStartListener
             music.ResumeMusic();
             // Restore the old timescale
             Time.timeScale = oldTimescale;
+
+            // Play the unpause clip
+            audio.clip = unpauseClip;
+            audio.Play();
         }
     }
 }

@@ -10,13 +10,13 @@ public class PauseControls
     [Tooltip("Parent of all the pause controls")]
     private GameObject controlsParent;
     [SerializeField]
-    [Tooltip("Toggle that changes player unbreakable mode")]
-    private Toggle unbreakableModeToggle;
+    [Tooltip("Manage the controls for unbreakable mode")]
+    private UnbreakableModePauseControls unbreakableMode;
 
     // Start is called before the first frame update
-    public void Start()
+    public void Start(AudioSource audio)
     {
-        // Setup toggle callback
+        unbreakableMode.Start(audio);
     }
 
     // Enable/disable the pause controls

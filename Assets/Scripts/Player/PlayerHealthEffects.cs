@@ -95,6 +95,11 @@ public class PlayerHealthEffects : MonoBehaviour
         StartCoroutine(Flicker(invincibleTime));
     }
 
+    public void UnbreakableModeTriggerEffect(int newHealth)
+    {
+        healthUi.UpdateUI(newHealth);
+    }
+
     public void DeathEffect()
     {
         healthUi.SetUIActive(false);

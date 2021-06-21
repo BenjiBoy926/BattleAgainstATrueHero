@@ -51,6 +51,8 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
 
     // Reference to the script that manages the health effects
     private PlayerHealthEffects effects;
+    // The health that the player starts out with
+    private int startingHealth;
     // Time that the application was at when the player last got hit
     private float timeSinceLastHit;
     // Time that the application was at when the player's invincibility activated
@@ -69,6 +71,20 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
     // Invincibility can be activated only if time exceeds time of invincibility deactivation by recharge time
     private bool invincibilityReady =>
         Time.time > (timeOfInvincibilityDeactivation + invincibilityRechargeTime);
+
+    // Determines if "unbreakable mode" is active
+    // In unbreakable mode the player cannot die
+    private static bool _unbreakable = false;
+    public static bool unbreakable
+    {
+        get => _unbreakable;
+        set
+        {
+            _unbreakable = value;
+
+            // Check some other things and setup the UI
+        }
+    }
 
     private void Start()
     {
@@ -118,9 +134,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
 
         if (health <= 0)
         {
-            // Die!
-            _deathEvent.Invoke();
-            effects.DeathEffect();
+            Die();
         }
         // If the player isn't dead yet, play the effect for the player taking damage
         else
@@ -128,6 +142,24 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
             effects.TakeDamageEffect(health, invincibilityAfterHit);
         }
     }
+
+    private void Die()
+    {
+        // If we died while unbreakable, do a different thing
+        if(unbreakable)
+        {
+            health = startingHealth;
+            // Enable a health restored effect
+            effects.UnbreakableModeTriggerEffect(health);
+        }
+        else
+        {
+            // Die!
+            _deathEvent.Invoke();
+            effects.DeathEffect();
+        }
+    }
+
 
     private void TryActivateInvincibility()
     {
