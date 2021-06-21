@@ -51,7 +51,10 @@ public class PlayerInvincibilityUI : MonoBehaviour
         {
             image.color = color;
         };
-        StartCoroutine(ColorModule.Flicker(baseImageColor, Color.clear, rechargeTime, 0.5f, updateSliderColor));
+        // Store a faded version of the base color
+        Color fadedColor = new Color(baseImageColor.r, baseImageColor.g, baseImageColor.b, 0.2f);
+        // Flicker the slider color
+        StartCoroutine(ColorModule.Flicker(baseImageColor, fadedColor, rechargeTime, 0.5f, updateSliderColor));
     }
 
     public void StartDeflect()

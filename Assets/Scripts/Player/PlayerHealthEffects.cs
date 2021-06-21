@@ -179,7 +179,11 @@ public class PlayerHealthEffects : MonoBehaviour
 
     private IEnumerator Flicker(float invincibleTime)
     {
-        yield return ColorModule.Flicker(Color.white, Color.clear, invincibleTime, fadeTime, SetRendererColor);
+        // Set low and high alpha colors, so that the heart is never completely invisible
+        Color lowColor = new Color(1f, 1f, 1f, 0.2f);
+        Color highColor = new Color(1f, 1f, 1f, 0.7f);
+        // Return the flicker module result
+        yield return ColorModule.Flicker(lowColor, highColor, invincibleTime, fadeTime, SetRendererColor);
         SetRendererColor(Color.white);
     }
 
