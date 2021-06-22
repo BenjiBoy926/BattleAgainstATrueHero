@@ -34,11 +34,8 @@ public class FightTag : MonoBehaviour
     [Header("References")]
 
     [SerializeField]
-    [Tooltip("Used to render the fight text")]
-    private TextMeshPro text;
-    [SerializeField]
-    [Tooltip("The outline that surrounds the fight text")]
-    private SpriteRenderer outline;
+    [Tooltip("Sprite that displays the tag")]
+    private SpriteRenderer sprite;
     [SerializeField]
     [Tooltip("Slider that shows how long the fight tag has left")]
     private GameObject sliderObject;
@@ -138,7 +135,6 @@ public class FightTag : MonoBehaviour
 
     private void SetColor(Color color)
     {
-        text.color = color;
-        outline.color = color;
+        sprite.color = color;
     }
 }

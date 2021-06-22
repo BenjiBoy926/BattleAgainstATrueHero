@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseManager : MonoBehaviour, IMusicStartListener
+public class PauseManager : MonoBehaviour, IMusicStartListener, IMusicEndListener
 {
     [SerializeField]
     [TagSelector]
@@ -31,7 +31,7 @@ public class PauseManager : MonoBehaviour, IMusicStartListener
     private SynchronizedMusic music;
     // Time scale of the system before it was paused
     private float oldTimescale;
-    // Holds the cursor, or "null" if the music hasn't started
+    // Holds the cursor, or "null" if the music hasn't started or it has already ended
     private MusicCursor? cursor = null;
 
     public static bool isPaused = false;
@@ -54,9 +54,17 @@ public class PauseManager : MonoBehaviour, IMusicStartListener
         countdown.Start();
     }
 
+    // When music starts, assign cursor so we know the beat of the music
     public void OnMusicStart(MusicCursor cursor)
     {
         this.cursor = cursor;
+        Debug.Log("Music started");
+    }
+    // When music ends, null cursor again
+    public void OnMusicEnd(MusicCursor cursor)
+    {
+        this.cursor = null;
+        Debug.Log("Music ended");
     }
 
     public void Pause(bool pause)

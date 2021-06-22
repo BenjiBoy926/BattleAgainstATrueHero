@@ -123,16 +123,23 @@ public class SynchronizedMusic : MonoBehaviour
 
     private void SetupMusicListeners()
     {
+        // Setup music start listeners
         IMusicStartListener[] musicStartListeners = GetComponentsInChildren<IMusicStartListener>();
         foreach (IMusicStartListener listener in musicStartListeners)
         {
             onMusicStart.AddListener(listener.OnMusicStart);
         }
-
+        // Setup music beat listeners
         IMusicBeatListener[] musicBeatListeners = GetComponentsInChildren<IMusicBeatListener>();
         foreach(IMusicBeatListener listener in musicBeatListeners)
         {
             onMusicBeat.AddListener(listener.OnMusicBeat);
+        }
+        // Setup music end listeners
+        IMusicEndListener[] musicEndListeners = GetComponentsInChildren<IMusicEndListener>();
+        foreach (IMusicEndListener listener in musicEndListeners)
+        {
+            onMusicEnd.AddListener(listener.OnMusicEnd);
         }
     }
 
