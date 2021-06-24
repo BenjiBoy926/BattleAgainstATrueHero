@@ -6,6 +6,9 @@ using UnityEngine;
 public class MonologueAdvanceSettings
 {
     [SerializeField]
+    [Tooltip("If true, the monologue advances even if the game is paused using Time.timeScale = 0f")]
+    private bool _advanceIfPaused = false;
+    [SerializeField]
     [Tooltip("If true, the monologue will auto-advance after the speech is done")]
     private bool _autoAdvance;
     [SerializeField]
@@ -18,6 +21,7 @@ public class MonologueAdvanceSettings
     [Tooltip("If advancing is not automatic, this is the indicator used to signal that the speech is ready to advance")]
     private GameObject _advanceIndicator;
 
+    public bool advanceIfPaused => _advanceIfPaused;
     public bool autoAdvance => _autoAdvance;
     public float readTime => _readTime;
     public string advanceButton => _advanceButton;
@@ -27,7 +31,7 @@ public class MonologueAdvanceSettings
     {
         get
         {
-            if(!_autoAdvance && !PauseManager.isPaused)
+            if(!_autoAdvance && (!_advanceIfPaused && !PauseManager.isPaused))
             {
                 return Input.GetButtonDown(_advanceButton);
             }

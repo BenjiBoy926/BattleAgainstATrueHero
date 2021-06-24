@@ -25,7 +25,7 @@ public class SpeechPart
 
     public IEnumerator Speak(AudioSource audio, AudioClip speechSound, UnityEvent<string> onUpdate, MonologueAdvanceSettings advance)
     {
-        float startTime = Time.time;
+        float startTime = GetTime(advance);
 
         // Disable the advancement indicator
         advance.SetIndicatorActive(false);
@@ -36,7 +36,7 @@ public class SpeechPart
         WaitUntil characterWait = new WaitUntil(() =>
         {
             skip = skip || advance.getAdvanceButtonDown;
-            return skip || (Time.time - startTime > characterDelay);
+            return skip || (GetTime(advance) - startTime > characterDelay);
         });
 
         // To start, we will not skip the voice line
@@ -70,14 +70,14 @@ public class SpeechPart
             }
 
             // Wait time between characters
-            startTime = Time.time;
+            startTime = GetTime(advance);
             yield return characterWait;
         }
 
         yield return null;
 
         // Set the time when the speech finished
-        float readTime = advance.readTime + Time.time;
+        float readTime = advance.readTime + GetTime(advance);
 
         // Try to enable the indicator (does not activate if auto-advancing)
         advance.SetIndicatorActive(true);
@@ -87,7 +87,7 @@ public class SpeechPart
             // If we should automatically advance, wait for the time to exceed the read time
             if (advance.autoAdvance)
             {
-                return Time.time > readTime;
+                return GetTime(advance) > readTime;
             }
             // If we do not automatically advance, then wait for the button to go down
             else
@@ -101,5 +101,11 @@ public class SpeechPart
     {
         currentText = newText;
         onUpdate.Invoke(newText);
+    }
+
+    private float GetTime(MonologueAdvanceSettings monologueAdvanceSettings)
+    {
+        if (monologueAdvanceSettings.advanceIfPaused) return Time.unscaledTime;
+        else return Time.time;
     }
 }

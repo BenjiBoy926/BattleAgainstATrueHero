@@ -11,12 +11,12 @@ public class PauseControls
     private GameObject controlsParent;
     [SerializeField]
     [Tooltip("Manage the controls for unbreakable mode")]
-    private UnbreakableModePauseControls unbreakableMode;
+    private UnbreakableModeControls unbreakableMode;
 
     // Start is called before the first frame update
-    public void Start(AudioSource audio)
+    public void Start(AudioSource audio, MonoBehaviour behaviour)
     {
-        unbreakableMode.Start(audio);
+        unbreakableMode.Start(audio, behaviour);
     }
 
     // Enable/disable the pause controls

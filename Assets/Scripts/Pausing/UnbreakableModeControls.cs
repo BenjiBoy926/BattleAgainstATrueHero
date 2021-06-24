@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 
 [System.Serializable]
-public class UnbreakableModePauseControls
+public class UnbreakableModeControls
 {
     [SerializeField]
     [Tooltip("Toggle that enables/disables unbreakable mode")]
@@ -30,10 +30,14 @@ public class UnbreakableModePauseControls
     [Tooltip("Color of the graphic while checkmark is on")]
     private Color onColor;
 
+    [SerializeField]
+    [Tooltip("Manages the head of Chara that appears when unbreakable mode is toggled on")]
+    private UnbreakableModeCharaEffect charaEffect;
+
     // Audio source we use to play the audio
     private AudioSource audio;
 
-    public void Start(AudioSource audio)
+    public void Start(AudioSource audio, MonoBehaviour behaviour)
     {
         // Audio source from the parent script
         this.audio = audio;
@@ -46,6 +50,8 @@ public class UnbreakableModePauseControls
 
         // Setup toggle callback
         toggle.onValueChanged.AddListener(ToggleUnbreakableMode);
+
+        charaEffect.Start(behaviour);
     }
 
     private void ToggleUnbreakableMode(bool active)
@@ -61,6 +67,7 @@ public class UnbreakableModePauseControls
         else SetColor(offColor);
 
         // Activate Chara!
+        charaEffect.SetActive(active);
     }
 
     private void SetColor(Color color)

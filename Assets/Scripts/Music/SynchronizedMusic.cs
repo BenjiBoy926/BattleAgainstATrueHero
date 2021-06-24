@@ -49,15 +49,12 @@ public class SynchronizedMusic : MonoBehaviour
     public void StartMusic()
     {
         musicRoutine = StartCoroutine(MusicSyncLoop());
-        // DEBUG
-        //Time.timeScale = 0f;
     }
 
     public void StopMusic()
     {
         // Stop the music routine
         TryStopMusicRoutine();
-
         // Stop the audio
         source.Get(this).Stop();
     }

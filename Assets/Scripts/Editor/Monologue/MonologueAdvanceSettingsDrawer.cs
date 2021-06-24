@@ -19,7 +19,11 @@ public class MonologueAdvanceSettingsDrawer : PropertyDrawer
             // Indent out once
             EditorGUI.indentLevel++;
 
-            // Display bool value
+            // Display advance if paused setting
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("_advanceIfPaused"));
+
+            // Display auto advance
             position.y += position.height;
             EditorGUI.PropertyField(position, autoAdvance);
 
@@ -46,20 +50,24 @@ public class MonologueAdvanceSettingsDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
+        // Start with room for foldout only
         float height = LayoutUtilities.standardControlHeight;
         SerializedProperty autoAdvance = property.FindPropertyRelative("_autoAdvance");
 
         if(property.isExpanded)
         {
-            // If auto advance is true, give only height for one checkbox
+            // Add space for unscaled checkbox and auto advance checkbox
+            height += LayoutUtilities.standardControlHeight * 2f;
+
+            // If auto advance is true, give height for read time
             if (autoAdvance.boolValue)
             {
-                height += LayoutUtilities.standardControlHeight * 2f;
+                height += LayoutUtilities.standardControlHeight;
             }
-            // If audo advance is false, give height for advance button, indicator, and read time
+            // If audo advance is false, give height for advance indicator and advance button
             else
             {
-                height += LayoutUtilities.standardControlHeight * 3f;
+                height += LayoutUtilities.standardControlHeight * 2f;
             }
         }
 

@@ -48,7 +48,7 @@ public class PauseManager : MonoBehaviour, IMusicStartListener, IMusicEndListene
         // Set pause to false when unpause button is clicked
         unpauseButton.onClick.AddListener(() => Pause(false));
         // Initialize the controls and disable them so they are invisible
-        controls.Start(audio);
+        controls.Start(audio, this);
         controls.SetActive(false);
         // Initialize countdown
         countdown.Start();
