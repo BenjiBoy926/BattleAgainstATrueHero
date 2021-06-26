@@ -14,9 +14,9 @@ public class PauseControls
     private UnbreakableModeControls unbreakableMode;
 
     // Start is called before the first frame update
-    public void Start(AudioSource audio, MonoBehaviour behaviour)
+    public void Start(AudioSource audio)
     {
-        unbreakableMode.Start(audio, behaviour);
+        unbreakableMode.Start(audio);
     }
 
     // Enable/disable the pause controls

@@ -37,7 +37,7 @@ public class UnbreakableModeControls
     // Audio source we use to play the audio
     private AudioSource audio;
 
-    public void Start(AudioSource audio, MonoBehaviour behaviour)
+    public void Start(AudioSource audio)
     {
         // Audio source from the parent script
         this.audio = audio;
@@ -51,7 +51,7 @@ public class UnbreakableModeControls
         // Setup toggle callback
         toggle.onValueChanged.AddListener(ToggleUnbreakableMode);
 
-        charaEffect.Start(behaviour);
+        charaEffect.Start();
     }
 
     private void ToggleUnbreakableMode(bool active)

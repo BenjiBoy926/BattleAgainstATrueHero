@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class UnbreakableModeCharaEffect
+public class UnbreakableModeCharaEffect : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Start delay before the monologue begins")]
@@ -15,24 +14,39 @@ public class UnbreakableModeCharaEffect
     [Tooltip("Parent of the panel that will display the monologue")]
     private GameObject speechPanel;
     [SerializeField]
+    [Tooltip("Source of the audio for the chara effect")]
+    private AudioSource audio;
+    [SerializeField]
+    [Tooltip("Clip that plays when the effect is enabled")]
+    private AudioClip enableClip;
+    [SerializeField]
     [Tooltip("Monologue spoken when Chara appears after enabling unbreakable mode")]
     private Monologue monologue;
 
-    // Reference to the monobehaviour to schedule the coroutine on
-    private MonoBehaviour coroutineScheduler;
-
-    public void Start(MonoBehaviour coroutineScheduler)
+    public void Start()
     {
-        this.coroutineScheduler = coroutineScheduler;
-        SetActive(false);
+        SetActive(PlayerHealth.unbreakable);
     }
 
     public void SetActive(bool active)
     {
-        coroutineScheduler.StopAllCoroutines();
         root.SetActive(active);
-        // If enabling, start the monologue routine
-        if (active) coroutineScheduler.StartCoroutine(MonologueRoutine());
+        StopAllCoroutines();
+        // If the effect is turning on, start the monologue routine
+        if (active)
+        {
+            // Play the enable clip
+            audio.clip = enableClip;
+            audio.Play();
+            // Start the monologue routine
+            StartCoroutine(MonologueRoutine());
+        }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        speechPanel.SetActive(false);
     }
 
     private IEnumerator MonologueRoutine()
