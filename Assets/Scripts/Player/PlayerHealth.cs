@@ -82,12 +82,25 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         {
             _unbreakable = value;
 
-            // Check some other things and setup the UI
+            // Try to find an active player health in the scene
+            PlayerHealth activeHealth = FindObjectOfType<PlayerHealth>();
+            // If a player health exists in the scene, activate its effects
+            if(activeHealth != null)
+            {
+                activeHealth.effects.UnbreakableModeToggleEffect(value);
+            }
         }
     }
+    // Counts the number of times that unbreakable mode has triggered during this fight
+    public static int unbreakableTriggerCounter { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
+        // At the start of the scene, the counter is always 0
+        unbreakableTriggerCounter = 0;
+        // Store the health we started at
+        startingHealth = health;
+
         effects = GetComponent<PlayerHealthEffects>();
         effects.Setup(health);
 
@@ -149,7 +162,11 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         if(unbreakable)
         {
             health = startingHealth;
-            // Enable a health restored effect
+            // Increase unbreakable mode trigger counter
+            unbreakableTriggerCounter++;
+            // Do the take damage effect
+            effects.TakeDamageEffect(health, invincibilityAfterHit);
+            // Enable a health restore effect
             effects.UnbreakableModeTriggerEffect(health);
         }
         else

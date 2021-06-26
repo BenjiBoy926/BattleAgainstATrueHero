@@ -99,6 +99,10 @@ public class PlayerHealthEffects : MonoBehaviour
     {
         healthUi.UpdateUI(newHealth);
     }
+    public void UnbreakableModeToggleEffect(bool active)
+    {
+        healthUi.ToggleUnbreakableModeUI(active);
+    }
 
     public void DeathEffect()
     {

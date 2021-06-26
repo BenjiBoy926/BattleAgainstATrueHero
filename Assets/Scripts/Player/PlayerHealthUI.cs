@@ -11,6 +11,9 @@ public class PlayerHealthUI : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the text that displays the player's current health")]
     private Text healthText;
+    [SerializeField]
+    [Tooltip("Information about the unbreakable mode UI")]
+    private PlayerUnbreakableModeUI unbreakableUI;
 
     private void Awake()
     {
@@ -19,6 +22,9 @@ public class PlayerHealthUI : MonoBehaviour
 
     public void Setup(int max)
     {
+        // Setup unbreakable ui
+        unbreakableUI.Setup();
+
         // Setup the slider to have the new max value
         healthSlider.minValue = 0;
         healthSlider.maxValue = max;
@@ -36,10 +42,17 @@ public class PlayerHealthUI : MonoBehaviour
         // Update health slider value
         healthSlider.value = newHealth;
         healthText.text = newHealth + "/" + healthSlider.maxValue;
+        // Always update the unbreakable ui with this ui
+        unbreakableUI.UpdateUI();
     }
 
     public void SetUIActive(bool active)
     {
         gameObject.SetActive(active);
+    }
+
+    public void ToggleUnbreakableModeUI(bool active)
+    {
+        unbreakableUI.ToggleUnbreakableModeUI(active);
     }
 }
