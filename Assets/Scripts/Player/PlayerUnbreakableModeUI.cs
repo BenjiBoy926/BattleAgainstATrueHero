@@ -18,6 +18,9 @@ public class PlayerUnbreakableModeUI
     [SerializeField]
     [Tooltip("Text that displays the unbreakable trigger counter")]
     private TextMeshProUGUI text;
+    [SerializeField]
+    [Tooltip("Effect that instantiates when unbreakable mode triggers")]
+    private ExpandOverTime charaEffect;
 
     public void Setup()
     {
@@ -41,6 +44,12 @@ public class PlayerUnbreakableModeUI
             charaHead.color = new Color(charaHead.color.r, charaHead.color.g, charaHead.color.b, 0.1f);
             text.color = new Color(text.color.r, text.color.g, text.color.b, 0.1f);
         }
+    }
+
+    public void UnbreakableModeTriggerEffect()
+    {
+        UpdateUI();
+        charaEffect.Play();
     }
 
     public void UpdateUI()

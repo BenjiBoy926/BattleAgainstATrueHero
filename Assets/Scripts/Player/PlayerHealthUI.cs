@@ -12,12 +12,21 @@ public class PlayerHealthUI : MonoBehaviour
     [Tooltip("Reference to the text that displays the player's current health")]
     private Text healthText;
     [SerializeField]
+    [Tooltip("Color of the healthbar in its default state")]
+    private Color defaultSliderColor = Color.yellow;
+    [SerializeField]
+    [Tooltip("Color of the healthbar while unbreakable mode is active")]
+    private Color unbreakableSliderColor = Color.green;
+    [SerializeField]
     [Tooltip("Information about the unbreakable mode UI")]
     private PlayerUnbreakableModeUI unbreakableUI;
+
+    private Graphic healthSliderFill => healthSlider.fillRect.GetComponent<Graphic>();
 
     private void Awake()
     {
         healthSlider.wholeNumbers = true;
+        SetSliderColor();
     }
 
     public void Setup(int max)
@@ -50,9 +59,20 @@ public class PlayerHealthUI : MonoBehaviour
     {
         gameObject.SetActive(active);
     }
-
+    public void UnbreakableModeTriggerEffect(int newHealth)
+    {
+        UpdateUI(newHealth);
+        unbreakableUI.UnbreakableModeTriggerEffect();
+    }
     public void ToggleUnbreakableModeUI(bool active)
     {
+        SetSliderColor();
         unbreakableUI.ToggleUnbreakableModeUI(active);
+    }
+
+    private void SetSliderColor()
+    {
+        if (PlayerHealth.unbreakable) healthSliderFill.color = unbreakableSliderColor;
+        else healthSliderFill.color = defaultSliderColor;
     }
 }

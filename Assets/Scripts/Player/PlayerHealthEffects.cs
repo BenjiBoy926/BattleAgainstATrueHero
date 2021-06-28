@@ -8,8 +8,6 @@ using UnityEngine.Events;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealthEffects : MonoBehaviour
 {
-    [Header("Sub-Components")]
-
     [SerializeField]
     [Tooltip("Reference to the script that manages the player UI")]
     private PlayerHealthUI healthUi;
@@ -17,7 +15,19 @@ public class PlayerHealthEffects : MonoBehaviour
     [Tooltip("Script that manages the player invincibility UI")]
     private PlayerInvincibilityUI invincibilityUI;
 
-    [Header("Visual Elements")]
+    [Header("Take Damage Effects")]
+
+    [SerializeField]
+    [Tooltip("Time it takes for the player to fade in and out just after taking damage")]
+    private float fadeTime;
+    [SerializeField]
+    [Tooltip("Source to play damaging effects")]
+    private AudioSource healthAudio;
+    [SerializeField]
+    [Tooltip("Sound effect that plays when the player takes damage")]
+    private AudioClip damageClip;
+
+    [Header("Death Effects")]
 
     [SerializeField]
     [Tooltip("Time between the crack and the splinter of the heart shape when the player dies")]
@@ -37,27 +47,18 @@ public class PlayerHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("The number of splinters instantiated when the player dies")]
     private int splinterCount;
-
-    [Header("Audio Elements")]
-
-    [SerializeField]
-    [Tooltip("Source to play damaging effects")]
-    private AudioSource healthAudio;
-    [SerializeField]
-    [Tooltip("Source to play invincibility effects")]
-    private AudioSource invincibilityAudio;
-    [SerializeField]
-    [Tooltip("Sound effect that plays when the player takes damage")]
-    private AudioClip damageClip;
     [SerializeField]
     [Tooltip("Clip played when the heart cracks")]
     private AudioClip crackClip;
     [SerializeField]
     [Tooltip("Clip played when the heart splinters to pieces")]
     private AudioClip splinterClip;
+
+    [Header("Invincibility Effects")]
+
     [SerializeField]
-    [Tooltip("Time it takes for the player to fade in and out while invincible")]
-    private float fadeTime;
+    [Tooltip("Source to play invincibility effects")]
+    private AudioSource invincibilityAudio;
     [SerializeField]
     [Tooltip("Deflect sound effect")]
     private AudioClip deflectClip;
@@ -67,6 +68,18 @@ public class PlayerHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("Effect played when the player powers down")]
     private AudioClip powerDownClip;
+
+    [Header("Unbreakable Effects")]
+
+    [SerializeField]
+    [Tooltip("Chara effect instantiated when unbreakable mode is triggered")]
+    private GameObject charaEffect;
+    [SerializeField]
+    [Tooltip("Source to play unbreakable mode related effects")]
+    private AudioSource unbreakableAudio;
+    [SerializeField]
+    [Tooltip("Effect played when unbreakable mode triggers")]
+    private AudioClip unbreakableTriggerClip;
 
     private new SpriteRenderer renderer;
 
@@ -97,7 +110,13 @@ public class PlayerHealthEffects : MonoBehaviour
 
     public void UnbreakableModeTriggerEffect(int newHealth)
     {
-        healthUi.UpdateUI(newHealth);
+        // Play the unbreakable trigger audio
+        unbreakableAudio.clip = unbreakableTriggerClip;
+        unbreakableAudio.Play();
+        // Instantaite the chara effect at this position
+        Instantiate(charaEffect, transform.position, transform.rotation);
+        // Make the health UI trigger an effect
+        healthUi.UnbreakableModeTriggerEffect(newHealth);
     }
     public void UnbreakableModeToggleEffect(bool active)
     {
