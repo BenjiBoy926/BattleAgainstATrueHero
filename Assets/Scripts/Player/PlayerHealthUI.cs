@@ -41,9 +41,6 @@ public class PlayerHealthUI : MonoBehaviour
 
         // Have the text display the values
         healthText.text = max + "/" + max;
-
-        // Enable ui on setup
-        SetUIActive(true);
     }
 
     public void UpdateUI(int newHealth)
@@ -53,11 +50,6 @@ public class PlayerHealthUI : MonoBehaviour
         healthText.text = newHealth + "/" + healthSlider.maxValue;
         // Always update the unbreakable ui with this ui
         unbreakableUI.UpdateUI();
-    }
-
-    public void SetUIActive(bool active)
-    {
-        gameObject.SetActive(active);
     }
     public void UnbreakableModeTriggerEffect(int newHealth)
     {

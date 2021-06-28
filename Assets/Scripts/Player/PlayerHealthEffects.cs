@@ -125,7 +125,6 @@ public class PlayerHealthEffects : MonoBehaviour
 
     public void DeathEffect()
     {
-        healthUi.SetUIActive(false);
         StartCoroutine(DeathRoutine());
     }
 

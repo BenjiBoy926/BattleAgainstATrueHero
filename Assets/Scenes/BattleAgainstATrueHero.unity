@@ -935,11 +935,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2823727187616156791, guid: 4dacc8082a6683e488606bbafef79d19,
-        type: 3}
-      propertyPath: health
-      value: 56
-      objectReference: {fileID: 0}
     - target: {fileID: 4390622800792777709, guid: 4dacc8082a6683e488606bbafef79d19,
         type: 3}
       propertyPath: m_Name
@@ -1036,6 +1031,7 @@ GameObject:
   - component: {fileID: 1349120701}
   - component: {fileID: 1349120700}
   - component: {fileID: 1349120699}
+  - component: {fileID: 1349120702}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1125,6 +1121,33 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1349120702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349120697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948b31b4997143e48b984c652bcdd66e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: Player
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1349120697}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1529300544
 GameObject:
   m_ObjectHideFlags: 0
