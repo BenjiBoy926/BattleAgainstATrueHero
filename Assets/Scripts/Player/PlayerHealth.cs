@@ -31,13 +31,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
     private UnityEvent _deathEvent;
     // Property for public access to the death event, 
     // but we need the field to be serialized
-    public UnityEvent deathEvent
-    {
-        get
-        {
-            return _deathEvent;
-        }
-    }
+    public UnityEvent deathEvent => _deathEvent;
 
     [SerializeField]
     [Tooltip("Event invoked when invincibility is activated")]
@@ -164,10 +158,8 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
             health = startingHealth;
             // Increase unbreakable mode trigger counter
             unbreakableTriggerCounter++;
-            // Do the take damage effect
-            effects.TakeDamageEffect(health, invincibilityAfterHit);
             // Enable a health restore effect
-            effects.UnbreakableModeTriggerEffect(health);
+            effects.UnbreakableTriggerEffect(health, invincibilityAfterHit);
         }
         else
         {
@@ -197,7 +189,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
 
         // Invoke deactivation
         CancelInvoke();
-        Invoke("DeactivateInvincibility", invincibilityTime);
+        Invoke(nameof(DeactivateInvincibility), invincibilityTime);
     }
 
     private void DeactivateInvincibility()
@@ -210,7 +202,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         effects.DeactivateInvincibilityEffect(invincibilityRechargeTime);
 
         CancelInvoke();
-        Invoke("InvincibilityReady", invincibilityRechargeTime);
+        Invoke(nameof(InvincibilityReady), invincibilityRechargeTime);
     }
 
     private void InvincibilityReady()

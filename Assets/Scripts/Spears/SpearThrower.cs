@@ -17,7 +17,6 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
             InstantiateAllSpears(cursor);
         }
     }
-
     public void OnMusicBeat(MusicCursor cursor)
     {
         foreach(Spear spear in spears)

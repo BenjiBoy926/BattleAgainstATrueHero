@@ -46,7 +46,7 @@ public class PauseManager : MonoBehaviour, IMusicStartListener, IMusicEndListene
         // Set pause to true when the pause button is clicked
         pauseButton.onClick.AddListener(() => Pause(true));
         // Set pause to false when unpause button is clicked
-        unpauseButton.onClick.AddListener(() => Pause(false));
+        unpauseButton.onClick.AddListener(() => Unpause());
         // Initialize the controls and disable them so they are invisible
         controls.Start(audio);
         controls.SetActive(false);
@@ -58,23 +58,27 @@ public class PauseManager : MonoBehaviour, IMusicStartListener, IMusicEndListene
     public void OnMusicStart(MusicCursor cursor)
     {
         this.cursor = cursor;
-        Debug.Log("Music started");
     }
     // When music ends, null cursor again
     public void OnMusicEnd(MusicCursor cursor)
     {
         this.cursor = null;
-        Debug.Log("Music ended");
     }
 
-    public void Pause(bool pause)
+    public void Pause(bool useUI)
     {
-        // If we are pausing, pause immediately
-        if (pause) DoPause(true);
-        // If we are unpausing but the music has started, do a countdown
-        // so the player can get their bearings
-        else if (musicHasStarted) countdown.StartCountdown(this, cursor.Value, controls, audio, DoPause);
-        // If we are unpausing but the music has NOT started, just unpause like normal
+        // Enable controls if we want to use them
+        controls.SetActive(useUI);
+        DoPause(true);
+    }
+
+    public void Unpause()
+    {
+        // In any case, disable the controls
+        controls.SetActive(false);
+        // If music has started, do a countdown before fully unpausing
+        if (musicHasStarted) countdown.StartCountdown(this, cursor.Value, audio, DoPause);
+        // If music has not started, unpause without a countdown
         else DoPause(false);
     }
 
@@ -82,8 +86,6 @@ public class PauseManager : MonoBehaviour, IMusicStartListener, IMusicEndListene
     {
         // Set is paused
         isPaused = pause;
-        // Set controls active or inactive based on whether we are pausing
-        controls.SetActive(pause);
         // Pause button only interactable when not paused
         pauseButton.interactable = !pause;
 
@@ -101,10 +103,6 @@ public class PauseManager : MonoBehaviour, IMusicStartListener, IMusicEndListene
             music.ResumeMusic();
             // Restore the old timescale
             Time.timeScale = oldTimescale;
-
-            // Play the unpause clip
-            audio.clip = unpauseClip;
-            audio.Play();
         }
     }
 }

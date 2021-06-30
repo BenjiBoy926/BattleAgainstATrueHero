@@ -381,7 +381,6 @@ GameObject:
   m_Component:
   - component: {fileID: 114355580119183249}
   - component: {fileID: 114355580119183252}
-  - component: {fileID: 114355580119183251}
   - component: {fileID: 114355580119183250}
   - component: {fileID: 114355580119183254}
   - component: {fileID: 114355580119183253}
@@ -427,33 +426,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spearPrefab: {fileID: 133580546490070260, guid: 68b7a52065c2d5945b449c668dd27319,
     type: 3}
---- !u!114 &114355580119183251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114355580119183248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948b31b4997143e48b984c652bcdd66e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTag: Player
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114355580119183248}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &114355580119183250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +464,7 @@ MonoBehaviour:
     audio: {fileID: 1807796499023911737}
     voiceClip: {fileID: 8300000, guid: e3dc2826ca15dd946aecf3da4a34d991, type: 3}
     advanceSettings:
+      _advanceIfPaused: 0
       _autoAdvance: 0
       _readTime: 0
       _advanceButton: Submit
@@ -749,6 +722,7 @@ MonoBehaviour:
     audio: {fileID: 1807796499023911737}
     voiceClip: {fileID: 8300000, guid: 74126faf0676b75419ce735dc2bf8f7e, type: 3}
     advanceSettings:
+      _advanceIfPaused: 0
       _autoAdvance: 1
       _readTime: 1
       _advanceButton: 
@@ -953,6 +927,7 @@ MonoBehaviour:
     audio: {fileID: 1807796499023911737}
     voiceClip: {fileID: 8300000, guid: 74126faf0676b75419ce735dc2bf8f7e, type: 3}
     advanceSettings:
+      _advanceIfPaused: 0
       _autoAdvance: 0
       _readTime: 0
       _advanceButton: Submit

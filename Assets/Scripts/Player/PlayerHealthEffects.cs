@@ -5,9 +5,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+using TMPro;
+
+using DG.Tweening;
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealthEffects : MonoBehaviour
 {
+    [SerializeField]
+    [TagSelector]
+    [Tooltip("Tag of the object that acts as the player's decoy so the player looks like they are in front of the black overlay")]
+    private string decoyTag;
     [SerializeField]
     [Tooltip("Reference to the script that manages the player UI")]
     private PlayerHealthUI healthUi;
@@ -27,33 +35,6 @@ public class PlayerHealthEffects : MonoBehaviour
     [Tooltip("Sound effect that plays when the player takes damage")]
     private AudioClip damageClip;
 
-    [Header("Death Effects")]
-
-    [SerializeField]
-    [Tooltip("Time between the crack and the splinter of the heart shape when the player dies")]
-    private float splitDelay;
-    [SerializeField]
-    [Tooltip("Time after the player splinters away that the game over text appears")]
-    private float gameOverDelay;
-    [SerializeField]
-    [Tooltip("Default appearance of the player")]
-    private Sprite defaultSprite;
-    [SerializeField]
-    [Tooltip("Appearance of the player when the heart cracks")]
-    private Sprite crackSprite;
-    [SerializeField]
-    [Tooltip("Object that represents the heart splinter")]
-    private GameObject splinterObject;
-    [SerializeField]
-    [Tooltip("The number of splinters instantiated when the player dies")]
-    private int splinterCount;
-    [SerializeField]
-    [Tooltip("Clip played when the heart cracks")]
-    private AudioClip crackClip;
-    [SerializeField]
-    [Tooltip("Clip played when the heart splinters to pieces")]
-    private AudioClip splinterClip;
-
     [Header("Invincibility Effects")]
 
     [SerializeField]
@@ -71,21 +52,23 @@ public class PlayerHealthEffects : MonoBehaviour
 
     [Header("Unbreakable Effects")]
 
-    [SerializeField]
-    [Tooltip("Chara effect instantiated when unbreakable mode is triggered")]
-    private GameObject charaEffect;
-    [SerializeField]
-    [Tooltip("Source to play unbreakable mode related effects")]
-    private AudioSource unbreakableAudio;
-    [SerializeField]
-    [Tooltip("Effect played when unbreakable mode triggers")]
-    private AudioClip unbreakableTriggerClip;
+    [Tooltip("Event invoked when the unbreakable trigger effect begins")]
+    public UnityEvent unbreakableTriggerStartEvent;
+    [Tooltip("Event invoked when the unbreakable trigger effect ends")]
+    public UnityEvent unbreakableTriggerEndEvent;
 
     private new SpriteRenderer renderer;
+    private PlayerDecoy decoy;
 
     private void Awake()
     {
         renderer = GetComponent<SpriteRenderer>();
+        decoy = GameObject.FindGameObjectWithTag(decoyTag).GetComponent<PlayerDecoy>();
+    }
+
+    private void Start()
+    {
+        decoy.gameObject.SetActive(false);
     }
 
     // Setup the max value on the slider
@@ -108,16 +91,27 @@ public class PlayerHealthEffects : MonoBehaviour
         StartCoroutine(Flicker(invincibleTime));
     }
 
-    public void UnbreakableModeTriggerEffect(int newHealth)
+    public void UnbreakableTriggerEffect(int newHealth, float invincibleTime)
     {
-        // Play the unbreakable trigger audio
-        unbreakableAudio.clip = unbreakableTriggerClip;
-        unbreakableAudio.Play();
-        // Instantaite the chara effect at this position
-        Instantiate(charaEffect, transform.position, transform.rotation);
         // Make the health UI trigger an effect
         healthUi.UnbreakableModeTriggerEffect(newHealth);
+        // Start the unbreakable trigger effect routine
+        StartCoroutine(UnbreakableTriggerRoutine(newHealth, invincibleTime));
     }
+
+    private IEnumerator UnbreakableTriggerRoutine(int newHealth, float invincibleTime)
+    {
+        // Invoke the start
+        unbreakableTriggerStartEvent.Invoke();
+        // Make the decoy do its effect
+        yield return decoy.UnbreakableTriggerRoutine();
+        // Invoke the end
+        unbreakableTriggerEndEvent.Invoke();
+        // Wait until time scale is back to normal, then cause a take damage effect
+        yield return new WaitUntil(() => Time.timeScale > 0);
+        TakeDamageEffect(newHealth, invincibleTime);
+    }
+
     public void UnbreakableModeToggleEffect(bool active)
     {
         healthUi.ToggleUnbreakableModeUI(active);
@@ -125,40 +119,7 @@ public class PlayerHealthEffects : MonoBehaviour
 
     public void DeathEffect()
     {
-        StartCoroutine(DeathRoutine());
-    }
-
-    private IEnumerator DeathRoutine()
-    {
-        yield return new WaitForSeconds(splitDelay);
-
-        // After a second, make the heart crack
-        renderer.sprite = crackSprite;
-
-        // Play the heart crack clip
-        healthAudio.clip = crackClip;
-        healthAudio.Play();
-
-        yield return new WaitForSeconds(splitDelay);
-
-        // After a second, make the heart crack
-        renderer.enabled = false;
-
-        // Play the heart splinter clip
-        healthAudio.clip = splinterClip;
-        healthAudio.Play();
-
-        // Instantiate multiple splinters. The objects themselves take care of other things
-        // like initial velocity and rotation
-        for(int i = 0; i < splinterCount; i++)
-        {
-            Instantiate(splinterObject, transform.position, splinterObject.transform.rotation);
-        }
-
-        yield return new WaitForSeconds(gameOverDelay);
-
-        // Startup game over manager
-        GameOver.BeginGameOver("BattleAgainstATrueHero");
+        decoy.DeathEffect();
     }
 
     public void ActivateInvincibilityEffect()
@@ -205,7 +166,7 @@ public class PlayerHealthEffects : MonoBehaviour
         Color lowColor = new Color(1f, 1f, 1f, 0.2f);
         Color highColor = new Color(1f, 1f, 1f, 0.7f);
         // Return the flicker module result
-        yield return ColorModule.Flicker(lowColor, highColor, invincibleTime, fadeTime, SetRendererColor);
+        yield return ColorModule.Flicker(lowColor, highColor, invincibleTime - 0.1f, fadeTime, SetRendererColor);
         SetRendererColor(Color.white);
     }
 

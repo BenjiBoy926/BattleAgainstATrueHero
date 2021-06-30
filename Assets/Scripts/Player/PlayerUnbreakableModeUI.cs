@@ -49,7 +49,7 @@ public class PlayerUnbreakableModeUI
     public void UnbreakableModeTriggerEffect()
     {
         UpdateUI();
-        charaEffect.Play();
+        //charaEffect.Play();
     }
 
     public void UpdateUI()

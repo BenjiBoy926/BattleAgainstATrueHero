@@ -26,25 +26,23 @@ public class UnpauseCountdown
         countdownText.transform.position = screenPos;
     }
 
-    public void StartCountdown(MonoBehaviour scheduler, MusicCursor cursor, PauseControls controls, AudioSource audio, UnityAction<bool> callback)
+    public void StartCountdown(MonoBehaviour scheduler, MusicCursor cursor, AudioSource audio, UnityAction<bool> callback)
     {
-        scheduler.StartCoroutine(CountdownRoutine(cursor, controls, audio, callback));
+        scheduler.StartCoroutine(CountdownRoutine(cursor, audio, callback));
     }
 
-    private IEnumerator CountdownRoutine(MusicCursor cursor, PauseControls controls, AudioSource audio, UnityAction<bool> callback)
+    private IEnumerator CountdownRoutine(MusicCursor cursor, AudioSource audio, UnityAction<bool> callback)
     {
         // Wait in realtime, since we are still paused
         WaitForSecondsRealtime wait = new WaitForSecondsRealtime(cursor.BeatsToSeconds(1f));
 
-        // Remove pause controls
-        controls.SetActive(false);
         // Enable the countdown text
         countdownText.enabled = true;
 
         // Set the countdown clip
         audio.clip = unpauseCountdownClip;
         // Countdown with the music timing
-        for (int i = 3; i >= 1; i--)
+        for (int i = 5; i <= 8; i++)
         {
             // Play the audio
             audio.Play();
