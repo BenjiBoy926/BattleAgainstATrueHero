@@ -49,7 +49,7 @@ public class GameOver : MonoBehaviour
     }
 
     // Begin the game over by loading the scene and setting the scene to callback to
-    public static void BeginGameOver(string sceneCallback)
+    public static void Begin(string sceneCallback)
     {
         GameOver.sceneCallback = sceneCallback;
         SceneManager.LoadScene("GameOver");

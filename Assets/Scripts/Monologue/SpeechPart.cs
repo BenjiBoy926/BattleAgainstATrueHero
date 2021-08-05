@@ -44,7 +44,7 @@ public class SpeechPart
 
         // Set display to be empty and set the speech sound
         SetText("", onUpdate);
-        audio.clip = speechSound;
+        if(audio != null) audio.clip = speechSound;
 
         // Invoke the speech begin event
         onBegin.Invoke();
@@ -56,7 +56,7 @@ public class SpeechPart
             if(skip)
             {
                 SetText(speech, onUpdate);
-                audio.Play();
+                if(audio != null) audio.Play();
                 break;
             }
 
@@ -64,10 +64,7 @@ public class SpeechPart
             SetText(currentText + c, onUpdate);
 
             // Play the speech sound for non whitespace
-            if(!char.IsWhiteSpace(c))
-            {
-                audio.Play();
-            }
+            if(!char.IsWhiteSpace(c) && audio != null) audio.Play();
 
             // Wait time between characters
             startTime = GetTime(advance);

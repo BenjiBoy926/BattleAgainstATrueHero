@@ -134,7 +134,7 @@ public class PlayerDecoy : MonoBehaviour
         yield return new WaitForSecondsRealtime(gameOverDelay);
 
         // Startup game over manager
-        GameOver.BeginGameOver("BattleAgainstATrueHero");
+        GameOver.Begin("BattleAgainstATrueHero");
     }
 
     public IEnumerator UnbreakableTriggerRoutine()

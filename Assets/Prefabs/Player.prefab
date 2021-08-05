@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hazardTag: Hazard
-  health: 7
+  health: 56
   damagePerHit: 8
   invincibilityAfterHit: 2
   invincibilityTime: 2
