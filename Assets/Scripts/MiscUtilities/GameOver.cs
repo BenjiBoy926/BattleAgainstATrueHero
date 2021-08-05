@@ -39,8 +39,10 @@ public class GameOver : MonoBehaviour
         StartCoroutine(music.FadeOut(fadeTime));
         yield return ColorModule.Fade(Color.white, Color.clear, fadeTime, SetTextColor);
 
-        // Load the scene that the game over manager was told to load after the game over screen
-        SceneManager.LoadScene(sceneCallback);
+        // If this is our first attempt, load up Chara's offer, which will go to the scene callback
+        if (BattleData.Attempts == 1) CharaOffer.Begin(sceneCallback);
+        // If this was not our first attempt go straight to the next scene
+        else SceneManager.LoadScene(sceneCallback);
     }
 
     private void SetTextColor(Color color)

@@ -71,7 +71,7 @@ public class UndyneIntroduction : MonoBehaviour
         overlay = overlayObject.GetComponent<Image>();
 
         // If this is the player's first attempt, give them the long introduction
-        if(BattleData.attempts == 0)
+        if(BattleData.Attempts == 0)
         {
             StartCoroutine(LongIntroduction());
         }

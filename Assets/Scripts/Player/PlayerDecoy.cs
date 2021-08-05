@@ -24,7 +24,7 @@ public class PlayerDecoy : MonoBehaviour
     private Image overlay;
     [SerializeField]
     [Tooltip("Audio source that plays the audio")]
-    private AudioSource audio;
+    private new AudioSource audio;
 
     [Header("Death Effects")]
 

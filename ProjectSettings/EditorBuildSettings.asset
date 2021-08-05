@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOver.unity
     guid: 83ec9a1568f820b49b783046ecc8366d
   - enabled: 1
+    path: Assets/Scenes/CharaOffer.unity
+    guid: 64f7dbcb5a01c2049a439b78ae7d0d8b
+  - enabled: 1
     path: Assets/Scenes/ThanksForPlaying.unity
     guid: 1c9e3d7df4411984ba860ce1bca5a1dc
   m_configObjects: {}

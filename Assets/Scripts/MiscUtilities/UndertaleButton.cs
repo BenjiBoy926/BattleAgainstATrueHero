@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+using Hellmade.Sound;
+
 public class UndertaleButton : MonoBehaviour, IPointerEnterHandler
 {
     // Normal and highlight colors for an undertale button
@@ -38,25 +40,23 @@ public class UndertaleButton : MonoBehaviour, IPointerEnterHandler
         // Play click sound when button pressed
         button.onClick.AddListener(() =>
         {
-            audio.clip = clickClip.Value;
-            audio.Play();
+            EazySoundManager.PlayUISound(clickClip.Value);
         });
     }
 
     private void Update()
     {
-        SetHovered(GetTargetRect().Contains(Input.mousePosition));
+        SetHoveredAppearance(GetTargetRect().Contains(Input.mousePosition));
     }
 
     public void OnPointerEnter(PointerEventData data)
     {
         // Play the hover audio
-        audio.clip = hoverClip.Value;
-        audio.Play();
+        EazySoundManager.PlayUISound(hoverClip.Value);
     }
 
     // Set if the button is hovered or not using colors and swapping graphics
-    private void SetHovered(bool hovered)
+    private void SetHoveredAppearance(bool hovered)
     {
         defaultGraphic.SetActive(!hovered);
         heartGraphic.SetActive(hovered);

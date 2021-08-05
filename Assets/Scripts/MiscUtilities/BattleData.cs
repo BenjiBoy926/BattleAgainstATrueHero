@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class BattleData : MonoBehaviour
 {
-    private static int _attempts = 0;
-    public static int attempts => _attempts;
+    private static int attempts = 0;
+    public static int Attempts => attempts;
 
     [SerializeField]
     [TagSelector]
-    [Tooltip("Tag of the player game object")]
-    private string playerTag;
+    [Tooltip("Tag of the object that has the player health on it")]
+    private string playerTag = "Player";
+
+    // Reference to the script that manages player health
+    private PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
-        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-        playerHealth.deathEvent.AddListener(IncrementAttempts);
-    }
-
-    private void IncrementAttempts()
-    {
-        _attempts++;
+        playerHealth = GameObject.FindGameObjectWithTag(playerTag).GetComponent<PlayerHealth>();
+        playerHealth.deathEvent.AddListener(() => attempts++);
     }
 }

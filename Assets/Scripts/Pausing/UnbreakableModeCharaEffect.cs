@@ -15,7 +15,7 @@ public class UnbreakableModeCharaEffect : MonoBehaviour
     private GameObject speechPanel;
     [SerializeField]
     [Tooltip("Source of the audio for the chara effect")]
-    private AudioSource audio;
+    private new AudioSource audio;
     [SerializeField]
     [Tooltip("Clip that plays when the effect is enabled")]
     private AudioClip enableClip;
@@ -32,8 +32,8 @@ public class UnbreakableModeCharaEffect : MonoBehaviour
     {
         root.SetActive(active);
         StopAllCoroutines();
-        // If the effect is turning on, start the monologue routine
-        if (active)
+        // If the effect is turning on and the game object is active in the heirarchy, start the monologue routine
+        if (active && gameObject.activeInHierarchy)
         {
             // Play the enable clip
             audio.clip = enableClip;

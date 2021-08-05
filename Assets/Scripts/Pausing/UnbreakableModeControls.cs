@@ -50,6 +50,7 @@ public class UnbreakableModeControls
 
         // Setup toggle callback
         toggle.onValueChanged.AddListener(ToggleUnbreakableMode);
+        toggle.isOn = PlayerHealth.unbreakable;
 
         charaEffect.Start();
     }
