@@ -17,7 +17,7 @@ public class FightTag : MonoBehaviour
     private string playerTag;
     [SerializeField]
     [Tooltip("Ending size of the tag after it has been picked up")]
-    private Vector3 endingSize;
+    private float endingSizeScale;
 
     [Header("Colors")]
 
@@ -38,7 +38,10 @@ public class FightTag : MonoBehaviour
     private SpriteRenderer sprite;
     [SerializeField]
     [Tooltip("Slider that shows how long the fight tag has left")]
-    private GameObject sliderObject;
+    private Slider slider;
+    [SerializeField]
+    [Tooltip("Reference to the image that displays the slider fill")]
+    private Image sliderFill;
     [SerializeField]
     [Tooltip("Reference the to box collider on the tag")]
     private new BoxCollider2D collider2D;
@@ -63,12 +66,11 @@ public class FightTag : MonoBehaviour
 
     private Vector3 startSize;
     private Coroutine lifetimeRoutine;
-    private Slider slider;
 
     private void Start()
     {
-        startSize = transform.localScale;
-        slider = sliderObject.GetComponent<Slider>();
+        startSize = sprite.transform.localScale;
+        sliderFill.color = new Color(startColor.r, startColor.g, startColor.b, 0.3f);
 
         SetColor(startColor);
         lifetimeRoutine = StartCoroutine(LifetimeRoutine());
@@ -94,7 +96,7 @@ public class FightTag : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag(playerTag))
+        if(collision.gameObject.CompareTagInParent(playerTag))
         {
             StartCoroutine(CollectRoutine());
         }
@@ -110,7 +112,7 @@ public class FightTag : MonoBehaviour
         StopCoroutine(lifetimeRoutine);
 
         // Disable the slider object so that we do not see it anymore
-        sliderObject.SetActive(false);
+        slider.gameObject.SetActive(false);
         // Disable collider so that player cannot re-enter after collecting
         collider2D.enabled = false;
 
@@ -120,7 +122,7 @@ public class FightTag : MonoBehaviour
         // Update the size in sync with the algorithm
         UnityAction<float> updateSize = t =>
         {
-            transform.localScale = Vector3.Lerp(startSize, endingSize, t);
+            sprite.transform.localScale = Vector3.Lerp(startSize, startSize * endingSizeScale, t);
         };
         yield return CoroutineModule.LerpForTime(collectTime, updateSize);
 

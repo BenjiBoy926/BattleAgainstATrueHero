@@ -82,7 +82,7 @@ public class PlayerDecoy : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag(playerTag).transform;
 
         // Set the size of the decoy to have the same size as the player collider
-        Collider2D playerCollider = playerTransform.GetComponent<Collider2D>();
+        Collider2D playerCollider = playerTransform.GetComponentInChildren<Collider2D>();
         Vector2 min = Camera.main.WorldToScreenPoint(playerCollider.bounds.min);
         Vector2 max = Camera.main.WorldToScreenPoint(playerCollider.bounds.max);
         rectTransform.sizeDelta = max - min;

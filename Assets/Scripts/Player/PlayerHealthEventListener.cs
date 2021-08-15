@@ -24,9 +24,11 @@ public class PlayerHealthEventListener : MonoBehaviour
     private void Awake()
     {
         GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+
         // Add the listener for the death event
         PlayerHealth health = player.GetComponent<PlayerHealth>();
         health.deathEvent.AddListener(deathEvent.Invoke);
+
         // Add listeners for the unbreakable events
         PlayerHealthEffects healthEffects = player.GetComponent<PlayerHealthEffects>();
         healthEffects.unbreakableTriggerStartEvent.AddListener(unbreakableTriggerStartEvent.Invoke);

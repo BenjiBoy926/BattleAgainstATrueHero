@@ -9,9 +9,11 @@ using TMPro;
 
 using DG.Tweening;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerHealthEffects : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("Reference to the sprite renderer used to create the player heart costume")]
+    private new SpriteRenderer renderer;
     [SerializeField]
     [TagSelector]
     [Tooltip("Tag of the object that acts as the player's decoy so the player looks like they are in front of the black overlay")]
@@ -57,12 +59,10 @@ public class PlayerHealthEffects : MonoBehaviour
     [Tooltip("Event invoked when the unbreakable trigger effect ends")]
     public UnityEvent unbreakableTriggerEndEvent;
 
-    private new SpriteRenderer renderer;
     private PlayerDecoy decoy;
 
     private void Awake()
     {
-        renderer = GetComponent<SpriteRenderer>();
         decoy = GameObject.FindGameObjectWithTag(decoyTag).GetComponent<PlayerDecoy>();
     }
 

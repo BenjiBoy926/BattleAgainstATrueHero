@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a245b4839dfa0284282e2f1977f751e9, type: 3}
+  m_Name: UndertaleStyleTextSettings
+  m_EditorClassIdentifier: 
+  characterRoster:
+  - characterName: Sans
+    fonts: []
+    voiceClips:
+    - {fileID: 8300000, guid: 65ef629d1e79b2f44b76890bf77bcd09, type: 3}
+    - {fileID: 8300000, guid: a2dd97459a9f9fe4aa2c0d66ef47692c, type: 3}
+    animationTriggers: []
+    faces: []
+    poses: []
+  - characterName: Chara
+    fonts:
+    - {fileID: 11400000, guid: 05426ba5b8900b44ba8f027c290e2bae, type: 2}
+    voiceClips: []
+    animationTriggers: []
+    faces:
+    - {fileID: 21300000, guid: c3b411820eb4bea41aac0fce8427819e, type: 3}
+    poses:
+    - {fileID: 21300000, guid: 3b8eead67619f6d4db8452ba0535b99a, type: 3}
+    - {fileID: 21300000, guid: 9cf0fee738fc5204eb294bf437038466, type: 3}
+    - {fileID: 21300000, guid: 451dab7acf3e42e42a82fdd7b2975350, type: 3}
+  textSpeeds:
+  - 0.1
+  - 0.2
+  - 0.3
+  readTime: 1
+  advanceButtonName: Submit

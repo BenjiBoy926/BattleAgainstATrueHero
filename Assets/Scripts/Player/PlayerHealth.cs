@@ -87,6 +87,8 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
     }
     // Counts the number of times that unbreakable mode has triggered during this fight
     public static int unbreakableTriggerCounter { get; private set; }
+    // Count the number of times that the player has died
+    public static int deathCount { get; private set; }
 
     private void Awake()
     {
@@ -164,6 +166,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         else
         {
             // Die!
+            deathCount++;
             _deathEvent.Invoke();
             effects.DeathEffect();
         }
