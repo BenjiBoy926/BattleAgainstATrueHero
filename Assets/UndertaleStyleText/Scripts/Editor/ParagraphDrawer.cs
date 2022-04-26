@@ -6,7 +6,7 @@ using UnityEditor;
 namespace UndertaleStyleText.Editor
 {
     //[CustomPropertyDrawer(typeof(Paragraph))]
-    public class ParagraphPropertyDrawer : PropertyDrawer
+    public class ParagraphDrawer : PropertyDrawer
     {
         private const int maxCharacters = 20;
 

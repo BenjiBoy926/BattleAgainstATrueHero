@@ -15,8 +15,8 @@ namespace UndertaleStyleText
         public bool Skip { get; private set; }
 
         [SerializeField]
-        [Tooltip("Set the speed of the text")]
-        private Settings.TextSpeed speed;
+        [Tooltip("Set the delay time between each character reveal")]
+        private TextDelay delay;
         [SerializeField]
         [Tooltip("If true, the text advancement is affected by the current timescale. " +
             "If false, the text advances at the defined speed irrespective of timescale")]
@@ -27,7 +27,7 @@ namespace UndertaleStyleText
 
         // Return a wait command that either waits until the current character is finished displaying,
         // or if auto advance is false, also additionally checks for a press of the advance button
-        public WaitUntil CharacterWait(ReaderRuntimeData data)
+        public WaitUntil CharacterWait(Button advanceButton)
         {
             // Set advance button object to its game object or null if we don't have a UI button
             float startTime = MyTime;
@@ -39,10 +39,10 @@ namespace UndertaleStyleText
             // and false if it is not time yet
             bool DetermineCharacterSkip()
             {
-                bool result = MyTime >= startTime + Settings.GetTextSpeed(speed);
+                bool result = MyTime >= startTime + delay.GetDelay();
 
                 // Return true we are not auto advancing and the advance button was clicked
-                if (!autoAdvance && GetAdvanceButton(data))
+                if (!autoAdvance && GetAdvanceButton(advanceButton))
                 {
                     result = true;
                     Skip = true;
@@ -56,7 +56,7 @@ namespace UndertaleStyleText
 
         // Return a wait command that waits until the player is finished reading the finished text
         // For auto advance, we wait for the read time, for non auto advance we wait for the button to be pressed
-        public WaitUntil ReadWait(ReaderRuntimeData data)
+        public WaitUntil ReadWait(Button advanceButton)
         {
             // Set advance button object to its game object or null if we don't have a UI button
             float startTime = MyTime;
@@ -66,15 +66,16 @@ namespace UndertaleStyleText
                 // If we are auto advancing, return true when the read time has passed
                 return autoAdvance && MyTime >= startTime + Settings.ReadTime ||
                     // Or, if we are not auto advancing, then wait for the advance button to be pressed
-                    !autoAdvance && GetAdvanceButton(data);
+                    !autoAdvance && GetAdvanceButton(advanceButton);
             }
 
             return new WaitUntil(DetermineReadFinished);
         }
 
-        public bool GetAdvanceButton(ReaderRuntimeData data)
+        public bool GetAdvanceButton(Button advanceButton)
         {
-            return (Input.GetButtonDown(Settings.AdvanceButtonName) || Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == data.AdvanceButtonObject);
+            GameObject advanceButtonObject = advanceButton == null ? null : advanceButton.gameObject;
+            return (Input.GetButtonDown(Settings.AdvanceButtonName) || Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == advanceButtonObject);
         }
     }
 }

@@ -38,10 +38,10 @@ namespace UndertaleStyleText
         [Tooltip("List of still sprites for the character's body poses")]
         private Sprite[] poses;
 
-        public TMP_FontAsset GetFont(int index) => fonts[index];
-        public AudioClip GetVoiceClip(int index) => voiceClips[index];
-        public string GetAnimationTrigger(int index) => animationTriggers[index];
-        public Sprite GetFace(int index) => faces[index];
-        public Sprite GetPose(int index) => poses[index];
+        public TMP_FontAsset GetFont(int index) => fonts.GetValueOrDefault(index);
+        public AudioClip GetVoiceClip(int index) => voiceClips.GetValueOrDefault(index);
+        public string GetAnimationTrigger(int index) => animationTriggers.GetValueOrDefault(index);
+        public Sprite GetFace(int index) => faces.GetValueOrDefault(index);
+        public Sprite GetPose(int index) => poses.GetValueOrDefault(index);
     }
 }

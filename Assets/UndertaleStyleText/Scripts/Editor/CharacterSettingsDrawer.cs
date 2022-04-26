@@ -6,7 +6,7 @@ using UnityEditor;
 namespace UndertaleStyleText.Editor
 {
     [CustomPropertyDrawer(typeof(CharacterSettings))]
-    public class CharacterSettingsPropertyDrawer : PropertyDrawer
+    public class CharacterSettingsDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

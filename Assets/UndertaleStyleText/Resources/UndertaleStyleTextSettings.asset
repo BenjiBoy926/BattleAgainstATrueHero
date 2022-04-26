@@ -32,9 +32,9 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3b8eead67619f6d4db8452ba0535b99a, type: 3}
     - {fileID: 21300000, guid: 9cf0fee738fc5204eb294bf437038466, type: 3}
     - {fileID: 21300000, guid: 451dab7acf3e42e42a82fdd7b2975350, type: 3}
-  textSpeeds:
+  textDelays:
+  - 0.05
   - 0.1
   - 0.2
-  - 0.3
   readTime: 1
   advanceButtonName: Submit

@@ -22,7 +22,7 @@ namespace UndertaleStyleText
 
         [SerializeField]
         [Tooltip("Index of the character in the character roster")]
-        private int characterIndex = -1;
+        private int characterIndex;
         [SerializeField]
         [Tooltip("Index of the font to use for the character")]
         private int fontIndex;
@@ -36,31 +36,31 @@ namespace UndertaleStyleText
         [Tooltip("Index selected for the visual element")]
         private int visualElementIndex;
 
-        public void PlayVoiceClip(CharacterRuntimeData data)
+        public void PlayVoiceClip(AudioSource voiceSource)
         {
-            if(data.voiceSource != null)
+            if(voiceSource != null && VoiceClip != null)
             {
-                data.voiceSource.clip = VoiceClip;
-                data.voiceSource.Play();
+                voiceSource.clip = VoiceClip;
+                voiceSource.Play();
             }
         }
-        public void SetFont(CharacterRuntimeData data)
+        public void SetFont(TextMeshProUGUI text)
         {
-            data.text.font = Font;
+            if (Font != null) text.font = Font;
         }
-        public void SetVisualExpression(CharacterRuntimeData data)
+        public void SetVisualExpression(Animator animator, ImageOrSpriteRenderer visualRenderer)
         {
             switch(visualType)
             {
                 case VisualExpressionType.None: break;
                 case VisualExpressionType.Animation:
-                    data.animator.SetTrigger(AnimationTrigger);
+                    if (!string.IsNullOrEmpty(AnimationTrigger)) animator.SetTrigger(AnimationTrigger);
                     break;
                 case VisualExpressionType.Face:
-                    data.visualRenderer.sprite = Face;
+                    if (Face != null) visualRenderer.SetSprite(Face);
                     break;
                 case VisualExpressionType.Pose:
-                    data.visualRenderer.sprite = Pose;
+                    if (Pose != null) visualRenderer.SetSprite(Pose);
                     break;
             }
         }

@@ -7,11 +7,6 @@ namespace UndertaleStyleText
 {
     public class Settings : ScriptableObject
     {
-        public enum TextSpeed
-        {
-            Fast, Medium, Slow
-        }
-
         private static Settings instance;
         private static Settings Instance
         {
@@ -25,7 +20,7 @@ namespace UndertaleStyleText
                     // If instance is still null after load, throw an exception
                     if (instance == null)
                     {
-                        throw new MissingReferenceException("Cannot find the undertale style text settings object");
+                        throw new MissingReferenceException("UndertaleStyleText.Settings: Cannot find the undertale style text settings object");
                     }
                 }
                 return instance;
@@ -41,7 +36,7 @@ namespace UndertaleStyleText
         private List<CharacterSettings> characterRoster;
         [SerializeField]
         [Tooltip("Different delays between the reveal of each character")]
-        private float[] textSpeeds = { 0.1f, 0.2f, 0.3f };
+        private float[] textDelays = { 0.1f, 0.2f, 0.3f };
         [SerializeField]
         [Tooltip("Default time given for a player to read a paragraph that is auto-advancing")]
         private float readTime = 1f;
@@ -54,9 +49,9 @@ namespace UndertaleStyleText
             if (index >= 0 && index < Instance.characterRoster.Count) return Instance.characterRoster[index];
             else return null;
         }
-        public static float GetTextSpeed(TextSpeed speed)
+        public static float GetTextDelay(TextDelayLevel level)
         {
-            return Instance.textSpeeds[(int)speed];
+            return Instance.textDelays[(int)level];
         }
     }
 }

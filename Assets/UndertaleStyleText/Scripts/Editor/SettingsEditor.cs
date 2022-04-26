@@ -14,13 +14,13 @@ namespace UndertaleStyleText.Editor
 
             // Get all the properties to edit
             SerializedProperty characterRoster = serializedObject.FindProperty(nameof(characterRoster));
-            SerializedProperty textSpeeds = serializedObject.FindProperty(nameof(textSpeeds));
+            SerializedProperty textDelays = serializedObject.FindProperty(nameof(textDelays));
             SerializedProperty readTime = serializedObject.FindProperty(nameof(readTime));
             SerializedProperty advanceButtonName = serializedObject.FindProperty(nameof(advanceButtonName));
 
             // Edit all of the properties
             EditorGUILayout.PropertyField(characterRoster);
-            LayoutUtility.ArrayOnEnumField<Settings.TextSpeed>(textSpeeds);
+            LayoutUtility.ArrayOnEnumField<TextDelayLevel>(textDelays);
             EditorGUILayout.PropertyField(readTime);
             EditorGUILayout.PropertyField(advanceButtonName);
 

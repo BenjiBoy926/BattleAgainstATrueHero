@@ -7,11 +7,11 @@ using UnityEditor;
 namespace UndertaleStyleText.Editor
 {
     [CustomPropertyDrawer(typeof(CharacterExpression))]
-    public class CharacterExpressionPropertyDrawer : PropertyDrawer
+    public class CharacterExpressionDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            Utility.CharacterExpressionPropertyField(position, property, true);
+            Utility.CharacterExpressionPropertyField(position, property, label);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -27,9 +27,9 @@ namespace UndertaleStyleText.Editor
             if (characterIndex.isExpanded && characterSettings != null)
             {
                 // If the visual type is none, only four total controls exist
-                if (visualType.enumValueIndex == 0) height *= 3;
+                if (visualType.enumValueIndex == 0) height *= 4;
                 // If the visual type is not none then 5 controls exist
-                else height *= 4;
+                else height *= 5;
             }
 
             return height;

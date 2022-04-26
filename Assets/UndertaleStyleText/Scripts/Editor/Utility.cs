@@ -7,35 +7,32 @@ namespace UndertaleStyleText.Editor
 {
     public static class Utility
     {
-        public static int CharacterIndexPopup(Rect position, int index, bool readOnly)
+        public static void SetCharacterExpressionValues(SerializedProperty src, SerializedProperty dest)
         {
-            // If character name cannot be edited then use a label
-            if (readOnly)
-            {
-                position = EditorGUI.PrefixLabel(position, new GUIContent("Character Name"));
+            string characterIndex = nameof(characterIndex);
+            string fontIndex = nameof(fontIndex);
+            string voiceClipIndex = nameof(voiceClipIndex);
+            string visualType = nameof(visualType);
+            string visualElementIndex = nameof(visualElementIndex);
 
-                // Put index to zero for proper layout
-                int oldIndent = EditorGUI.indentLevel;
-                EditorGUI.indentLevel = 0;
+            // Copy the values from source into destination
+            dest.FindPropertyRelative(characterIndex).intValue = src.FindPropertyRelative(characterIndex).intValue;
+            dest.FindPropertyRelative(fontIndex).intValue = src.FindPropertyRelative(fontIndex).intValue;
+            dest.FindPropertyRelative(voiceClipIndex).intValue = src.FindPropertyRelative(voiceClipIndex).intValue;
+            dest.FindPropertyRelative(visualType).enumValueIndex = src.FindPropertyRelative(visualType).enumValueIndex;
+            dest.FindPropertyRelative(visualElementIndex).intValue = src.FindPropertyRelative(visualElementIndex).intValue;
+        }
 
-                // If the index is still below zero, we know that no character name has been selected
-                if (index < 0)
-                {
-                    EditorGUI.LabelField(position, "Nothing selected");
-                } 
-                else // If the index is valid then display the character's name as a label
-                {
-                    EditorGUI.LabelField(position, Settings.CharacterNames[index]);
-                }
+        public static void SetReaderSettingsValues(SerializedProperty src, SerializedProperty dest)
+        {
+            string useCurrentTimescale = nameof(useCurrentTimescale);
+            string autoAdvance = nameof(autoAdvance);
 
-                EditorGUI.indentLevel = oldIndent;
-            }
-            else // If character name can be edited then use a popup
-            {
-                index = Popup(position, index, Settings.CharacterNames, new GUIContent("Character Name"));
-            }
-
-            return index;
+            // Copy the values from source into destination
+            dest.FindPropertyRelative("delay.enumValueIndex").intValue = src.FindPropertyRelative("delay.enumValueIndex").intValue;
+            dest.FindPropertyRelative("delay.customDelay").floatValue = src.FindPropertyRelative("delay.customDelay").floatValue;
+            dest.FindPropertyRelative(useCurrentTimescale).boolValue = src.FindPropertyRelative(useCurrentTimescale).boolValue;
+            dest.FindPropertyRelative(autoAdvance).boolValue = src.FindPropertyRelative(autoAdvance).boolValue;
         }
 
         public static int Popup(Rect position, int index, string[] values, GUIContent label)
@@ -64,7 +61,7 @@ namespace UndertaleStyleText.Editor
             return index;
         }
 
-        public static void CharacterExpressionPropertyField(Rect position, SerializedProperty property, bool characterNameReadOnly)
+        public static void CharacterExpressionPropertyField(Rect position, SerializedProperty property, GUIContent label)
         {
             SerializedProperty characterIndex = property.FindPropertyRelative("characterIndex");
             SerializedProperty fontIndex = property.FindPropertyRelative("fontIndex");
@@ -74,7 +71,7 @@ namespace UndertaleStyleText.Editor
 
             // Set the height to the height for only one control
             position.height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-            characterIndex.intValue = CharacterIndexPopup(position, characterIndex.intValue, characterNameReadOnly);
+            characterIndex.intValue = Popup(position, characterIndex.intValue, Settings.CharacterNames, label);
             // Layout a foldout
             characterIndex.isExpanded = EditorGUI.Foldout(position, characterIndex.isExpanded, GUIContent.none);
             position.y += position.height;
@@ -92,6 +89,12 @@ namespace UndertaleStyleText.Editor
                 // Layout the voice clip
                 voiceClipIndex.intValue = Popup(position, voiceClipIndex.intValue, characterSettings.VoiceClipNames, new GUIContent("Voice Clip"));
                 position.y += position.height;
+                // Layout the visual type property
+                EditorGUI.PropertyField(position, visualType);
+                position.y += position.height;
+
+                // Increase indent for fields dependent on previous
+                EditorGUI.indentLevel++;
 
                 // Switch the editing based off of 
                 switch(visualType.enumValueIndex)
@@ -108,6 +111,8 @@ namespace UndertaleStyleText.Editor
                         break;
                 }
 
+                // Restore original indent
+                EditorGUI.indentLevel--;
                 EditorGUI.indentLevel--;
             }
         }
