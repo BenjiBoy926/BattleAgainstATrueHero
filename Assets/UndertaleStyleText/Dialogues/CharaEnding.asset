@@ -40,7 +40,7 @@ MonoBehaviour:
       autoAdvance: 0
   - paragraph: 
     expression:
-      characterIndex: 0
+      characterIndex: 1
       fontIndex: 0
       voiceClipIndex: 0
       visualType: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
   - paragraph: 
     expression:
       characterIndex: 0
-      fontIndex: 0
+      fontIndex: -1
       voiceClipIndex: 0
       visualType: 0
       visualElementIndex: 0

@@ -25,7 +25,20 @@ MonoBehaviour:
     useCurrentTimescale: 1
     autoAdvance: 0
   paragraphs:
-  - paragraph: heya
+  - text: heya
+    expression:
+      characterIndex: 0
+      fontIndex: -1
+      voiceClipIndex: 0
+      visualType: 3
+      visualElementIndex: -1
+    reader:
+      delay:
+        enumValueIndex: 1
+        customDelay: 0
+      useCurrentTimescale: 1
+      autoAdvance: 0
+  - text: you've been busy, huh?
     expression:
       characterIndex: 0
       fontIndex: -1

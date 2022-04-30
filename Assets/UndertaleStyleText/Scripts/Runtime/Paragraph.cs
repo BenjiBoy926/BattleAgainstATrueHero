@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-
 using TMPro;
-
 
 namespace UndertaleStyleText
 {
     [System.Serializable]
     public class Paragraph
     {
-        // Public access to the character's expression
+        public string Text => text;
         public CharacterExpression Expression => expression;
 
         [SerializeField]
         [TextArea(3, 10)]
         [Tooltip("Text that the character speaks")]
-        private string paragraph;
+        [FormerlySerializedAs("paragraph")]
+        private string text;
         [SerializeField]
         [Tooltip("Reference to the data on the character speaking this paragraph")]
         private CharacterExpression expression;
@@ -33,7 +33,7 @@ namespace UndertaleStyleText
             expression.SetFont(references.text);
             expression.SetVisualExpression(references.animator, references.visualRenderer);
 
-            foreach (char c in paragraph)
+            foreach (char c in text)
             {
                 // Add the character to the text
                 references.text.text += c;
@@ -45,7 +45,7 @@ namespace UndertaleStyleText
                 // If the reader says to skip, then skip
                 if (reader.Skip)
                 {
-                    references.text.text = paragraph;
+                    references.text.text = text;
                     expression.PlayVoiceClip(references.voiceSource);
                     // Wait a frame to prevent the ReadWait immediately returning true
                     yield return null;

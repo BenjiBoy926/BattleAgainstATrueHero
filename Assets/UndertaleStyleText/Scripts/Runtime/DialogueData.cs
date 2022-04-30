@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace UndertaleStyleText
 {
     [CreateAssetMenu(fileName = "Dialogue Data", menuName = "Undertale Style Text/Dialogue Data")]
     public class DialogueData : ScriptableObject
     {
+        public IReadOnlyList<Paragraph> Paragraphs => paragraphs;
+
         [SerializeField]
         [Tooltip("Default character expression for each new paragraph")]
         private CharacterExpression defaultExpression;
@@ -19,14 +22,17 @@ namespace UndertaleStyleText
 
         // To say the dialogue we need a dictionary mapping the name of the character
         // to the component references for that character
-        public IEnumerator SayDialogue(Dictionary<string, CharacterReferences> references)
+        public IEnumerator SayDialogue(Dictionary<string, CharacterReferences> references, ParagraphEvents[] events)
         {
-            foreach (Paragraph p in paragraphs)
+            for (int i = 0; i < paragraphs.Count; i++)
             {
-                // Get the name of the character who is saying this paragraph
+                events[i].StartEvent.Invoke();
+
+                Paragraph p = paragraphs[i];
                 string character = p.Expression.CharacterSettings.CharacterName;
-                // Give the paragraph the references on the character
                 yield return p.SayParagraph(references[character]);
+
+                events[i].EndEvent.Invoke();
             }
         }
     }

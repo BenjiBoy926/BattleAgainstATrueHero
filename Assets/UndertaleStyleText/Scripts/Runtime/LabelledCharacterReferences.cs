@@ -7,6 +7,7 @@ namespace UndertaleStyleText
     [System.Serializable]
     public class LabelledCharacterReferences
     {
+        public string CharacterName => characterName;
         public CharacterReferences References => references;
 
         [SerializeField]
