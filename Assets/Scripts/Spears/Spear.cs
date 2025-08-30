@@ -89,10 +89,6 @@ public class Spear : MonoBehaviour, IMusicBeatListener
     private IEnumerator Rotate(MusicCursor cursor)
     {
         yield return rb2D.Get(this).RotateOverTime(720f, cursor.BeatsToSeconds(1f), RotationDirection.Clockwise);
-
-        // Set the direction
-        transform.up = directionInfo.GetDirection(rb2D.Get(this).position);
-        rb2D.Get(this).rotation = transform.rotation.eulerAngles.z;
     }
 
     // Set the warning of the spear using a line renderer showing the spear's intended path

@@ -309,7 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8043668888218583224}
   - component: {fileID: 480518191225971928}
-  - component: {fileID: 3916780877496432027}
+  - component: {fileID: 3565984343832605010}
   m_Layer: 0
   m_Name: Costume
   m_TagString: Untagged
@@ -384,8 +384,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3916780877496432027
-BoxCollider2D:
+--- !u!60 &3565984343832605010
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -426,9 +426,19 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.6}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.27646762, y: -0.06554529}
+      - {x: 0.2825799, y: 0.20806706}
+      - {x: 0.17427434, y: 0.2805615}
+      - {x: 0.064691156, y: 0.2439736}
+      - {x: -0.0021182587, y: 0.1332029}
+      - {x: -0.06577283, y: 0.2402518}
+      - {x: -0.17796099, y: 0.28882042}
+      - {x: -0.2765237, y: 0.20706473}
+      - {x: -0.2776647, y: -0.074566886}
+      - {x: 0.00070647337, y: -0.29114383}
+  m_UseDelaunayMesh: 0
 --- !u!1 &3647585379493066007
 GameObject:
   m_ObjectHideFlags: 0
