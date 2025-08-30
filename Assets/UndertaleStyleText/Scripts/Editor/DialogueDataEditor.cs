@@ -10,6 +10,7 @@ namespace UndertaleStyleText.Editor
     {
         public override void OnInspectorGUI()
         {
+            serializedObject.Update();
             SerializedProperty defaultExpression = serializedObject.FindProperty(nameof(defaultExpression));
             SerializedProperty defaultReader = serializedObject.FindProperty(nameof(defaultReader));
             SerializedProperty paragraphs = serializedObject.FindProperty(nameof(paragraphs));
@@ -35,6 +36,7 @@ namespace UndertaleStyleText.Editor
                     Utility.SetReaderSettingsValues(defaultReader, reader);
                 }
             }
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

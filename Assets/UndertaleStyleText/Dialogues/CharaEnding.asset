@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: CharaEnding
   m_EditorClassIdentifier: 
   defaultExpression:
-    characterIndex: 0
-    fontIndex: -1
-    voiceClipIndex: 0
-    visualType: 0
+    characterIndex: 1
+    fontIndex: 0
+    voiceClipIndex: -1
+    visualType: 3
     visualElementIndex: 0
   defaultReader:
     delay:
@@ -25,38 +25,12 @@ MonoBehaviour:
     useCurrentTimescale: 1
     autoAdvance: 0
   paragraphs:
-  - paragraph: 
-    expression:
-      characterIndex: 0
-      fontIndex: 0
-      voiceClipIndex: 0
-      visualType: 0
-      visualElementIndex: 0
-    reader:
-      delay:
-        enumValueIndex: 0
-        customDelay: 0
-      useCurrentTimescale: 1
-      autoAdvance: 0
-  - paragraph: 
+  - text: hello
     expression:
       characterIndex: 1
       fontIndex: 0
-      voiceClipIndex: 0
-      visualType: 0
-      visualElementIndex: 0
-    reader:
-      delay:
-        enumValueIndex: 0
-        customDelay: 0
-      useCurrentTimescale: 1
-      autoAdvance: 0
-  - paragraph: 
-    expression:
-      characterIndex: 0
-      fontIndex: -1
-      voiceClipIndex: 0
-      visualType: 0
+      voiceClipIndex: -1
+      visualType: 3
       visualElementIndex: 0
     reader:
       delay:
