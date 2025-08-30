@@ -291,7 +291,7 @@ TextureImporter:
       213: -3829603784599410886
     second: undyne-the-undying_95
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -308,9 +308,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -319,9 +322,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -342,10 +345,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -357,6 +365,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -369,6 +378,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -381,6 +391,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -2412,9 +2436,105 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      undyne-the-undying_0: -7660895413596128386
+      undyne-the-undying_1: -3156688559794307779
+      undyne-the-undying_10: -8243692313836712968
+      undyne-the-undying_11: -1975975371491814779
+      undyne-the-undying_12: 3572538516452676511
+      undyne-the-undying_13: 5770217159064785858
+      undyne-the-undying_14: -4181773558771574298
+      undyne-the-undying_15: 8582641979462034377
+      undyne-the-undying_16: -2288746088723100928
+      undyne-the-undying_17: -4770540458117972609
+      undyne-the-undying_18: -4274183730883265726
+      undyne-the-undying_19: -4208103792671502698
+      undyne-the-undying_2: 1254431454094490938
+      undyne-the-undying_20: 7528811438658116370
+      undyne-the-undying_21: -8871908567482975957
+      undyne-the-undying_22: -4211375159444365766
+      undyne-the-undying_23: 2538884823830026841
+      undyne-the-undying_24: 5101608056313677907
+      undyne-the-undying_25: -3485918735563524105
+      undyne-the-undying_26: 5959486971936328810
+      undyne-the-undying_27: 1748626636075133430
+      undyne-the-undying_28: 2638977358311457163
+      undyne-the-undying_29: 7040623714614950861
+      undyne-the-undying_3: 6948647493747741537
+      undyne-the-undying_30: -8099158605082460742
+      undyne-the-undying_31: 6543139379663487366
+      undyne-the-undying_32: 624789195705437679
+      undyne-the-undying_33: -8351594483173618577
+      undyne-the-undying_34: 699654906990215816
+      undyne-the-undying_35: -2718790809549482656
+      undyne-the-undying_36: 1555847807756216445
+      undyne-the-undying_37: -7038094130077003974
+      undyne-the-undying_38: -3528589761510993529
+      undyne-the-undying_39: 1717852660491516682
+      undyne-the-undying_4: 8965688065247775854
+      undyne-the-undying_40: 3216450970075920139
+      undyne-the-undying_41: 7853547999353891929
+      undyne-the-undying_42: -5691113312851009243
+      undyne-the-undying_43: 1554075795428151866
+      undyne-the-undying_44: 8144196888085231409
+      undyne-the-undying_45: -1585241951422607587
+      undyne-the-undying_46: 5342996452566152621
+      undyne-the-undying_47: -2056506413238076713
+      undyne-the-undying_48: -952065953932785767
+      undyne-the-undying_49: 3213943296457942015
+      undyne-the-undying_5: 7062143536699128802
+      undyne-the-undying_50: -4508343989203352364
+      undyne-the-undying_51: 8691198480970522698
+      undyne-the-undying_52: -2119584431141928908
+      undyne-the-undying_53: -7998520637341924763
+      undyne-the-undying_54: -5480247695365551784
+      undyne-the-undying_55: 2677954987867604704
+      undyne-the-undying_56: -141336150081201345
+      undyne-the-undying_57: 866841235571741110
+      undyne-the-undying_58: -1964316005708862947
+      undyne-the-undying_59: 4401755298089041658
+      undyne-the-undying_6: -5481016022886222104
+      undyne-the-undying_60: -5424789435627093730
+      undyne-the-undying_61: -260678423782178872
+      undyne-the-undying_62: 2097534836340811737
+      undyne-the-undying_63: 7795274019526617602
+      undyne-the-undying_64: -8134635376077967928
+      undyne-the-undying_65: -373282253526628324
+      undyne-the-undying_66: -2553308057518340864
+      undyne-the-undying_67: -2761705798513289822
+      undyne-the-undying_68: 6096278485067512775
+      undyne-the-undying_69: -4402566449482298448
+      undyne-the-undying_7: 1758165572955422184
+      undyne-the-undying_70: -2482215997482410107
+      undyne-the-undying_71: 3448291046603192
+      undyne-the-undying_72: 8014937093666220057
+      undyne-the-undying_73: -1119225950719752433
+      undyne-the-undying_74: -1475415856359507203
+      undyne-the-undying_75: 5457259443818158310
+      undyne-the-undying_76: 3159620867337589844
+      undyne-the-undying_77: 1821984948271042482
+      undyne-the-undying_78: 755949768686665744
+      undyne-the-undying_79: 8849844164590616402
+      undyne-the-undying_8: -546310678170112972
+      undyne-the-undying_80: 457818046816504587
+      undyne-the-undying_81: 7570195168891623144
+      undyne-the-undying_82: -3686241891679096366
+      undyne-the-undying_83: -6135049682642297734
+      undyne-the-undying_84: 6424879919685148926
+      undyne-the-undying_85: -4352795903738631496
+      undyne-the-undying_86: 64461403416432145
+      undyne-the-undying_87: -3924205640056839677
+      undyne-the-undying_88: 1848051477439222506
+      undyne-the-undying_89: -5712855239804952521
+      undyne-the-undying_9: -8355859326345101738
+      undyne-the-undying_90: 2707530612771371385
+      undyne-the-undying_91: -6063698455711056044
+      undyne-the-undying_92: 3390022125030511766
+      undyne-the-undying_93: -5892421846385067763
+      undyne-the-undying_94: 2098304952744698247
+      undyne-the-undying_95: -3829603784599410886
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
