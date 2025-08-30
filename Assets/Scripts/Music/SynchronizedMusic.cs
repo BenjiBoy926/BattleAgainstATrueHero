@@ -81,8 +81,6 @@ public class SynchronizedMusic : MonoBehaviour
         // Create a brand new cursor
         cursor = new MusicCursor(info);
 
-        // Invoke music start event
-        onMusicStart.Invoke(cursor);
 
         do // while(loop)
         {
@@ -93,6 +91,9 @@ public class SynchronizedMusic : MonoBehaviour
             // Play that funky music, white boy!
             source.Get(this).clip = info.music;
             source.Get(this).Play();
+
+            // Invoke music start event
+            onMusicStart.Invoke(cursor);
 
             while (cursor.currentPhrase < (info.finalPhrase + 1))
             {
@@ -151,6 +152,6 @@ public class SynchronizedMusic : MonoBehaviour
 
     // TYPEDEFS
     // This is so that the unity event shows up in the editor
-    [System.Serializable]
+    [Serializable]
     private class MusicCursorEvent : UnityEvent<MusicCursor> { }
 }
