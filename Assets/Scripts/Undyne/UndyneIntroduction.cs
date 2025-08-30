@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -118,6 +117,7 @@ public class UndyneIntroduction : MonoBehaviour
     // Breif introduction simply has Undyne the Undying say something, then start the music
     private IEnumerator UndyneTheUndyingIntroduction()
     {
+        // "You're going to have to dance a little better than THAT"
         yield return transformMonologue.Speak();
 
         // Set undying animation

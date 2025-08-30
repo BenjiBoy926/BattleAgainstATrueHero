@@ -7,11 +7,11 @@ using UnityEngine.EventSystems;
 
 using Hellmade.Sound;
 
-public class UndertaleButton : MonoBehaviour, IPointerEnterHandler
+public class UndertaleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // Normal and highlight colors for an undertale button
-    public readonly Color normalColor = new Color(1f, 0.47f, 0f);
-    public readonly Color highlightColor = new Color(1f, 1f, 0f);
+    public readonly Color normalColor = new(1f, 0.47f, 0f);
+    public readonly Color highlightColor = new(1f, 1f, 0f);
     // Audio clips played for all buttons
     public readonly Lazy<AudioClip> hoverClip = new Lazy<AudioClip>(() => Resources.Load<AudioClip>("Audio/Select"));
     public readonly Lazy<AudioClip> clickClip = new Lazy<AudioClip>(() => Resources.Load<AudioClip>("Audio/Click"));
@@ -32,9 +32,17 @@ public class UndertaleButton : MonoBehaviour, IPointerEnterHandler
     [Tooltip("List of all graphics in the button to change color")]
     private List<Graphic> graphics;
 
+    private void OnEnable()
+    {
+        SetHoveredAppearance(EventSystem.current.currentSelectedGameObject == gameObject);
+    }
+    private void OnDisable()
+    {
+        SetHoveredAppearance(false);
+    }
+
     private void Start()
     {
-        heartGraphic.SetActive(false);
         // Button has no transition as it will be customized by this script
         button.transition = Selectable.Transition.None;
         // Play click sound when button pressed
@@ -44,15 +52,16 @@ public class UndertaleButton : MonoBehaviour, IPointerEnterHandler
         });
     }
 
-    private void Update()
-    {
-        SetHoveredAppearance(GetTargetRect().Contains(Input.mousePosition));
-    }
-
     public void OnPointerEnter(PointerEventData data)
     {
         // Play the hover audio
         EazySoundManager.PlayUISound(hoverClip.Value);
+        SetHoveredAppearance(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        SetHoveredAppearance(false);
     }
 
     // Set if the button is hovered or not using colors and swapping graphics
