@@ -64,18 +64,17 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         yield return new WaitForSeconds(appearanceTime.timeSinceLastBeat);
 
         // Setup the initial position
-        //Vector2 initialPos = positionInfo.GetInitialPosition();
-        //transform.position = initialPos;
-        rb2D.Get(this).position = positionInfo.GetInitialPosition();
+        Vector2 position = positionInfo.GetInitialPosition();
+        rb2D.Get(this).position = position;
+        transform.up = directionInfo.GetDirection(position);
+        rb2D.Get(this).rotation = transform.localEulerAngles.z;
 
         // Activate the warning
         SetWarningActive(true);
 
-        // Fade the sprite in
-        StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));
-
-        // Have the spear rotate as it appears, then enable the warning
-        StartCoroutine(Rotate(cursor));
+        float durationOfOneBeat = cursor.BeatsToSeconds(1f);
+        StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, durationOfOneBeat));
+        yield return rb2D.Get(this).RotateOverTime(720f, durationOfOneBeat, RotationDirection.Clockwise);
     }
 
     private IEnumerator Rush()
@@ -84,11 +83,6 @@ public class Spear : MonoBehaviour, IMusicBeatListener
         isRushing = true;
         rb2D.Get(this).Send(transform.up, rushSpeed);
         SetWarningActive(false);
-    }
-
-    private IEnumerator Rotate(MusicCursor cursor)
-    {
-        yield return rb2D.Get(this).RotateOverTime(720f, cursor.BeatsToSeconds(1f), RotationDirection.Clockwise);
     }
 
     // Set the warning of the spear using a line renderer showing the spear's intended path
@@ -105,7 +99,7 @@ public class Spear : MonoBehaviour, IMusicBeatListener
     private void SetLineRendererPositions()
     {
         Rigidbody2D rb = rb2D.Get(this);
-        line.Get(this).RenderRay(rb.position, directionInfo.GetDirection(rb.position), 50f);
+        line.Get(this).RenderRay(rb.position, transform.up, 50f);
     }
 
     // Fade the spear so it is invisible, then disable it
