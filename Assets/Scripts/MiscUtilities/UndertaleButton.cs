@@ -81,17 +81,4 @@ public class UndertaleButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             g.color = color;
         }
     }
-
-    private Rect GetTargetRect()
-    {
-        // Get the corners in world space
-        Vector3[] worldCorners = new Vector3[4];
-        button.targetGraphic.rectTransform.GetWorldCorners(worldCorners);
-        // Bottom left is the second item in the corners list
-        Vector2 pos = worldCorners[0];
-        // Compute the size based on the x coordinate world positions
-        Vector2 size = new Vector2(worldCorners[2].x - pos.x, worldCorners[1].y - pos.y);
-        // Return the rect
-        return new Rect(pos, size);
-    }
 }
