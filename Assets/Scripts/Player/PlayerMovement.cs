@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
             rb2D.Get(this).velocity = direction * speed;
         }
 
-        bool dashKeyboardButtonPressed = Input.GetButtonDown("Fire1");
+        bool dashKeyboardButtonPressed = Input.GetButtonDown("Jump");
         bool dashMouseButtonPressed = Input.GetButtonDown("Fire2");
         if (!IsDashing && dashKeyboardButtonPressed)
         {
