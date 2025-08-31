@@ -19,35 +19,44 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     private AnimationCurve dashCurve;
 
     // Reference to the rigidbody used to move the player
-    private CachedComponent<Rigidbody2D> rb2D = new CachedComponent<Rigidbody2D>();
-
-    // Store horizontal vertical movement input
-    // Used so that we can get input in Update but apply it in FixedUpdate
+    private readonly CachedComponent<Rigidbody2D> rb2D = new();
     private Coroutine dashRoutine;
 
-    // Update is called once per frame
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(x, y).normalized;
-        bool dashButtonPressedThisFrame = Input.GetButtonDown("Fire1");
         if (!IsDashing)
         {
-            ApplyInputs(direction, dashButtonPressedThisFrame);
+            rb2D.Get(this).velocity = direction * speed;
         }
-    }
 
-    private void ApplyInputs(Vector2 direction, bool dashButtonPressedThisFrame)
-    {
-        rb2D.Get(this).velocity = direction * speed;
-        if (dashButtonPressedThisFrame)
+        bool dashKeyboardButtonPressed = Input.GetButtonDown("Fire1");
+        bool dashMouseButtonPressed = Input.GetButtonDown("Fire2");
+        if (!IsDashing && dashKeyboardButtonPressed)
         {
-            dashRoutine = StartCoroutine(PerformDash(direction));
+            Dash(direction);
+        }
+        if (!IsDashing && dashMouseButtonPressed)
+        {
+            Dash(GetDirectionToMouse());
         }
     }
 
-    private IEnumerator PerformDash(Vector2 direction)
+    private Vector2 GetDirectionToMouse()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 positionOffset = mousePosition - rb2D.Get(this).position;
+        return positionOffset.normalized;
+    }
+
+    private void Dash(Vector2 direction)
+    {
+        dashRoutine = StartCoroutine(DashAsync(direction));
+    }
+
+    private IEnumerator DashAsync(Vector2 direction)
     {
         float startTime = Time.time;
         float elapsedTime = 0;
