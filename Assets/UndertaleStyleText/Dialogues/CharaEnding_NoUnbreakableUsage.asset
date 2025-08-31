@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33a2b350080149546946d78f7fa241d7, type: 3}
-  m_Name: CharaEnding
+  m_Name: CharaEnding_NoUnbreakableUsage
   m_EditorClassIdentifier: 
   defaultExpression:
     characterIndex: 1
@@ -25,7 +25,33 @@ MonoBehaviour:
     useCurrentTimescale: 1
     autoAdvance: 0
   paragraphs:
-  - text: hello
+  - text: Greetings.
+    expression:
+      characterIndex: 1
+      fontIndex: 0
+      voiceClipIndex: -1
+      visualType: 3
+      visualElementIndex: 0
+    reader:
+      delay:
+        enumValueIndex: 0
+        customDelay: 0
+      useCurrentTimescale: 1
+      autoAdvance: 0
+  - text: I'm impressed.
+    expression:
+      characterIndex: 1
+      fontIndex: 0
+      voiceClipIndex: -1
+      visualType: 3
+      visualElementIndex: 0
+    reader:
+      delay:
+        enumValueIndex: 0
+        customDelay: 0
+      useCurrentTimescale: 1
+      autoAdvance: 0
+  - text: I'm impressed.
     expression:
       characterIndex: 1
       fontIndex: 0

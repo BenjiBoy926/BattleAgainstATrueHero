@@ -56,14 +56,14 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
 
     // Player is invulnerable if activated invulnerability
     // or if recently hit by an attack
-    private bool invincible =>
-        invincibilityActive ||
+    private bool isInvincible =>
+        isInvincibilityTriggered ||
         Time.time < (timeSinceLastHit + invincibilityAfterHit);
     // Determine if active invincibility is active
-    private bool invincibilityActive =>
+    private bool isInvincibilityTriggered =>
         Time.time < (timeOfInvincibilityActivation + invincibilityTime);
     // Invincibility can be activated only if time exceeds time of invincibility deactivation by recharge time
-    private bool invincibilityReady =>
+    private bool isInvincibilityReadyToTrigger =>
         Time.time > (timeOfInvincibilityDeactivation + invincibilityRechargeTime);
 
     // Determines if "unbreakable mode" is active
@@ -124,12 +124,12 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
     private void TryTakeDamage()
     {
         // If current time exceeds time since last hit plus invincibility time, then take damage
-        if(!invincible)
+        if(!isInvincible)
         {
             TakeDamage();
         }
         // If we are invincible from active invincibility, tell the effects script
-        else if(invincibilityActive)
+        else if(isInvincibilityTriggered)
         {
             effects.AttackDeflectEffect();
         }
@@ -175,7 +175,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
 
     private void TryActivateInvincibility()
     {
-        if(!invincible && invincibilityReady)
+        if(!isInvincible && isInvincibilityReadyToTrigger)
         {
             ActivateInvincibility();
         }
