@@ -1098,6 +1098,7 @@ MonoBehaviour:
   speed: 5
   dashSpeed: 10
   dashDuration: 0.3
+  dashStall: 0.15
   dashCurve:
     serializedVersion: 2
     m_Curve:
@@ -1106,15 +1107,15 @@ MonoBehaviour:
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 136
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -2.7512572
-      outSlope: -2.7512572
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.06666666

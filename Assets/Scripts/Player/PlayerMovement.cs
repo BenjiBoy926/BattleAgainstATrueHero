@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     [SerializeField]
     private float dashDuration = 0.3f;
     [SerializeField]
+    private float dashStall = 0.15f;
+    [SerializeField]
     private AnimationCurve dashCurve;
 
     // Reference to the rigidbody used to move the player
@@ -21,29 +23,27 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
 
     // Store horizontal vertical movement input
     // Used so that we can get input in Update but apply it in FixedUpdate
-    private float h;
-    private float v;
-    private Vector2 move = new();
-    private bool dashButtonPressedThisFrame;
     private Coroutine dashRoutine;
 
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
-        move.Set(h, v);
-        dashButtonPressedThisFrame = Input.GetButtonDown("Fire1");
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+        Vector2 direction = new Vector2(x, y).normalized;
+        bool dashButtonPressedThisFrame = Input.GetButtonDown("Fire1");
+        if (!IsDashing)
+        {
+            ApplyInputs(direction, dashButtonPressedThisFrame);
+        }
     }
 
-    private void FixedUpdate()
+    private void ApplyInputs(Vector2 direction, bool dashButtonPressedThisFrame)
     {
-        if (IsDashing) return;
-        
-        rb2D.Get(this).Shift(move, speed);
+        rb2D.Get(this).velocity = direction * speed;
         if (dashButtonPressedThisFrame)
         {
-            dashRoutine = StartCoroutine(PerformDash(move));
+            dashRoutine = StartCoroutine(PerformDash(direction));
         }
     }
 
@@ -51,7 +51,6 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     {
         float startTime = Time.time;
         float elapsedTime = 0;
-        direction = direction.normalized;
         while (elapsedTime < dashDuration)
         {
             float t = elapsedTime / dashDuration;
@@ -60,6 +59,8 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
             yield return null;
             elapsedTime = Time.time - startTime;
         }
+        rb2D.Get(this).velocity = Vector2.zero;
+        yield return new WaitForSeconds(dashStall);
         dashRoutine = null;
     }
 
