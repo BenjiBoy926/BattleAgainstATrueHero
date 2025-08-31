@@ -105,14 +105,6 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         timeOfInvincibilityDeactivation = -invincibilityTime;
     }
 
-    private void Update()
-    {
-        if(Input.GetButtonDown("Jump"))
-        {
-            TryActivateInvincibility();
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag(hazardTag))
