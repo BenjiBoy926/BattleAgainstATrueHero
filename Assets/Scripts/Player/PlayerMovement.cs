@@ -9,10 +9,14 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     [SerializeField]
     private PlayerHealth health;
     [SerializeField]
+    private Transform costumeTransform;
+    [SerializeField]
     [Tooltip("Speed at which the player moves")]
     private float speed;
     [SerializeField]
     private float dashSpeed = 10;
+    [SerializeField]
+    private float dashSquish = 0.3f;
     [SerializeField]
     private float dashDuration = 0.3f;
     [SerializeField]
@@ -66,14 +70,35 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
         while (elapsedTime < dashDuration)
         {
             float t = elapsedTime / dashDuration;
-            float speed = dashSpeed * dashCurve.Evaluate(t);
-            rb2D.Get(this).velocity = direction * speed;
+            float curveSample = dashCurve.Evaluate(t);
+            UpdateDashVelocity(direction, curveSample);
+            UpdateDashSquish(curveSample);
             yield return null;
             elapsedTime = Time.time - startTime;
         }
-        rb2D.Get(this).velocity = Vector2.zero;
-        yield return new WaitForSeconds(dashStall);
+        yield return DashStall();
         dashRoutine = null;
+    }
+
+    private void UpdateDashVelocity(Vector2 direction, float curveSample)
+    {
+        rb2D.Get(this).velocity = curveSample * speed * direction;
+    }
+
+    private void UpdateDashSquish(float curveSample)
+    {
+        float invCurve = 1 - curveSample;
+        float scaleDecrease = (1 - dashSquish) * invCurve;
+        float y = (1 - scaleDecrease);
+        Vector3 scale = costumeTransform.localScale;
+        scale.y = y;
+        costumeTransform.localScale = scale;
+    }
+
+    private YieldInstruction DashStall()
+    {
+        rb2D.Get(this).velocity = Vector2.zero;
+        return new WaitForSeconds(dashStall);
     }
 
     public void OnMusicStart(MusicCursor cursor)

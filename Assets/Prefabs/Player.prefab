@@ -1096,8 +1096,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 2823727187616156791}
+  costumeTransform: {fileID: 8043668888218583224}
   speed: 5
   dashSpeed: 10
+  dashSquish: 0.3
   dashDuration: 0.3
   dashStall: 0.15
   dashCurve:
