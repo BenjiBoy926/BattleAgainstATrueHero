@@ -88,6 +88,7 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     {
         float startTime = Time.time;
         float elapsedTime = 0;
+        costumeTransform.right = direction;
         while (elapsedTime < dashDuration)
         {
             float t = elapsedTime / dashDuration;
@@ -117,6 +118,7 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
 
     private IEnumerator DashStall()
     {
+        costumeTransform.right = Vector2.right;
         rb2D.Get(this).velocity = Vector2.zero;
         yield return new WaitForSeconds(dashStall);
     }
