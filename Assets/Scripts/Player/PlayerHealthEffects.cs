@@ -1,13 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using UnityEngine.Events;
-
-using TMPro;
-
-using DG.Tweening;
 
 public class PlayerHealthEffects : MonoBehaviour
 {
@@ -21,9 +14,6 @@ public class PlayerHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the script that manages the player UI")]
     private PlayerHealthUI healthUi;
-    [SerializeField]
-    [Tooltip("Script that manages the player invincibility UI")]
-    private PlayerInvincibilityUI invincibilityUI;
 
     [Header("Take Damage Effects")]
 
@@ -36,21 +26,6 @@ public class PlayerHealthEffects : MonoBehaviour
     [SerializeField]
     [Tooltip("Sound effect that plays when the player takes damage")]
     private AudioClip damageClip;
-
-    [Header("Invincibility Effects")]
-
-    [SerializeField]
-    [Tooltip("Source to play invincibility effects")]
-    private AudioSource invincibilityAudio;
-    [SerializeField]
-    [Tooltip("Deflect sound effect")]
-    private AudioClip deflectClip;
-    [SerializeField]
-    [Tooltip("Sound effect for healing")]
-    private AudioClip healClip;
-    [SerializeField]
-    [Tooltip("Effect played when the player powers down")]
-    private AudioClip powerDownClip;
 
     [Header("Unbreakable Effects")]
 
@@ -120,44 +95,6 @@ public class PlayerHealthEffects : MonoBehaviour
     public void DeathEffect()
     {
         decoy.DeathEffect();
-    }
-
-    public void ActivateInvincibilityEffect()
-    {
-        // Play a sound!
-        invincibilityAudio.clip = deflectClip;
-        invincibilityAudio.Play();
-
-        // Activate the UI
-        invincibilityUI.Activate();
-    }
-
-    public void DeactivateInvincibilityEffect(float rechargeTime)
-    {
-        // Play a sound
-        invincibilityAudio.clip = powerDownClip;
-        invincibilityAudio.Play();
-
-        // This function updates the slider
-        invincibilityUI.Recharge(rechargeTime);
-    }
-
-    public void AttackDeflectEffect()
-    {
-        // Play a sound!
-        invincibilityAudio.clip = deflectClip;
-        invincibilityAudio.Play();
-
-        invincibilityUI.StartDeflect();
-    }
-
-    public void InvincibilityReadyEffect()
-    {
-        // Play a sound!  Or, you know, SOMETHING
-        invincibilityAudio.clip = healClip;
-        invincibilityAudio.Play();
-
-        invincibilityUI.Ready();
     }
 
     private IEnumerator Flicker(float invincibleTime)
