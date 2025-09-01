@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     private float dashStall = 0.15f;
     [SerializeField]
     private AnimationCurve dashCurve;
+    [SerializeField]
+    private ParticleSystem dashParticle;
 
     // Reference to the rigidbody used to move the player
     private readonly CachedComponent<Rigidbody2D> rb2D = new();
@@ -90,6 +92,8 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
         float elapsedTime = 0;
         float angle = GetDashRotationAngle(direction);
         costumeTransform.localEulerAngles = new(0, 0, angle);
+        dashParticle.transform.right = direction;
+        dashParticle.Play();
         while (elapsedTime < dashDuration)
         {
             float t = elapsedTime / dashDuration;
