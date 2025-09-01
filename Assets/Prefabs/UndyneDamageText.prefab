@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 315684056907774408}
   - component: {fileID: 315684056907774407}
-  - component: {fileID: 315684056907774406}
   - component: {fileID: 315684056907774405}
   - component: {fileID: 8928661766829698313}
   m_Layer: 0
@@ -83,14 +82,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &315684056907774406
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 315684056907774404}
-  m_CullTransparentMesh: 0
 --- !u!114 &315684056907774405
 MonoBehaviour:
   m_ObjectHideFlags: 0

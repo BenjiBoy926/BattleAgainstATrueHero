@@ -70,7 +70,7 @@ public class UndyneIntroduction : MonoBehaviour
         overlay = overlayObject.GetComponent<Image>();
 
         // If this is the player's first attempt, give them the long introduction
-        if(PlayerHealth.deathCount == 0)
+        if (PlayerHealth.deathCount == 0 && !Application.isEditor)
         {
             StartCoroutine(LongIntroduction());
         }

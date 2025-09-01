@@ -88,7 +88,8 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     {
         float startTime = Time.time;
         float elapsedTime = 0;
-        costumeTransform.right = direction;
+        float angle = GetDashRotationAngle(direction);
+        costumeTransform.localEulerAngles = new(0, 0, angle);
         while (elapsedTime < dashDuration)
         {
             float t = elapsedTime / dashDuration;
@@ -102,6 +103,20 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
         dashRoutine = null;
     }
 
+    private static float GetDashRotationAngle(Vector2 direction)
+    {
+        float angle = Vector2.SignedAngle(Vector2.right, direction);
+        if (angle < -90)
+        {
+            angle += 180;
+        }
+        if (angle > 90)
+        {
+            angle -= 180;
+        }
+        return angle;
+    }
+
     private void UpdateDashVelocity(Vector2 direction, float curveSample)
     {
         rb2D.Get(this).velocity = curveSample * dashSpeed * direction;
@@ -110,15 +125,18 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     private void UpdateDashSquish(float curveSample)
     {
         float scaleDecrease = (1 - dashSquish) * curveSample;
-        float y = (1 - scaleDecrease);
+        float x = 1 + scaleDecrease;
+        float y = 1 - scaleDecrease;
         Vector3 scale = costumeTransform.localScale;
+        scale.x = x; 
         scale.y = y;
         costumeTransform.localScale = scale;
     }
 
     private IEnumerator DashStall()
     {
-        costumeTransform.right = Vector2.right;
+        costumeTransform.localRotation = Quaternion.identity;
+        costumeTransform.localScale = Vector3.one;
         rb2D.Get(this).velocity = Vector2.zero;
         yield return new WaitForSeconds(dashStall);
     }
