@@ -121,7 +121,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
             TakeDamage();
         }
         // If we are invincible from active invincibility, tell the effects script
-        else if(isInvincibilityTriggered)
+        else if (isInvincibilityTriggered)
         {
             effects.AttackDeflectEffect();
         }
@@ -170,35 +170,6 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         timeOfInvincibilityActivation = Time.time;
         invincibilityDuration = duration;
         _invincibilityActivatedEvent.Invoke();
-
-        // Let the effects know we have activated invincibility
-        effects.ActivateInvincibilityEffect();
-
-        // Invoke deactivation
-        CancelInvoke();
-        Invoke(nameof(DeactivateInvincibility), invincibilityDuration);
-    }
-
-    private void DeactivateInvincibility()
-    {
-        // Set time of invincibility deactivation
-        timeOfInvincibilityDeactivation = Time.time;
-        _invincibilityDeactivatedEvent.Invoke();
-
-        // Let the effects know we have deactivated invincibility
-        effects.DeactivateInvincibilityEffect(invincibilityRechargeTime);
-
-        CancelInvoke();
-        Invoke(nameof(InvincibilityReady), invincibilityRechargeTime);
-    }
-
-    private void InvincibilityReady()
-    {
-        // Invoke invincibility ready event
-        _invincibilityReadyEvent.Invoke();
-
-        // Let the effects know that invincibility is ready to be activated
-        effects.InvincibilityReadyEffect();
     }
 
     public void OnMusicStart(MusicCursor cursor)
