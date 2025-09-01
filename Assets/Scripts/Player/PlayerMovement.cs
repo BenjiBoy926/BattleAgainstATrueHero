@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
 
     // Reference to the rigidbody used to move the player
     private readonly CachedComponent<Rigidbody2D> rb2D = new();
+    private Vector2 lastNonZeroInput;
     private Coroutine dashRoutine;
 
     void Update()
@@ -33,6 +34,10 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(x, y).normalized;
+        if (!Mathf.Approximately(direction.sqrMagnitude, 0))
+        {
+            lastNonZeroInput = direction;
+        }
         if (!IsDashing)
         {
             rb2D.Get(this).velocity = direction * speed;
@@ -40,14 +45,30 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
 
         bool dashKeyboardButtonPressed = Input.GetButtonDown("Jump");
         bool dashMouseButtonPressed = Input.GetButtonDown("Fire2");
-        if (!IsDashing && dashKeyboardButtonPressed)
+        bool dashButtonPressed = dashKeyboardButtonPressed || dashMouseButtonPressed;
+        if (!IsDashing && dashButtonPressed)
         {
-            Dash(direction);
+            Vector2 dashDirection = GetDashDirection(direction, dashMouseButtonPressed);
+            Dash(dashDirection);
         }
-        if (!IsDashing && dashMouseButtonPressed)
+    }
+
+    private Vector2 GetDashDirection(Vector2 lastInput, bool isMouseButtonPressed)
+    {
+        if (isMouseButtonPressed)
         {
-            Dash(GetDirectionToMouse());
+            return GetDashDirection(GetDirectionToMouse());
         }
+        else
+        {
+            return GetDashDirection(lastInput);
+        }
+    }
+
+    private Vector2 GetDashDirection(Vector2 lastInput)
+    {
+        bool isZero = Mathf.Approximately(lastInput.sqrMagnitude, 0);
+        return isZero ? lastNonZeroInput : lastInput;
     }
 
     private Vector2 GetDirectionToMouse()
@@ -94,10 +115,10 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
         costumeTransform.localScale = scale;
     }
 
-    private YieldInstruction DashStall()
+    private IEnumerator DashStall()
     {
         rb2D.Get(this).velocity = Vector2.zero;
-        return new WaitForSeconds(dashStall);
+        yield return new WaitForSeconds(dashStall);
     }
 
     public void OnMusicStart(MusicCursor cursor)
