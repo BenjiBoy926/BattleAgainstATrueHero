@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     private bool IsDashing => dashRoutine != null;
 
     [SerializeField]
+    private PlayerHealth health;
+    [SerializeField]
     [Tooltip("Speed at which the player moves")]
     private float speed;
     [SerializeField]
@@ -54,6 +56,7 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     private void Dash(Vector2 direction)
     {
         dashRoutine = StartCoroutine(DashAsync(direction));
+        health.ActivateInvincibility(dashDuration);
     }
 
     private IEnumerator DashAsync(Vector2 direction)

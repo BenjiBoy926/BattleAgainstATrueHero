@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
     private float invincibilityAfterHit;
     [SerializeField]
     [Tooltip("Time that the player remains invulnerable when activating temporary invulnerability")]
-    private float invincibilityTime;
+    private float invincibilityDuration;
     [SerializeField]
     [Tooltip("Time it takes for invincibility activation to recharge")]
     private float invincibilityRechargeTime;
@@ -61,7 +61,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         Time.time < (timeSinceLastHit + invincibilityAfterHit);
     // Determine if active invincibility is active
     private bool isInvincibilityTriggered =>
-        Time.time < (timeOfInvincibilityActivation + invincibilityTime);
+        Time.time < (timeOfInvincibilityActivation + invincibilityDuration);
     // Invincibility can be activated only if time exceeds time of invincibility deactivation by recharge time
     private bool isInvincibilityReadyToTrigger =>
         Time.time > (timeOfInvincibilityDeactivation + invincibilityRechargeTime);
@@ -101,8 +101,8 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         effects.Setup(health);
 
         timeSinceLastHit = -invincibilityAfterHit;
-        timeOfInvincibilityActivation = -invincibilityTime;
-        timeOfInvincibilityDeactivation = -invincibilityTime;
+        timeOfInvincibilityActivation = -invincibilityDuration;
+        timeOfInvincibilityDeactivation = -invincibilityDuration;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -164,19 +164,11 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
         }
     }
 
-
-    private void TryActivateInvincibility()
-    {
-        if(!isInvincible && isInvincibilityReadyToTrigger)
-        {
-            ActivateInvincibility();
-        }
-    }
-
-    private void ActivateInvincibility()
+    public void ActivateInvincibility(float duration)
     {
         // Set time of invincibility activation
         timeOfInvincibilityActivation = Time.time;
+        invincibilityDuration = duration;
         _invincibilityActivatedEvent.Invoke();
 
         // Let the effects know we have activated invincibility
@@ -184,7 +176,7 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
 
         // Invoke deactivation
         CancelInvoke();
-        Invoke(nameof(DeactivateInvincibility), invincibilityTime);
+        Invoke(nameof(DeactivateInvincibility), invincibilityDuration);
     }
 
     private void DeactivateInvincibility()

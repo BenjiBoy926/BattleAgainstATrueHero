@@ -1095,6 +1095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b51e38bde723c4e9f93f3449459c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 2823727187616156791}
   speed: 5
   dashSpeed: 10
   dashDuration: 0.3
@@ -1139,7 +1140,7 @@ MonoBehaviour:
   health: 56
   damagePerHit: 8
   invincibilityAfterHit: 2
-  invincibilityTime: 2
+  invincibilityDuration: 0
   invincibilityRechargeTime: 3
   _deathEvent:
     m_PersistentCalls:
