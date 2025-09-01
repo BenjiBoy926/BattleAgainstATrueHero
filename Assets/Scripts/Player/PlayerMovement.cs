@@ -82,13 +82,12 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
 
     private void UpdateDashVelocity(Vector2 direction, float curveSample)
     {
-        rb2D.Get(this).velocity = curveSample * speed * direction;
+        rb2D.Get(this).velocity = curveSample * dashSpeed * direction;
     }
 
     private void UpdateDashSquish(float curveSample)
     {
-        float invCurve = 1 - curveSample;
-        float scaleDecrease = (1 - dashSquish) * invCurve;
+        float scaleDecrease = (1 - dashSquish) * curveSample;
         float y = (1 - scaleDecrease);
         Vector3 scale = costumeTransform.localScale;
         scale.y = y;
