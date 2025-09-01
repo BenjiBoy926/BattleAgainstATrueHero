@@ -136,9 +136,20 @@ public class PlayerMovement : MonoBehaviour, IMusicStartListener
     private IEnumerator DashStall()
     {
         costumeTransform.localRotation = Quaternion.identity;
-        costumeTransform.localScale = Vector3.one;
         rb2D.Get(this).velocity = Vector2.zero;
-        yield return new WaitForSeconds(dashStall);
+
+        float startTime = Time.time;
+        float elapsedTime = 0;
+        while (elapsedTime < dashStall)
+        {
+            float t = elapsedTime / dashStall;
+            float shrinkAmount = Mathf.PingPong(t, 0.5f) * 2;
+            float scale = Mathf.Lerp(1, dashSquish, shrinkAmount);
+            costumeTransform.localScale = new(1, scale, 1);
+            yield return null;
+            elapsedTime = Time.time - startTime;
+        }
+        costumeTransform.localScale = Vector3.one;
     }
 
     public void OnMusicStart(MusicCursor cursor)
