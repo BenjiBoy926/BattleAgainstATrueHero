@@ -20,7 +20,7 @@ public class GameOver : MonoBehaviour
     private Monologue monologue;
 
     // Scene that the game over script loads when the game over is finished
-    private static string sceneCallback;
+    private static string sceneCallback = "BattleAgainstATrueHero";
 
     private void Start()
     {
