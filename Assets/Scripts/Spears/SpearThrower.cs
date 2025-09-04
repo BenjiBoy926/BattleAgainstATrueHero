@@ -7,19 +7,30 @@ public class SpearThrower : MonoBehaviour, IMusicStartListener, IMusicBeatListen
     [SerializeField]
     [Tooltip("Prefab for the spear")]
     private Spear spearPrefab;
+    private readonly List<Spear> spears = new();
 
-    private List<Spear> spears = new List<Spear>();
+    private void OnEnable()
+    {
+        // The prefab itself has to be disabled to avoid massive startup lag when they are all created
+        spearPrefab.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        // We don't want to save the prefab as disabled while working in the unity editor
+        spearPrefab.gameObject.SetActive(true);
+    }
 
     public void OnMusicStart(MusicCursor cursor)
     {
-        if(spears.Count <= 0)
+        if (spears.Count <= 0)
         {
             InstantiateAllSpears(cursor);
         }
     }
     public void OnMusicBeat(MusicCursor cursor)
     {
-        foreach(Spear spear in spears)
+        foreach (Spear spear in spears)
         {
             spear.OnMusicBeat(cursor);
         }

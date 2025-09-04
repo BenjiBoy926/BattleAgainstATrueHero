@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spear : MonoBehaviour, IMusicBeatListener
 {
+    private const float LineStartPositionOffset = 0.3f;
+
     private SpearPosition positionInfo;
     private SpearDirection directionInfo;
 
@@ -16,9 +18,9 @@ public class Spear : MonoBehaviour, IMusicBeatListener
     private MusicCursor rushTime;
 
     // Cached components
-    private CachedComponent<Rigidbody2D> rb2D = new CachedComponent<Rigidbody2D>();
-    private CachedComponent<LineRenderer> line = new CachedComponent<LineRenderer>();
-    private CachedComponent<SpriteRenderer> sprite = new CachedComponent<SpriteRenderer>();
+    private readonly CachedComponent<Rigidbody2D> rb2D = new();
+    private readonly CachedComponent<LineRenderer> line = new();
+    private readonly CachedComponent<SpriteRenderer> sprite = new();
 
     public void Setup(SpearPosition positionInfo, SpearDirection directionInfo, float rushSpeed, MusicCursor appearanceTime, MusicCursor rushTime)
     {
@@ -33,11 +35,11 @@ public class Spear : MonoBehaviour, IMusicBeatListener
 
     public void OnMusicBeat(MusicCursor cursor)
     {
-        if(appearanceTime.currentBeat == cursor.currentBeat)
+        if (appearanceTime.currentBeat == cursor.currentBeat)
         {
             Appear(cursor);
         }
-        if(rushTime.currentBeat == cursor.currentBeat)
+        if (rushTime.currentBeat == cursor.currentBeat)
         {
             StartCoroutine(Rush());
         }
@@ -45,16 +47,10 @@ public class Spear : MonoBehaviour, IMusicBeatListener
 
     private void Appear(MusicCursor cursor)
     {
-        // Enable the object
-        gameObject.SetActive(true);
-
-        // Make sure the sprite starts invisible
+        isRushing = false;
         sprite.Get(this).color = Color.clear;
         line.Get(this).enabled = false;
-
-        isRushing = false;
-
-        // Start the fade-in
+        gameObject.SetActive(true);
         StartCoroutine(FadeIn(cursor));
     }
 
@@ -99,7 +95,8 @@ public class Spear : MonoBehaviour, IMusicBeatListener
     private void SetLineRendererPositions()
     {
         Rigidbody2D rb = rb2D.Get(this);
-        line.Get(this).RenderRay(rb.position, transform.up, 50f);
+        Vector3 start = (Vector3)rb.position + transform.up * LineStartPositionOffset;
+        line.Get(this).RenderRay(start, transform.up, 50f);
     }
 
     // Fade the spear so it is invisible, then disable it

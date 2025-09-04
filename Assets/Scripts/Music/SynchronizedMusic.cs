@@ -40,7 +40,7 @@ public class SynchronizedMusic : MonoBehaviour
     private void Start()
     {
         SetupMusicListeners();
-        if(playOnAwake)
+        if (playOnAwake)
         {
             StartMusic();
         }
