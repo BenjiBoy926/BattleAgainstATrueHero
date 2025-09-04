@@ -21,6 +21,8 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     [SerializeField]
     private SpriteRenderer sprite;
     [SerializeField]
+    private float lineStartPositionOffset = 0.3f;
+    [SerializeField]
     [Tooltip("Will the cross spear move into position at the first phrase or second phrase?")]
     private PhraseType type;
     [SerializeField]
@@ -171,7 +173,8 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
 
         if (active)
         {
-            line.RenderRay(rb2D.position, slashDirection, 50f);
+            Vector3 start = rb2D.position + slashDirection * lineStartPositionOffset;
+            line.RenderRay(start, slashDirection, 50f);
             StartCoroutine(line.FadeGradient(Color.clear, new Color(1f, 1f, 1f, 0.3f), 0.1f));
         }
     }
