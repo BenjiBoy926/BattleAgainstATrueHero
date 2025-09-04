@@ -20,7 +20,7 @@ public class GameOver : MonoBehaviour
     private Monologue monologue;
 
     // Scene that the game over script loads when the game over is finished
-    private static string sceneCallback = "BattleAgainstATrueHero";
+    private static string nextSceneName = "BattleAgainstATrueHero";
 
     private void Start()
     {
@@ -40,9 +40,9 @@ public class GameOver : MonoBehaviour
         yield return ColorModule.Fade(Color.white, Color.clear, fadeTime, SetTextColor);
 
         // If this is our first attempt, load up Chara's offer, which will go to the scene callback
-        if (PlayerHealth.deathCount == 1) CharaOffer.Begin(sceneCallback);
+        if (PlayerHealth.deathCount == 1) CharaOffer.Begin(nextSceneName);
         // If this was not our first attempt go straight to the next scene
-        else SceneManager.LoadScene(sceneCallback);
+        else SceneManager.LoadScene(nextSceneName);
     }
 
     private void SetTextColor(Color color)
@@ -51,9 +51,9 @@ public class GameOver : MonoBehaviour
     }
 
     // Begin the game over by loading the scene and setting the scene to callback to
-    public static void Begin(string sceneCallback)
+    public static void Begin(string nextSceneName)
     {
-        GameOver.sceneCallback = sceneCallback;
+        GameOver.nextSceneName = nextSceneName;
         SceneManager.LoadScene("GameOver");
     }
 }

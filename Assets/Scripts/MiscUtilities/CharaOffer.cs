@@ -46,7 +46,7 @@ public class CharaOffer : MonoBehaviour
     private Monologue rejectMonologue;
 
     private Audio creepyMusicAudio;
-    private static string sceneCallback;
+    private static string nextSceneName;
 
     // When the scene begins, 
     private void Start()
@@ -93,11 +93,11 @@ public class CharaOffer : MonoBehaviour
 
         yield return new WaitForSeconds(endDelayTime);
 
-        SceneManager.LoadScene(sceneCallback);
+        SceneManager.LoadScene(nextSceneName);
     }
-    public static void Begin(string sceneCallback)
+    public static void Begin(string nextSceneName)
     {
-        CharaOffer.sceneCallback = sceneCallback;
+        CharaOffer.nextSceneName = nextSceneName;
         SceneManager.LoadScene("CharaOffer");
     }
 
