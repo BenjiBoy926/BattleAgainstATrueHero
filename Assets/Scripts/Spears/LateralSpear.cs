@@ -133,6 +133,9 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
 
         // Shift the spear to a new up or down position
         yield return rb2D.MoveOverTime(TargetPosition(cursor.measureInPhrase), cursor.BeatsToSeconds(0.25f));
+
+        // Enable the line renderer as a warning
+        SetLineRendererActive(true);
     }
 
     private IEnumerator TurnAround(MusicCursor cursor, float preWaitInBeats)
@@ -141,9 +144,6 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
 
         // Wait for the spear to rotate around
         yield return rb2D.RotateOverTime(180, cursor.BeatsToSeconds(0.25f), RotationDirection.Clockwise);
-
-        // Enable the line renderer as a warning
-        SetLineRendererActive(true);
     }
 
     private IEnumerator Throw(MusicCursor cursor, float slashTimeInBeats)
@@ -171,6 +171,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
 
         if (active)
         {
+            line.RenderRay(rb2D.position, slashDirection, 50f);
             StartCoroutine(line.FadeGradient(Color.clear, new Color(1f, 1f, 1f, 0.3f), 0.1f));
         }
     }
