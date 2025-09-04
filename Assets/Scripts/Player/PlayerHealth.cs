@@ -104,7 +104,8 @@ public class PlayerHealth : MonoBehaviour, IMusicStartListener
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(hazardTag))
+        Hazard hazard = collision.GetComponentInParent<Hazard>();
+        if (hazard)
         {
             TryTakeDamage();
         }
