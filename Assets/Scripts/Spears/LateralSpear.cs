@@ -15,6 +15,12 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     }
 
     [SerializeField]
+    private Rigidbody2D rb2D;
+    [SerializeField]
+    private LineRenderer line;
+    [SerializeField]
+    private SpriteRenderer sprite;
+    [SerializeField]
     [Tooltip("Will the cross spear move into position at the first phrase or second phrase?")]
     private PhraseType type;
     [SerializeField]
@@ -23,10 +29,6 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     [SerializeField]
     [Tooltip("Measure ranges where the spear is active and moving, spear is dormant on other measures")]
     private List<IntRange> measureRanges;
-
-    private CachedComponent<Rigidbody2D> rb2D = new CachedComponent<Rigidbody2D>();
-    private CachedComponent<LineRenderer> line = new CachedComponent<LineRenderer>();
-    private CachedComponent<SpriteRenderer> sprite = new CachedComponent<SpriteRenderer>();
 
     // Current direction that the spear will move when it slashes
     private Vector2 slashDirection
@@ -37,7 +39,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
             if(orientation == SlashOrientation.Horizontal)
             {
                 // If we are on the left side, slash to the right
-                if (rb2D.Get(this).position.x < Field.center.x)
+                if (rb2D.position.x < Field.center.x)
                 {
                     return Vector2.right;
                 }
@@ -48,7 +50,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
             else
             {
                 // If we are on the bottom, slash up
-                if (rb2D.Get(this).position.y < Field.center.y)
+                if (rb2D.position.y < Field.center.y)
                 {
                     return Vector2.up;
                 }
@@ -60,24 +62,26 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
 
     private void Awake()
     {
-        rb2D.Get(this).rotation = Vector2.SignedAngle(Vector2.down, slashDirection);
+        rb2D.rotation = Vector2.SignedAngle(Vector2.down, slashDirection);
+        line.enabled = false;
+        sprite.color = Color.clear;
     }
 
     public void OnMusicBeat(MusicCursor cursor)
     {
         // If this is the first move, fade the sprite in
-        if(FirstMove(cursor))
+        if (IsFirstMove(cursor))
         {
-            StartCoroutine(sprite.Get(this).Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));
+            StartCoroutine(sprite.Fade(Color.clear, Color.white, cursor.BeatsToSeconds(1f)));
         }
         // If this is the first move, fade the sprite out
-        if (LastMove(cursor))
+        if (IsLastMove(cursor))
         {
-            StartCoroutine(sprite.Get(this).Fade(Color.white, Color.clear, cursor.BeatsToSeconds(1f)));
+            StartCoroutine(sprite.Fade(Color.white, Color.clear, cursor.BeatsToSeconds(1f)));
         }
 
         // Only move if this measure is within the range of possible motions
-        if (MoveThisMeasure(cursor.currentMeasure))
+        if (ShouldMoveThisMeasure(cursor.currentMeasure))
         {
             // For non-final phrases
             if (cursor.measureInPhrase != 4)
@@ -122,21 +126,21 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         }
     }
 
-    private IEnumerator TurnAround(MusicCursor cursor, float preWaitInBeats)
-    {
-        yield return new WaitForSeconds(cursor.BeatsToSeconds(preWaitInBeats));
-
-        // Wait for the spear to rotate around
-        yield return rb2D.Get(this).RotateOverTime(180, cursor.BeatsToSeconds(0.25f), RotationDirection.Clockwise);
-    }
-
     // Give the spear a new y position before slashing
     private IEnumerator TakePosition(MusicCursor cursor, float preWaitInBeats)
     {
         yield return new WaitForSeconds(cursor.BeatsToSeconds(preWaitInBeats));
 
         // Shift the spear to a new up or down position
-        yield return rb2D.Get(this).MoveOverTime(TargetPosition(cursor.measureInPhrase), cursor.BeatsToSeconds(0.25f));
+        yield return rb2D.MoveOverTime(TargetPosition(cursor.measureInPhrase), cursor.BeatsToSeconds(0.25f));
+    }
+
+    private IEnumerator TurnAround(MusicCursor cursor, float preWaitInBeats)
+    {
+        yield return new WaitForSeconds(cursor.BeatsToSeconds(preWaitInBeats));
+
+        // Wait for the spear to rotate around
+        yield return rb2D.RotateOverTime(180, cursor.BeatsToSeconds(0.25f), RotationDirection.Clockwise);
 
         // Enable the line renderer as a warning
         SetLineRendererActive(true);
@@ -145,7 +149,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
     private IEnumerator Throw(MusicCursor cursor, float slashTimeInBeats)
     {
         SetLineRendererActive(false);
-        yield return rb2D.Get(this).ShiftOverTime(TargetShift(), cursor.BeatsToSeconds(slashTimeInBeats));
+        yield return rb2D.ShiftOverTime(TargetShift(), cursor.BeatsToSeconds(slashTimeInBeats));
     }
 
     private IEnumerator DoubleThrow(MusicCursor cursor, float initialWaitInBeats)
@@ -156,19 +160,18 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         yield return new WaitForSeconds(cursor.BeatsToSeconds(0.5f));
 
         // Turn the spear around
-        rb2D.Get(this).rotation += 180f;
+        rb2D.rotation += 180f;
 
         yield return Throw(cursor, 0.25f);
     }
 
     private void SetLineRendererActive(bool active)
     {
-        line.Get(this).enabled = active;
+        line.enabled = active;
 
-        if(active)
+        if (active)
         {
-            line.Get(this).RenderRay(rb2D.Get(this).position, slashDirection, 50f);
-            StartCoroutine(line.Get(this).FadeGradient(Color.clear, new Color(1f, 1f, 1f, 0.3f), 0.1f));
+            StartCoroutine(line.FadeGradient(Color.clear, new Color(1f, 1f, 1f, 0.3f), 0.1f));
         }
     }
 
@@ -183,7 +186,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
 
     private Vector2 TargetPosition(int measureInPhrase)
     {
-        Vector2 pos = new Vector2();
+        Vector2 pos = new();
 
         // Check orientation
         if(orientation == SlashOrientation.Horizontal)
@@ -248,7 +251,7 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         return targetPos;
     }
 
-    private bool MoveThisMeasure(int currentMeasure)
+    private bool ShouldMoveThisMeasure(int currentMeasure)
     {
         foreach(IntRange range in measureRanges)
         {
@@ -260,11 +263,11 @@ public class LateralSpear : MonoBehaviour, IMusicBeatListener
         return false;
     }
 
-    private bool FirstMove(MusicCursor cursor)
+    private bool IsFirstMove(MusicCursor cursor)
     {
         return measureRanges[0].min == cursor.currentMeasure && cursor.beatInMeasure == 1;
     }
-    private bool LastMove(MusicCursor cursor)
+    private bool IsLastMove(MusicCursor cursor)
     {
         return (measureRanges[measureRanges.Count - 1].max + 1) == cursor.currentMeasure && cursor.beatInMeasure == 1;
     }
